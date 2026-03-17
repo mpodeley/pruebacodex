@@ -87,6 +87,13 @@ type Transform = {
   y: number;
 };
 
+type RouteHistoryPoint = {
+  date: string;
+  caudal: number | null;
+  capacidad: number | null;
+  utilization: number | null;
+};
+
 const dataset = flowData as FlowDataset;
 const outline = outlineData as OutlineDataset;
 const CANVAS_WIDTH = 920;
@@ -135,6 +142,35 @@ function snapshotHasOperationalData(snapshot: Snapshot) {
     (metric) =>
       metric.caudal != null || metric.capacidad != null || metric.utilization != null
   );
+}
+
+function buildSeriesPath(
+  values: Array<number | null>,
+  width: number,
+  height: number,
+  padding: { top: number; right: number; bottom: number; left: number }
+) {
+  const points = values
+    .map((value, index) => ({ value, index }))
+    .filter((point): point is { value: number; index: number } => point.value != null);
+
+  if (points.length === 0) {
+    return "";
+  }
+
+  const maxValue = Math.max(...points.map((point) => point.value), 1);
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
+
+  return points
+    .map((point, index) => {
+      const x =
+        padding.left +
+        (points.length === 1 ? innerWidth / 2 : (point.index / (values.length - 1 || 1)) * innerWidth);
+      const y = padding.top + innerHeight - (point.value / maxValue) * innerHeight;
+      return `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    })
+    .join(" ");
 }
 
 function utilizationColor(utilization: number | null) {
@@ -377,6 +413,25 @@ export default function App() {
     [visibleRoutes, selectedRouteId]
   );
 
+  const selectedRouteHistory = useMemo<RouteHistoryPoint[]>(() => {
+    if (!selectedRouteId) {
+      return [];
+    }
+
+    return dataset.snapshots.map((snapshot) => {
+      const metric = snapshot.metrics.find(
+        (entry) => fixText(entry.ruta) === selectedRouteId
+      );
+
+      return {
+        date: snapshot.date,
+        caudal: metric?.caudal ?? null,
+        capacidad: metric?.capacidad ?? null,
+        utilization: metric?.utilization ?? null
+      };
+    });
+  }, [selectedRouteId]);
+
   const availableDatesDescending = useMemo(
     () => [...dataset.availableDates].reverse(),
     []
@@ -534,98 +589,7 @@ export default function App() {
             Cortes mensuales del dataset ENARGAS. Grosor por caudal, color por utilizacion.
           </p>
         </div>
-        <section className="timeline-card" aria-label="Controles temporales">
-          <div className="timeline-heading">
-            <div>
-              <span className="timeline-label">Fecha activa</span>
-              <strong>{selectedDateLabel}</strong>
-            </div>
-            <span className="timeline-range">
-              {selectedDateIndex + 1}/{dataset.availableDates.length}
-            </span>
-          </div>
-          {!selectedSnapshotHasData ? (
-            <p className="timeline-warning">
-              Este corte no trae caudal ni capacidad. Se puede recorrer la serie, pero no sirve
-              para evaluar uso operativo de la red.
-            </p>
-          ) : null}
-          <div className="timeline-actions">
-            <button
-              type="button"
-              className="timeline-step"
-              onClick={() => stepDate(-1)}
-              disabled={selectedDateIndex <= 0}
-            >
-              Mes anterior
-            </button>
-            <button
-              type="button"
-              className="timeline-play"
-              onClick={() => {
-                if (selectedDateIndex >= dataset.availableDates.length - 1) {
-                  setDateByIndex(0);
-                  setIsPlayingTimeline(true);
-                  return;
-                }
-                setIsPlayingTimeline((current) => !current);
-              }}
-            >
-              {isPlayingTimeline ? "Pausar" : "Reproducir"}
-            </button>
-            <button
-              type="button"
-              className="timeline-step"
-              onClick={() => stepDate(1)}
-              disabled={selectedDateIndex >= dataset.availableDates.length - 1}
-            >
-              Mes siguiente
-            </button>
-          </div>
-          <label className="timeline-slider">
-            <span className="sr-only">Mover en la serie mensual</span>
-            <input
-              type="range"
-              min={0}
-              max={dataset.availableDates.length - 1}
-              step={1}
-              value={selectedDateIndex}
-              onChange={(event) => {
-                setIsPlayingTimeline(false);
-                setDateByIndex(Number(event.target.value));
-              }}
-            />
-          </label>
-          <div className="timeline-marks" aria-hidden="true">
-            {timelineMarks.map((mark) => (
-              <span
-                key={mark.date}
-                style={{
-                  left: `${(mark.index / (dataset.availableDates.length - 1)) * 100}%`
-                }}
-              >
-                {formatMonthLabel(mark.date, { year: "numeric" })}
-              </span>
-            ))}
-          </div>
-          <div className="timeline-presets">
-            {availableDatesDescending.slice(0, 4).map((date) => (
-              <button
-                key={date}
-                type="button"
-                className={date === selectedDate ? "is-active" : ""}
-                onClick={() => {
-                  setIsPlayingTimeline(false);
-                  setSelectedDate(date);
-                  setSelectedRouteId(null);
-                }}
-              >
-                {formatMonthLabel(date)}
-              </button>
-            ))}
-          </div>
-        </section>
-        <label>
+        <label className="control-field">
           <span>Gasoducto</span>
           <select
             value={selectedGasoducto}
@@ -637,7 +601,7 @@ export default function App() {
             ))}
           </select>
         </label>
-        <label className="toggle">
+        <label className="toggle control-field">
           <input
             type="checkbox"
             checked={showCriticalOnly}
@@ -742,6 +706,39 @@ export default function App() {
         </section>
 
         <aside className="side-panel">
+          <section className="detail-card detail-summary timeline-panel">
+            <h3>Fecha</h3>
+            <TimelineControls
+              selectedDateLabel={selectedDateLabel}
+              selectedDateIndex={selectedDateIndex}
+              totalDates={dataset.availableDates.length}
+              selectedSnapshotHasData={selectedSnapshotHasData}
+              isPlayingTimeline={isPlayingTimeline}
+              onStepBack={() => stepDate(-1)}
+              onTogglePlay={() => {
+                if (selectedDateIndex >= dataset.availableDates.length - 1) {
+                  setDateByIndex(0);
+                  setIsPlayingTimeline(true);
+                  return;
+                }
+                setIsPlayingTimeline((current) => !current);
+              }}
+              onStepForward={() => stepDate(1)}
+              onSliderChange={(value) => {
+                setIsPlayingTimeline(false);
+                setDateByIndex(value);
+              }}
+              timelineMarks={timelineMarks}
+              availableDatesDescending={availableDatesDescending}
+              selectedDate={selectedDate}
+              onDatePick={(date) => {
+                setIsPlayingTimeline(false);
+                setSelectedDate(date);
+                setSelectedRouteId(null);
+              }}
+            />
+          </section>
+
           <section className="detail-card detail-summary">
             <h3>Lectura rapida</h3>
             <div className="detail-grid summary-grid">
@@ -805,6 +802,21 @@ export default function App() {
           </section>
 
           <section className="detail-card">
+            <h3>Serie historica del tramo</h3>
+            {selectedDetails ? (
+              <RouteHistoryChart
+                routeName={selectedDetails.ruta}
+                history={selectedRouteHistory}
+                selectedDate={selectedDate}
+              />
+            ) : (
+              <p className="empty-copy">
+                Selecciona un tramo en el mapa o en la lista para ver su evolucion mensual.
+              </p>
+            )}
+          </section>
+
+          <section className="detail-card">
             <h3>Tramos mas exigidos</h3>
             <ul className="hot-list">
               {busiestRoutes.map((route) => (
@@ -839,6 +851,228 @@ function Legend() {
       <div><i style={{ background: "#ffe06d" }} /> Medio</div>
       <div><i style={{ background: "#ff9d4d" }} /> Alto</div>
       <div><i style={{ background: "#ff5f87" }} /> Saturado</div>
+    </div>
+  );
+}
+
+function TimelineControls({
+  selectedDateLabel,
+  selectedDateIndex,
+  totalDates,
+  selectedSnapshotHasData,
+  isPlayingTimeline,
+  onStepBack,
+  onTogglePlay,
+  onStepForward,
+  onSliderChange,
+  timelineMarks,
+  availableDatesDescending,
+  selectedDate,
+  onDatePick
+}: {
+  selectedDateLabel: string;
+  selectedDateIndex: number;
+  totalDates: number;
+  selectedSnapshotHasData: boolean;
+  isPlayingTimeline: boolean;
+  onStepBack: () => void;
+  onTogglePlay: () => void;
+  onStepForward: () => void;
+  onSliderChange: (value: number) => void;
+  timelineMarks: Array<{ date: string; index: number }>;
+  availableDatesDescending: string[];
+  selectedDate: string;
+  onDatePick: (date: string) => void;
+}) {
+  return (
+    <section className="timeline-card" aria-label="Controles temporales">
+      <div className="timeline-heading">
+        <div>
+          <span className="timeline-label">Fecha activa</span>
+          <strong>{selectedDateLabel}</strong>
+        </div>
+        <span className="timeline-range">
+          {selectedDateIndex + 1}/{totalDates}
+        </span>
+      </div>
+      {!selectedSnapshotHasData ? (
+        <p className="timeline-warning">
+          Este corte no trae caudal ni capacidad. Se puede recorrer la serie, pero no sirve
+          para evaluar uso operativo de la red.
+        </p>
+      ) : null}
+      <div className="timeline-actions">
+        <button
+          type="button"
+          className="timeline-step"
+          onClick={onStepBack}
+          disabled={selectedDateIndex <= 0}
+        >
+          Mes anterior
+        </button>
+        <button type="button" className="timeline-play" onClick={onTogglePlay}>
+          {isPlayingTimeline ? "Pausar" : "Reproducir"}
+        </button>
+        <button
+          type="button"
+          className="timeline-step"
+          onClick={onStepForward}
+          disabled={selectedDateIndex >= totalDates - 1}
+        >
+          Mes siguiente
+        </button>
+      </div>
+      <label className="timeline-slider">
+        <span className="sr-only">Mover en la serie mensual</span>
+        <input
+          type="range"
+          min={0}
+          max={totalDates - 1}
+          step={1}
+          value={selectedDateIndex}
+          onChange={(event) => onSliderChange(Number(event.target.value))}
+        />
+      </label>
+      <div className="timeline-marks" aria-hidden="true">
+        {timelineMarks.map((mark) => (
+          <span
+            key={mark.date}
+            style={{
+              left: `${(mark.index / (totalDates - 1)) * 100}%`
+            }}
+          >
+            {formatMonthLabel(mark.date, { year: "numeric" })}
+          </span>
+        ))}
+      </div>
+      <div className="timeline-presets">
+        {availableDatesDescending.slice(0, 4).map((date) => (
+          <button
+            key={date}
+            type="button"
+            className={date === selectedDate ? "is-active" : ""}
+            onClick={() => onDatePick(date)}
+          >
+            {formatMonthLabel(date)}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RouteHistoryChart({
+  routeName,
+  history,
+  selectedDate
+}: {
+  routeName: string;
+  history: RouteHistoryPoint[];
+  selectedDate: string;
+}) {
+  const width = 420;
+  const height = 220;
+  const padding = { top: 16, right: 12, bottom: 28, left: 12 };
+  const flowPath = buildSeriesPath(
+    history.map((point) => point.caudal),
+    width,
+    height,
+    padding
+  );
+  const capacityPath = buildSeriesPath(
+    history.map((point) => point.capacidad),
+    width,
+    height,
+    padding
+  );
+  const currentIndex = history.findIndex((point) => point.date === selectedDate);
+  const currentPoint = history[currentIndex] ?? null;
+  const maxValue = Math.max(
+    ...history.flatMap((point) => [point.caudal ?? 0, point.capacidad ?? 0]),
+    1
+  );
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
+  const markerX =
+    currentIndex < 0
+      ? null
+      : padding.left + (currentIndex / (history.length - 1 || 1)) * innerWidth;
+  const markerY =
+    currentPoint?.caudal == null
+      ? null
+      : padding.top + innerHeight - (currentPoint.caudal / maxValue) * innerHeight;
+
+  return (
+    <div className="history-chart">
+      <p className="history-title">{routeName}</p>
+      <div className="history-legend">
+        <span><i className="history-flow" /> Caudal</span>
+        <span><i className="history-capacity" /> Capacidad</span>
+      </div>
+      <svg viewBox={`0 0 ${width} ${height}`} className="history-svg" role="img" aria-label={`Serie historica de ${routeName}`}>
+        <rect
+          x={padding.left}
+          y={padding.top}
+          width={innerWidth}
+          height={innerHeight}
+          className="history-frame"
+          rx="16"
+        />
+        {[0.25, 0.5, 0.75].map((ratio) => (
+          <line
+            key={ratio}
+            x1={padding.left}
+            x2={width - padding.right}
+            y1={padding.top + innerHeight * ratio}
+            y2={padding.top + innerHeight * ratio}
+            className="history-grid"
+          />
+        ))}
+        {capacityPath ? <path d={capacityPath} className="history-capacity-line" /> : null}
+        {flowPath ? <path d={flowPath} className="history-flow-line" /> : null}
+        {markerX != null ? (
+          <line
+            x1={markerX}
+            x2={markerX}
+            y1={padding.top}
+            y2={height - padding.bottom}
+            className="history-marker"
+          />
+        ) : null}
+        {markerX != null && markerY != null ? (
+          <circle cx={markerX} cy={markerY} r="4.5" className="history-marker-dot" />
+        ) : null}
+      </svg>
+      <div className="history-axis">
+        <span>{formatMonthLabel(history[0].date)}</span>
+        <span>{formatMonthLabel(history.at(-1)!.date)}</span>
+      </div>
+      <div className="history-stats">
+        <Detail
+          label="Caudal actual"
+          value={
+            currentPoint?.caudal == null
+              ? "Sin dato"
+              : `${formatNumber(currentPoint.caudal)} MMm3/d`
+          }
+        />
+        <Detail
+          label="Capacidad actual"
+          value={
+            currentPoint?.capacidad == null
+              ? "Sin dato"
+              : `${formatNumber(currentPoint.capacidad)} MMm3/d`
+          }
+        />
+        <Detail
+          label="Utilizacion actual"
+          value={
+            currentPoint?.utilization == null
+              ? "Sin dato"
+              : `${formatNumber(currentPoint.utilization * 100)}%`
+          }
+        />
+      </div>
     </div>
   );
 }
