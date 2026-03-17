@@ -54,48 +54,122 @@ const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 760;
 const INITIAL_TRANSFORM: Transform = { scale: 1, x: 0, y: 0 };
 const VIEWPORT_BOUNDS = {
-  minLat: -56,
-  maxLat: -20,
-  minLon: -74,
-  maxLon: -52
+  minLat: -55.6,
+  maxLat: -21.2,
+  minLon: -73.6,
+  maxLon: -53.4
 };
 const ARGENTINA_POLYGON = [
-  [-68.4, -21.8],
-  [-66.3, -22.2],
-  [-65.1, -24.2],
-  [-66.2, -26.3],
-  [-67.3, -28.6],
-  [-68.2, -31.1],
-  [-69.1, -33.6],
-  [-70.1, -36.2],
-  [-71.2, -38.8],
-  [-71.5, -41.4],
-  [-71.1, -43.8],
-  [-70.2, -46.1],
-  [-69.7, -48.2],
-  [-68.5, -50.4],
-  [-67.2, -52.1],
-  [-66.1, -54.4],
-  [-64.7, -54.9],
-  [-64, -53.5],
-  [-63.4, -51.7],
-  [-62.8, -49.3],
-  [-62.1, -46.7],
-  [-61.5, -43.9],
-  [-60.8, -40.7],
-  [-60, -37.8],
-  [-59.1, -35.5],
-  [-58.3, -34.2],
-  [-57.5, -32.6],
-  [-56.6, -30.1],
-  [-55.5, -27.4],
-  [-54.8, -25.9],
-  [-54.6, -24.3],
-  [-55.7, -22.6],
-  [-57.8, -21.7],
-  [-60.7, -21.9],
-  [-63.8, -22.4],
-  [-66.3, -22.2]
+  [-64.964892, -22.075862],
+  [-64.377021, -22.798091],
+  [-63.986838, -21.993644],
+  [-62.846468, -22.034985],
+  [-62.685057, -22.249029],
+  [-60.846565, -23.880713],
+  [-60.028966, -24.032796],
+  [-58.807128, -24.771459],
+  [-57.777217, -25.16234],
+  [-57.63366, -25.603657],
+  [-58.618174, -27.123719],
+  [-57.60976, -27.395899],
+  [-56.486702, -27.548499],
+  [-55.695846, -27.387837],
+  [-54.788795, -26.621786],
+  [-54.625291, -25.739255],
+  [-54.13005, -25.547639],
+  [-53.628349, -26.124865],
+  [-53.648735, -26.923473],
+  [-54.490725, -27.474757],
+  [-55.162286, -27.881915],
+  [-56.2909, -28.852761],
+  [-57.625133, -30.216295],
+  [-57.874937, -31.016556],
+  [-58.14244, -32.044504],
+  [-58.132648, -33.040567],
+  [-58.349611, -33.263189],
+  [-58.427074, -33.909454],
+  [-58.495442, -34.43149],
+  [-57.22583, -35.288027],
+  [-57.362359, -35.97739],
+  [-56.737487, -36.413126],
+  [-56.788285, -36.901572],
+  [-57.749157, -38.183871],
+  [-59.231857, -38.72022],
+  [-61.237445, -38.928425],
+  [-62.335957, -38.827707],
+  [-62.125763, -39.424105],
+  [-62.330531, -40.172586],
+  [-62.145994, -40.676897],
+  [-62.745803, -41.028761],
+  [-63.770495, -41.166789],
+  [-64.73209, -40.802677],
+  [-65.118035, -41.064315],
+  [-64.978561, -42.058001],
+  [-64.303408, -42.359016],
+  [-63.755948, -42.043687],
+  [-63.458059, -42.563138],
+  [-64.378804, -42.873558],
+  [-65.181804, -43.495381],
+  [-65.328823, -44.501366],
+  [-65.565269, -45.036786],
+  [-66.509966, -45.039628],
+  [-67.293794, -45.551896],
+  [-67.580546, -46.301773],
+  [-66.597066, -47.033925],
+  [-65.641027, -47.236135],
+  [-65.985088, -48.133289],
+  [-67.166179, -48.697337],
+  [-67.816088, -49.869669],
+  [-68.728745, -50.264218],
+  [-69.138539, -50.73251],
+  [-68.815561, -51.771104],
+  [-68.149995, -52.349983],
+  [-68.571545, -52.299444],
+  [-69.498362, -52.142761],
+  [-71.914804, -52.009022],
+  [-72.329404, -51.425956],
+  [-72.309974, -50.67701],
+  [-72.975747, -50.74145],
+  [-73.328051, -50.378785],
+  [-73.415436, -49.318436],
+  [-72.648247, -48.878618],
+  [-72.331161, -48.244238],
+  [-72.447355, -47.738533],
+  [-71.917258, -46.884838],
+  [-71.552009, -45.560733],
+  [-71.659316, -44.973689],
+  [-71.222779, -44.784243],
+  [-71.329801, -44.407522],
+  [-71.793623, -44.207172],
+  [-71.464056, -43.787611],
+  [-71.915424, -43.408565],
+  [-72.148898, -42.254888],
+  [-71.746804, -42.051386],
+  [-71.915734, -40.832339],
+  [-71.680761, -39.808164],
+  [-71.413517, -38.916022],
+  [-70.814664, -38.552995],
+  [-71.118625, -37.576827],
+  [-71.121881, -36.658124],
+  [-70.364769, -36.005089],
+  [-70.388049, -35.169688],
+  [-69.817309, -34.193571],
+  [-69.814777, -33.273886],
+  [-70.074399, -33.09121],
+  [-70.535069, -31.36501],
+  [-69.919008, -30.336339],
+  [-70.01355, -29.367923],
+  [-69.65613, -28.459141],
+  [-69.001235, -27.521214],
+  [-68.295542, -26.89934],
+  [-68.5948, -26.506909],
+  [-68.386001, -26.185016],
+  [-68.417653, -24.518555],
+  [-67.328443, -24.025303],
+  [-66.985234, -22.986349],
+  [-67.106674, -22.735925],
+  [-66.273339, -21.83231],
+  [-64.964892, -22.075862]
 ] as const;
 
 function fixText(value: string | null) {
@@ -173,26 +247,46 @@ function useDerivedNetwork(routes: RouteRecord[]) {
       sentido: fixText(route.sentido)
     }));
 
-    const nodes = new Map<string, Node>();
+    const nodeAccumulator = new Map<
+      string,
+      { label: string; latSum: number; lonSum: number; count: number }
+    >();
 
     for (const route of cleanedRoutes) {
-      if (!nodes.has(route.origen)) {
-        const projected = projectPoint(route.latitudOrigen, route.longitudOrigen);
-        nodes.set(route.origen, {
-          id: route.origen,
-          label: route.origen,
-          ...projected
-        });
-      }
+      const originNode = nodeAccumulator.get(route.origen) ?? {
+        label: route.origen,
+        latSum: 0,
+        lonSum: 0,
+        count: 0
+      };
+      originNode.latSum += route.latitudOrigen;
+      originNode.lonSum += route.longitudOrigen;
+      originNode.count += 1;
+      nodeAccumulator.set(route.origen, originNode);
 
-      if (!nodes.has(route.destino)) {
-        const projected = projectPoint(route.latitudDestino, route.longitudDestino);
-        nodes.set(route.destino, {
-          id: route.destino,
-          label: route.destino,
-          ...projected
-        });
-      }
+      const destinationNode = nodeAccumulator.get(route.destino) ?? {
+        label: route.destino,
+        latSum: 0,
+        lonSum: 0,
+        count: 0
+      };
+      destinationNode.latSum += route.latitudDestino;
+      destinationNode.lonSum += route.longitudDestino;
+      destinationNode.count += 1;
+      nodeAccumulator.set(route.destino, destinationNode);
+    }
+
+    const nodes = new Map<string, Node>();
+    for (const [id, entry] of nodeAccumulator.entries()) {
+      const projected = projectPoint(
+        entry.latSum / entry.count,
+        entry.lonSum / entry.count
+      );
+      nodes.set(id, {
+        id,
+        label: entry.label,
+        ...projected
+      });
     }
 
     const maxCaudal = Math.max(...cleanedRoutes.map((route) => route.caudal ?? 0), 1);
@@ -255,6 +349,16 @@ export default function App() {
     [network.routes]
   );
 
+  const highStressCount = useMemo(
+    () => network.routes.filter((route) => (route.utilization ?? 0) >= 0.8).length,
+    [network.routes]
+  );
+
+  const peakRouteFlow = useMemo(
+    () => Math.max(...network.routes.map((route) => route.caudal ?? 0), 0),
+    [network.routes]
+  );
+
   const selectedDetails =
     selectedRoute &&
     network.routes.find((route) => route.ruta === selectedRoute.ruta);
@@ -290,11 +394,12 @@ export default function App() {
         </div>
         <div className="hero-metrics">
           <Metric label="Fecha de corte" value={dataset.latestDate} />
-          <Metric label="Caudal total" value={`${formatNumber(dataset.stats.totalFlow)} MMm3/d`} />
           <Metric
-            label="Capacidad total"
-            value={`${formatNumber(dataset.stats.totalCapacity)} MMm3/d`}
+            label="Tramos con caudal"
+            value={`${dataset.stats.routesWithFlow}/${dataset.stats.routes}`}
           />
+          <Metric label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
+          <Metric label="Tramos exigidos" value={`${highStressCount} sobre 73`} />
         </div>
       </header>
 
