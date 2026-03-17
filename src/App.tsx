@@ -256,7 +256,7 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(dataset.latestDate);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
   const [isDragging, setIsDragging] = useState(false);
-  const dragState = useRef<{ x: number; y: number } | null>(null);
+  const dragState = useRef<{ x: number; y: number; moved: boolean } | null>(null);
 
   const network = useProjectedNetwork(dataset.routes, outline.polygons);
 
@@ -388,8 +388,7 @@ export default function App() {
   }
 
   function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
-    dragState.current = { x: event.clientX, y: event.clientY };
-    setIsDragging(true);
+    dragState.current = { x: event.clientX, y: event.clientY, moved: false };
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
@@ -400,7 +399,13 @@ export default function App() {
 
     const deltaX = event.clientX - dragState.current.x;
     const deltaY = event.clientY - dragState.current.y;
-    dragState.current = { x: event.clientX, y: event.clientY };
+    const moved =
+      dragState.current.moved || Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3;
+
+    dragState.current = { x: event.clientX, y: event.clientY, moved };
+    if (moved) {
+      setIsDragging(true);
+    }
 
     setTransform((current) =>
       clampTransform({
@@ -417,6 +422,14 @@ export default function App() {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
+  }
+
+  function handleRouteSelect(routeId: string) {
+    if (dragState.current?.moved) {
+      return;
+    }
+
+    setSelectedRouteId(routeId);
   }
 
   return (
@@ -520,11 +533,18 @@ export default function App() {
                 />
                 <path d={network.countryPath} className="country-outline" />
                 {visibleRoutes.map((route) => (
-                  <g
-                    key={route.ruta}
-                    onClick={() => setSelectedRouteId(route.ruta)}
-                    className="route-hit"
-                  >
+                  <g key={route.ruta} className="route-hit">
+                    <line
+                      x1={route.start.x}
+                      y1={route.start.y}
+                      x2={route.end.x}
+                      y2={route.end.y}
+                      stroke="transparent"
+                      strokeWidth={Math.max(route.strokeWidth + 10, 16)}
+                      strokeLinecap="round"
+                      className="route-hit-area"
+                      onClick={() => handleRouteSelect(route.ruta)}
+                    />
                     <line
                       x1={route.start.x}
                       y1={route.start.y}
