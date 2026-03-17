@@ -490,14 +490,14 @@ h1 {
 
 .side-panel {
   display: grid;
-  gap: 20px;
+  gap: 14px;
   position: sticky;
   top: 24px;
 }
 
 .detail-card {
   border-radius: 28px;
-  padding: 20px;
+  padding: 18px;
 }
 
 .detail-card h3 {
@@ -510,7 +510,7 @@ h1 {
 }
 
 .timeline-panel {
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .detail-grid {
@@ -530,6 +530,48 @@ h1 {
 
 .history-chart {
   display: grid;
+  gap: 12px;
+}
+
+.inspector-card {
+  display: grid;
+  gap: 14px;
+}
+
+.route-inspector {
+  display: grid;
+  gap: 14px;
+}
+
+.inspector-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.inspector-subtitle {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.inspector-chip {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(13, 24, 48, 0.9);
+  border: 1px solid rgba(126, 165, 255, 0.12);
+  color: #f4d78b;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.inspector-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -696,6 +738,10 @@ h1 {
   .history-stats {
     grid-template-columns: 1fr;
   }
+
+  .inspector-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -729,5 +775,9 @@ h1 {
 
   .detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .inspector-head {
+    flex-direction: column;
   }
 }

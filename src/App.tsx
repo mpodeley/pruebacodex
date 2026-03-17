@@ -801,60 +801,18 @@ export default function App() {
             />
           </section>
 
-          <section className="detail-card">
-            <h3>Detalle del tramo</h3>
+          <section className="detail-card inspector-card">
+            <h3>Inspector del tramo</h3>
             {selectedDetails ? (
-              <div className="detail-grid">
-                <Detail label="Ruta" value={selectedDetails.ruta} />
-                <Detail label="Gasoducto" value={selectedDetails.gasoducto} />
-                <Detail label="Fecha" value={selectedDetails.fecha} />
-                <Detail label="Origen" value={selectedDetails.origen} />
-                <Detail label="Destino" value={selectedDetails.destino} />
-                <Detail
-                  label="Caudal"
-                  value={
-                    selectedDetails.caudal == null
-                      ? "Sin dato"
-                      : `${formatNumber(selectedDetails.caudal)} MMm3/d`
-                  }
-                />
-                <Detail
-                  label="Capacidad"
-                  value={
-                    selectedDetails.capacidad == null
-                      ? "Sin dato"
-                      : `${formatNumber(selectedDetails.capacidad)} MMm3/d`
-                  }
-                />
-                <Detail
-                  label="Utilizacion"
-                  value={
-                    selectedDetails.utilization == null
-                      ? "Sin dato"
-                      : `${formatNumber(selectedDetails.utilization * 100)}%`
-                  }
-                />
-                <Detail label="Sentido" value={selectedDetails.sentido || "Sin dato"} />
-              </div>
-            ) : (
-              <p className="empty-copy">
-                Elegi un tramo para ver sus metricas en la fecha seleccionada.
-              </p>
-            )}
-          </section>
-
-          <section className="detail-card">
-            <h3>Serie historica del tramo</h3>
-            {selectedDetails ? (
-              <RouteHistoryChart
-                routeName={selectedDetails.ruta}
+              <RouteInspector
+                details={selectedDetails}
                 history={selectedRouteHistory}
                 selectedDate={selectedDate}
               />
             ) : (
               <div className="history-empty">
                 <p className="empty-copy">
-                  Selecciona un tramo en el mapa o en la lista para ver su evolucion mensual.
+                  Selecciona un tramo en el mapa o en la lista para abrir su inspector.
                 </p>
                 <div className="detail-grid summary-grid">
                   <Detail
@@ -1145,6 +1103,44 @@ function RouteHistoryChart({
           }
         />
       </div>
+    </div>
+  );
+}
+
+function RouteInspector({
+  details,
+  history,
+  selectedDate
+}: {
+  details: DisplayRoute;
+  history: RouteHistoryPoint[];
+  selectedDate: string;
+}) {
+  return (
+    <div className="route-inspector">
+      <div className="inspector-head">
+        <div>
+          <p className="history-title">{details.ruta}</p>
+          <p className="inspector-subtitle">
+            {details.origen} → {details.destino}
+          </p>
+        </div>
+        <span className="inspector-chip">{details.gasoducto}</span>
+      </div>
+      <div className="inspector-stats">
+        <Detail label="Caudal" value={details.caudal == null ? "Sin dato" : `${formatNumber(details.caudal)} MMm3/d`} />
+        <Detail label="Capacidad" value={details.capacidad == null ? "Sin dato" : `${formatNumber(details.capacidad)} MMm3/d`} />
+        <Detail
+          label="Utilizacion"
+          value={
+            details.utilization == null
+              ? "Sin dato"
+              : `${formatNumber(details.utilization * 100)}%`
+          }
+        />
+        <Detail label="Sentido" value={details.sentido || "Sin dato"} />
+      </div>
+      <RouteHistoryChart routeName={details.ruta} history={history} selectedDate={selectedDate} />
     </div>
   );
 }
