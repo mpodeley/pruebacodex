@@ -111,7 +111,7 @@ h1 {
 
 .control-bar {
   display: grid;
-  grid-template-columns: minmax(320px, 1.2fr) auto auto;
+  grid-template-columns: minmax(280px, 1.1fr) minmax(360px, 1.3fr) auto auto;
   gap: 18px;
   align-items: center;
   margin-bottom: 20px;
@@ -133,6 +133,112 @@ h1 {
   display: grid;
   gap: 8px;
   color: var(--muted);
+}
+
+.timeline-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(9, 20, 39, 0.88);
+  border: 1px solid rgba(125, 159, 245, 0.16);
+}
+
+.timeline-heading,
+.timeline-actions,
+.timeline-presets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.timeline-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.timeline-heading strong {
+  display: block;
+  font-size: 1.15rem;
+  text-transform: capitalize;
+}
+
+.timeline-range {
+  color: var(--muted);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.timeline-warning {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 157, 77, 0.12);
+  border: 1px solid rgba(255, 157, 77, 0.26);
+  color: #ffd7b2;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.timeline-step,
+.timeline-play,
+.timeline-presets button {
+  border: 1px solid rgba(125, 159, 245, 0.16);
+  color: var(--ink);
+  background: rgba(16, 31, 58, 0.92);
+  border-radius: 999px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+
+.timeline-play {
+  background: linear-gradient(135deg, #173254, #224875);
+}
+
+.timeline-step:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.timeline-slider {
+  gap: 0;
+}
+
+.timeline-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.timeline-marks {
+  position: relative;
+  min-height: 18px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.timeline-marks span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.timeline-presets {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.timeline-presets button {
+  padding: 7px 10px;
+  font-size: 0.84rem;
+}
+
+.timeline-presets button.is-active {
+  border-color: rgba(125, 211, 252, 0.5);
+  background: rgba(31, 68, 112, 0.95);
 }
 
 .control-bar select {
@@ -323,10 +429,26 @@ h1 {
   color: #ff9ab0;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 1080px) {
   .control-bar,
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .timeline-actions {
+    flex-wrap: wrap;
   }
 }
 
@@ -337,6 +459,16 @@ h1 {
 
   .control-bar {
     align-items: stretch;
+  }
+
+  .timeline-heading,
+  .timeline-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .timeline-range {
+    white-space: normal;
   }
 
   .reset-view {

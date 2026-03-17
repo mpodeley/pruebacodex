@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import flowData from "../data/processed/powerbi-flows-latest.json";
 import outlineData from "../data/processed/argentina-outline-3857.json";
 
@@ -94,6 +94,7 @@ const CANVAS_HEIGHT = 760;
 const MIN_SCALE = 1;
 const MAX_SCALE = 5;
 const INITIAL_TRANSFORM: Transform = { scale: 1, x: 0, y: 0 };
+const TIMELINE_AUTOPLAY_MS = 1400;
 
 function fixText(value: string | null) {
   if (!value) {
@@ -116,6 +117,24 @@ function formatNumber(value: number | null, digits = 2) {
     maximumFractionDigits: digits,
     minimumFractionDigits: digits
   }).format(value);
+}
+
+function formatMonthLabel(value: string, options?: Intl.DateTimeFormatOptions) {
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return new Intl.DateTimeFormat("es-AR", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+    ...options
+  }).format(date);
+}
+
+function snapshotHasOperationalData(snapshot: Snapshot) {
+  return snapshot.metrics.some(
+    (metric) =>
+      metric.caudal != null || metric.capacidad != null || metric.utilization != null
+  );
 }
 
 function utilizationColor(utilization: number | null) {
@@ -250,10 +269,19 @@ function useProjectedNetwork(routes: RouteBase[], polygons: OutlinePoint[][]) {
 }
 
 export default function App() {
+  const latestUsableDate = useMemo(() => {
+    const latestSnapshotWithData = [...dataset.snapshots]
+      .reverse()
+      .find((snapshot) => snapshotHasOperationalData(snapshot));
+
+    return latestSnapshotWithData?.date ?? dataset.latestDate;
+  }, []);
+
   const [selectedGasoducto, setSelectedGasoducto] = useState("Todos");
   const [selectedRouteId, setSelectedRouteId] = useState<string | null>(null);
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(dataset.latestDate);
+  const [selectedDate, setSelectedDate] = useState(latestUsableDate);
+  const [isPlayingTimeline, setIsPlayingTimeline] = useState(false);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
   const [isDragging, setIsDragging] = useState(false);
   const dragState = useRef<{ x: number; y: number; moved: boolean } | null>(null);
@@ -354,6 +382,69 @@ export default function App() {
     []
   );
 
+  const selectedDateIndex = useMemo(
+    () => dataset.availableDates.findIndex((date) => date === selectedDate),
+    [selectedDate]
+  );
+
+  const selectedDateLabel = useMemo(
+    () => formatMonthLabel(selectedSnapshot.date, { month: "long", year: "numeric" }),
+    [selectedSnapshot.date]
+  );
+
+  const selectedDateShortLabel = useMemo(
+    () => formatMonthLabel(selectedSnapshot.date),
+    [selectedSnapshot.date]
+  );
+
+  const selectedSnapshotHasData = useMemo(
+    () => snapshotHasOperationalData(selectedSnapshot),
+    [selectedSnapshot]
+  );
+
+  const timelineMarks = useMemo(
+    () =>
+      dataset.availableDates
+        .map((date, index) => ({ date, index }))
+        .filter(({ date, index }) => {
+          const month = Number(date.split("-")[1]);
+          return index === 0 || month === 1 || index === dataset.availableDates.length - 1;
+        }),
+    []
+  );
+
+  useEffect(() => {
+    if (!isPlayingTimeline) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setSelectedDate((currentDate) => {
+        const currentIndex = dataset.availableDates.findIndex((date) => date === currentDate);
+        const nextIndex = currentIndex + 1;
+        if (nextIndex >= dataset.availableDates.length) {
+          window.clearInterval(intervalId);
+          setIsPlayingTimeline(false);
+          return currentDate;
+        }
+        return dataset.availableDates[nextIndex];
+      });
+      setSelectedRouteId(null);
+    }, TIMELINE_AUTOPLAY_MS);
+
+    return () => window.clearInterval(intervalId);
+  }, [isPlayingTimeline]);
+
+  function setDateByIndex(nextIndex: number) {
+    const safeIndex = Math.max(0, Math.min(dataset.availableDates.length - 1, nextIndex));
+    setSelectedDate(dataset.availableDates[safeIndex]);
+    setSelectedRouteId(null);
+  }
+
+  function stepDate(direction: -1 | 1) {
+    setDateByIndex(selectedDateIndex + direction);
+  }
+
   function clampTransform(next: Transform) {
     if (next.scale <= MIN_SCALE) {
       return INITIAL_TRANSFORM;
@@ -443,22 +534,97 @@ export default function App() {
             Cortes mensuales del dataset ENARGAS. Grosor por caudal, color por utilizacion.
           </p>
         </div>
-        <label>
-          <span>Fecha</span>
-          <select
-            value={selectedDate}
-            onChange={(event) => {
-              setSelectedDate(event.target.value);
-              setSelectedRouteId(null);
-            }}
-          >
-            {availableDatesDescending.map((date) => (
-              <option key={date} value={date}>
-                {date}
-              </option>
+        <section className="timeline-card" aria-label="Controles temporales">
+          <div className="timeline-heading">
+            <div>
+              <span className="timeline-label">Fecha activa</span>
+              <strong>{selectedDateLabel}</strong>
+            </div>
+            <span className="timeline-range">
+              {selectedDateIndex + 1}/{dataset.availableDates.length}
+            </span>
+          </div>
+          {!selectedSnapshotHasData ? (
+            <p className="timeline-warning">
+              Este corte no trae caudal ni capacidad. Se puede recorrer la serie, pero no sirve
+              para evaluar uso operativo de la red.
+            </p>
+          ) : null}
+          <div className="timeline-actions">
+            <button
+              type="button"
+              className="timeline-step"
+              onClick={() => stepDate(-1)}
+              disabled={selectedDateIndex <= 0}
+            >
+              Mes anterior
+            </button>
+            <button
+              type="button"
+              className="timeline-play"
+              onClick={() => {
+                if (selectedDateIndex >= dataset.availableDates.length - 1) {
+                  setDateByIndex(0);
+                  setIsPlayingTimeline(true);
+                  return;
+                }
+                setIsPlayingTimeline((current) => !current);
+              }}
+            >
+              {isPlayingTimeline ? "Pausar" : "Reproducir"}
+            </button>
+            <button
+              type="button"
+              className="timeline-step"
+              onClick={() => stepDate(1)}
+              disabled={selectedDateIndex >= dataset.availableDates.length - 1}
+            >
+              Mes siguiente
+            </button>
+          </div>
+          <label className="timeline-slider">
+            <span className="sr-only">Mover en la serie mensual</span>
+            <input
+              type="range"
+              min={0}
+              max={dataset.availableDates.length - 1}
+              step={1}
+              value={selectedDateIndex}
+              onChange={(event) => {
+                setIsPlayingTimeline(false);
+                setDateByIndex(Number(event.target.value));
+              }}
+            />
+          </label>
+          <div className="timeline-marks" aria-hidden="true">
+            {timelineMarks.map((mark) => (
+              <span
+                key={mark.date}
+                style={{
+                  left: `${(mark.index / (dataset.availableDates.length - 1)) * 100}%`
+                }}
+              >
+                {formatMonthLabel(mark.date, { year: "numeric" })}
+              </span>
             ))}
-          </select>
-        </label>
+          </div>
+          <div className="timeline-presets">
+            {availableDatesDescending.slice(0, 4).map((date) => (
+              <button
+                key={date}
+                type="button"
+                className={date === selectedDate ? "is-active" : ""}
+                onClick={() => {
+                  setIsPlayingTimeline(false);
+                  setSelectedDate(date);
+                  setSelectedRouteId(null);
+                }}
+              >
+                {formatMonthLabel(date)}
+              </button>
+            ))}
+          </div>
+        </section>
         <label>
           <span>Gasoducto</span>
           <select
@@ -490,7 +656,7 @@ export default function App() {
             <div>
               <h2>Red proyectada</h2>
               <p>
-                Corte {selectedSnapshot.date}. {selectedSnapshot.stats.routesWithFlow} tramos
+                Corte {selectedDateShortLabel}. {selectedSnapshot.stats.routesWithFlow} tramos
                 con caudal y {highStressCount} con uso mayor a 80%.
               </p>
             </div>
@@ -583,8 +749,16 @@ export default function App() {
                 label="Tramos con caudal"
                 value={`${selectedSnapshot.stats.routesWithFlow}/${selectedSnapshot.stats.routes}`}
               />
+              <Detail label="Mes activo" value={selectedDateShortLabel} />
               <Detail label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
-              <Detail label="Tramos exigidos" value={`${highStressCount} sobre 73`} />
+              <Detail
+                label="Tramos exigidos"
+                value={
+                  selectedSnapshotHasData
+                    ? `${highStressCount} sobre 73`
+                    : "Sin datos operativos"
+                }
+              />
             </div>
           </section>
 

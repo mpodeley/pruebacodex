@@ -398,6 +398,32 @@ async function getRoutes() {
 }
 
 async function getAllFlows() {
+  throw new Error("Use getMonthlyFlows instead");
+}
+
+async function getAllCapacity() {
+  throw new Error("Use getMonthlyCapacity instead");
+}
+
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = new Array(items.length);
+  let cursor = 0;
+
+  async function worker() {
+    while (cursor < items.length) {
+      const index = cursor++;
+      results[index] = await mapper(items[index], index);
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, () => worker())
+  );
+
+  return results;
+}
+
+async function getFlowsForDate(date) {
   const payload = await queryData({
     from: [{ Name: "f", Entity: "Flujos", Type: 0 }],
     select: [
@@ -407,8 +433,9 @@ async function getAllFlows() {
       buildColumn("f", "F-CF", "Flujos.F-CF"),
       buildColumn("f", "Flujo-ContrFlujo", "Flujos.Flujo-ContrFlujo")
     ],
+    where: [buildDateEqualsCondition("f", "Fecha", date)],
     projections: [0, 1, 2, 3, 4],
-    top: 120000
+    top: 500
   });
 
   return rowsToObjects(parseDsrRows(payload), [
@@ -420,7 +447,7 @@ async function getAllFlows() {
   ]);
 }
 
-async function getAllCapacity() {
+async function getCapacityForDate(date) {
   const payload = await queryData({
     from: [{ Name: "c", Entity: "Capacidad", Type: 0 }],
     select: [
@@ -428,11 +455,30 @@ async function getAllCapacity() {
       buildColumn("c", "Ruta", "Capacidad.Ruta"),
       buildColumn("c", "Capacidad", "Capacidad.Capacidad")
     ],
+    where: [buildDateEqualsCondition("c", "Fecha", date)],
     projections: [0, 1, 2],
-    top: 120000
+    top: 500
   });
 
   return rowsToObjects(parseDsrRows(payload), ["fecha", "ruta", "capacidad"]);
+}
+
+async function getMonthlyFlows(dates) {
+  const monthly = await mapWithConcurrency(dates, 6, async (date) => {
+    console.log(`  Flujos ${date}...`);
+    return getFlowsForDate(date);
+  });
+
+  return monthly.flat();
+}
+
+async function getMonthlyCapacity(dates) {
+  const monthly = await mapWithConcurrency(dates, 6, async (date) => {
+    console.log(`  Capacidad ${date}...`);
+    return getCapacityForDate(date);
+  });
+
+  return monthly.flat();
 }
 
 function buildMetadata(modelsAndExploration, conceptualSchema, latestDate, availableDates) {
@@ -617,8 +663,8 @@ async function main() {
   console.log(`Fetching route metadata and time series (${timelineDates.length} monthly cuts)...`);
   const [routes, flows, capacity] = await Promise.all([
     getRoutes(),
-    getAllFlows(),
-    getAllCapacity()
+    getMonthlyFlows(timelineDates),
+    getMonthlyCapacity(timelineDates)
   ]);
 
   const metadata = buildMetadata(
