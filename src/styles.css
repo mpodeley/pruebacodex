@@ -42,6 +42,34 @@ input {
   padding: 28px;
 }
 
+.top-shell {
+  margin-bottom: 20px;
+}
+
+.hero-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 14px 20px 12px;
+  backdrop-filter: blur(20px);
+  background: rgba(12, 22, 40, 0.92);
+  border: 1px solid rgba(126, 165, 255, 0.12);
+  border-bottom: 0;
+  border-radius: 24px 24px 0 0;
+  box-shadow: var(--shadow);
+}
+
+.hero-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, #ff5f87, #ff9d4d, #ffe06d, #53e0a1, #7dd3fc);
+  border-radius: 24px 24px 0 0;
+}
+
 .backdrop {
   position: fixed;
   inset: 0;
@@ -111,12 +139,13 @@ h1 {
 
 .control-bar {
   display: grid;
-  grid-template-columns: minmax(320px, 1.4fr) repeat(3, auto);
-  gap: 18px;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 12px;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 18px 20px;
-  border-radius: 24px;
+  margin-bottom: 0;
+  padding: 8px 20px 12px;
+  border-radius: 0 0 24px 24px;
+  background: rgba(12, 22, 40, 0.92);
 }
 
 .control-copy h1 {
@@ -137,6 +166,39 @@ h1 {
 
 .control-field {
   align-self: stretch;
+}
+
+.toolbar-spacer {
+  min-width: 8px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metric-pill {
+  min-width: 118px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(126, 165, 255, 0.12);
+  background: rgba(13, 24, 48, 0.9);
+}
+
+.metric-pill strong {
+  display: block;
+  color: #f4d78b;
+  font-size: 0.95rem;
+}
+
+.metric-pill span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .timeline-card {
@@ -274,6 +336,7 @@ h1 {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(360px, 0.95fr);
   gap: 20px;
+  align-items: start;
 }
 
 .map-panel {
@@ -289,15 +352,64 @@ h1 {
   margin-bottom: 18px;
 }
 
+.panel-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.panel-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 165, 255, 0.12);
+  color: var(--muted);
+  background: rgba(9, 20, 39, 0.85);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.map-stage {
+  position: relative;
+}
+
+.map-controls {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-control {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(126, 165, 255, 0.14);
+  background: rgba(12, 22, 40, 0.94);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.map-control-fit {
+  height: auto;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+}
+
 .panel-heading p {
   margin-top: 6px;
   color: var(--muted);
 }
 
 .legend {
-  display: grid;
-  gap: 6px;
-  font-size: 0.88rem;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.76rem;
   color: var(--muted);
 }
 
@@ -379,6 +491,8 @@ h1 {
 .side-panel {
   display: grid;
   gap: 20px;
+  position: sticky;
+  top: 24px;
 }
 
 .detail-card {
@@ -388,6 +502,7 @@ h1 {
 
 .detail-card h3 {
   margin-bottom: 14px;
+  font-size: 0.95rem;
 }
 
 .detail-summary {
@@ -406,6 +521,11 @@ h1 {
 
 .summary-grid {
   grid-template-columns: 1fr;
+}
+
+.history-empty {
+  display: grid;
+  gap: 16px;
 }
 
 .history-chart {
@@ -533,6 +653,11 @@ h1 {
   color: #ff9ab0;
 }
 
+.compact-toggle {
+  min-width: 210px;
+  align-self: center;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -546,8 +671,21 @@ h1 {
 }
 
 @media (max-width: 1080px) {
-  .control-bar,
   .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    position: static;
+    top: auto;
+  }
+
+  .hero-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-bar {
     grid-template-columns: 1fr;
   }
 
@@ -567,6 +705,12 @@ h1 {
 
   .control-bar {
     align-items: stretch;
+  }
+
+  .hero-stats,
+  .panel-badges,
+  .legend {
+    justify-content: flex-start;
   }
 
   .timeline-heading,

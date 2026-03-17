@@ -581,38 +581,56 @@ export default function App() {
   return (
     <div className="app-shell">
       <div className="backdrop" />
-      <section className="control-bar">
-        <div className="control-copy">
-          <p className="eyebrow">Argentina Gas Grid</p>
-          <h1>Flujo vs capacidad en la red de transporte</h1>
-          <p className="lede">
-            Cortes mensuales del dataset ENARGAS. Grosor por caudal, color por utilizacion.
-          </p>
-        </div>
-        <label className="control-field">
-          <span>Gasoducto</span>
-          <select
-            value={selectedGasoducto}
-            onChange={(event) => setSelectedGasoducto(event.target.value)}
-          >
-            <option>Todos</option>
-            {network.gasoductos.map((gasoducto) => (
-              <option key={gasoducto}>{gasoducto}</option>
-            ))}
-          </select>
-        </label>
-        <label className="toggle control-field">
-          <input
-            type="checkbox"
-            checked={showCriticalOnly}
-            onChange={(event) => setShowCriticalOnly(event.target.checked)}
-          />
-          <span>Mostrar solo tramos con uso mayor a 80%</span>
-        </label>
-        <button type="button" className="reset-view" onClick={() => setTransform(INITIAL_TRANSFORM)}>
-          Recentrar vista
-        </button>
-      </section>
+      <header className="top-shell">
+        <section className="hero-bar">
+          <div className="control-copy">
+            <p className="eyebrow">Argentina Gas Grid</p>
+            <h1>Flujo vs capacidad en la red de transporte</h1>
+            <p className="lede">
+              Navegacion temporal de la red ENARGAS. Grosor por caudal, color por utilizacion.
+            </p>
+          </div>
+          <div className="hero-stats">
+            <MetricPill
+              value={`${selectedSnapshot.stats.routesWithFlow}/${selectedSnapshot.stats.routes}`}
+              label="Tramos con caudal"
+            />
+            <MetricPill
+              value={`${formatNumber(peakRouteFlow)} MMm3/d`}
+              label="Pico por tramo"
+            />
+            <MetricPill
+              value={selectedSnapshotHasData ? `${highStressCount}` : "0"}
+              label="Tramos > 80%"
+            />
+          </div>
+        </section>
+
+        <section className="control-bar">
+          <Legend />
+          <div className="toolbar-spacer" />
+          <label className="control-field">
+            <span>Gasoducto</span>
+            <select
+              value={selectedGasoducto}
+              onChange={(event) => setSelectedGasoducto(event.target.value)}
+            >
+              <option>Todos</option>
+              {network.gasoductos.map((gasoducto) => (
+                <option key={gasoducto}>{gasoducto}</option>
+              ))}
+            </select>
+          </label>
+          <label className="toggle control-field compact-toggle">
+            <input
+              type="checkbox"
+              checked={showCriticalOnly}
+              onChange={(event) => setShowCriticalOnly(event.target.checked)}
+            />
+            <span>Solo uso mayor a 80%</span>
+          </label>
+        </section>
+      </header>
 
       <main className="layout">
         <section className="map-panel">
@@ -624,80 +642,124 @@ export default function App() {
                 con caudal y {highStressCount} con uso mayor a 80%.
               </p>
             </div>
-            <Legend />
+            <div className="panel-badges">
+              <span className="panel-badge">EPSG:3857</span>
+              <span className="panel-badge">{selectedDateShortLabel}</span>
+            </div>
           </div>
-          <svg
-            viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
-            className={`network-map ${isDragging ? "is-dragging" : ""}`}
-            onWheel={handleWheel}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
-          >
-            <defs>
-              <radialGradient id="nightGlow" cx="50%" cy="45%" r="70%">
-                <stop offset="0%" stopColor="rgba(85,126,255,0.22)" />
-                <stop offset="65%" stopColor="rgba(17,24,46,0.08)" />
-                <stop offset="100%" stopColor="rgba(0,0,0,0)" />
-              </radialGradient>
-            </defs>
-            <rect x="0" y="0" width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="map-ocean" />
-            <ellipse
-              cx={CANVAS_WIDTH / 2}
-              cy={CANVAS_HEIGHT / 2}
-              rx={CANVAS_WIDTH * 0.38}
-              ry={CANVAS_HEIGHT * 0.4}
-              fill="url(#nightGlow)"
-            />
-            <g transform={`translate(${transform.x} ${transform.y})`}>
-              <g transform={`scale(${transform.scale})`}>
-                <path d={network.countryPath} className="country-fill" />
-                <rect
-                  x="30"
-                  y="30"
-                  width={CANVAS_WIDTH - 60}
-                  height={CANVAS_HEIGHT - 60}
-                  rx="30"
-                  className="map-frame"
-                />
-                <path d={network.countryPath} className="country-outline" />
-                {visibleRoutes.map((route) => (
-                  <g key={route.ruta} className="route-hit">
-                    <line
-                      x1={route.start.x}
-                      y1={route.start.y}
-                      x2={route.end.x}
-                      y2={route.end.y}
-                      stroke="transparent"
-                      strokeWidth={Math.max(route.strokeWidth + 10, 16)}
-                      strokeLinecap="round"
-                      className="route-hit-area"
-                      onPointerUp={() => handleRouteSelect(route.ruta)}
-                    />
-                    <line
-                      x1={route.start.x}
-                      y1={route.start.y}
-                      x2={route.end.x}
-                      y2={route.end.y}
-                      stroke={utilizationColor(route.utilization)}
-                      strokeWidth={route.strokeWidth}
-                      strokeLinecap="round"
-                      opacity={selectedVisibleRoute && selectedVisibleRoute.ruta !== route.ruta ? 0.14 : 0.9}
-                    />
-                  </g>
-                ))}
-                {visibleNodes.map((node) => (
-                  <g key={node.id}>
-                    <circle cx={node.x} cy={node.y} r="5.5" className="node-dot" />
-                    <text x={node.x + 8} y={node.y - 8} className="node-label">
-                      {node.label}
-                    </text>
-                  </g>
-                ))}
+          <div className="map-stage">
+            <div className="map-controls">
+              <button
+                type="button"
+                className="map-control"
+                onClick={() =>
+                  setTransform((current) =>
+                    clampTransform({
+                      scale: Math.min(MAX_SCALE, current.scale * 1.25),
+                      x: current.x - CANVAS_WIDTH * 0.125,
+                      y: current.y - CANVAS_HEIGHT * 0.125
+                    })
+                  )
+                }
+              >
+                +
+              </button>
+              <button
+                type="button"
+                className="map-control"
+                onClick={() =>
+                  setTransform((current) =>
+                    clampTransform({
+                      scale: Math.max(MIN_SCALE, current.scale / 1.25),
+                      x: current.x + CANVAS_WIDTH * 0.1,
+                      y: current.y + CANVAS_HEIGHT * 0.1
+                    })
+                  )
+                }
+              >
+                −
+              </button>
+              <button
+                type="button"
+                className="map-control map-control-fit"
+                onClick={() => setTransform(INITIAL_TRANSFORM)}
+              >
+                Recentrar
+              </button>
+            </div>
+            <svg
+              viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
+              className={`network-map ${isDragging ? "is-dragging" : ""}`}
+              onWheel={handleWheel}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+            >
+              <defs>
+                <radialGradient id="nightGlow" cx="50%" cy="45%" r="70%">
+                  <stop offset="0%" stopColor="rgba(85,126,255,0.22)" />
+                  <stop offset="65%" stopColor="rgba(17,24,46,0.08)" />
+                  <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+                </radialGradient>
+              </defs>
+              <rect x="0" y="0" width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="map-ocean" />
+              <ellipse
+                cx={CANVAS_WIDTH / 2}
+                cy={CANVAS_HEIGHT / 2}
+                rx={CANVAS_WIDTH * 0.38}
+                ry={CANVAS_HEIGHT * 0.4}
+                fill="url(#nightGlow)"
+              />
+              <g transform={`translate(${transform.x} ${transform.y})`}>
+                <g transform={`scale(${transform.scale})`}>
+                  <path d={network.countryPath} className="country-fill" />
+                  <rect
+                    x="30"
+                    y="30"
+                    width={CANVAS_WIDTH - 60}
+                    height={CANVAS_HEIGHT - 60}
+                    rx="30"
+                    className="map-frame"
+                  />
+                  <path d={network.countryPath} className="country-outline" />
+                  {visibleRoutes.map((route) => (
+                    <g key={route.ruta} className="route-hit">
+                      <line
+                        x1={route.start.x}
+                        y1={route.start.y}
+                        x2={route.end.x}
+                        y2={route.end.y}
+                        stroke="transparent"
+                        strokeWidth={Math.max(route.strokeWidth + 10, 16)}
+                        strokeLinecap="round"
+                        className="route-hit-area"
+                        onPointerUp={() => handleRouteSelect(route.ruta)}
+                      />
+                      <line
+                        x1={route.start.x}
+                        y1={route.start.y}
+                        x2={route.end.x}
+                        y2={route.end.y}
+                        stroke={utilizationColor(route.utilization)}
+                        strokeWidth={route.strokeWidth}
+                        strokeLinecap="round"
+                        opacity={selectedVisibleRoute && selectedVisibleRoute.ruta !== route.ruta ? 0.14 : 0.9}
+                      />
+                    </g>
+                  ))}
+                  {visibleNodes.map((node) => (
+                    <g key={node.id}>
+                      <circle cx={node.x} cy={node.y} r="5.5" className="node-dot" />
+                      <text x={node.x + 8} y={node.y - 8} className="node-label">
+                        {node.label}
+                      </text>
+                    </g>
+                  ))}
+                </g>
               </g>
-            </g>
-          </svg>
+            </svg>
+          </div>
           <p className="map-note">
             Datos visibles: topologia y geometria de capas publicas de ENARGAS en ArcGIS, mas
             flujos y capacidades estimadas publicados en su reporte Power BI. Este MVP usa
@@ -737,26 +799,6 @@ export default function App() {
                 setSelectedRouteId(null);
               }}
             />
-          </section>
-
-          <section className="detail-card detail-summary">
-            <h3>Lectura rapida</h3>
-            <div className="detail-grid summary-grid">
-              <Detail
-                label="Tramos con caudal"
-                value={`${selectedSnapshot.stats.routesWithFlow}/${selectedSnapshot.stats.routes}`}
-              />
-              <Detail label="Mes activo" value={selectedDateShortLabel} />
-              <Detail label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
-              <Detail
-                label="Tramos exigidos"
-                value={
-                  selectedSnapshotHasData
-                    ? `${highStressCount} sobre 73`
-                    : "Sin datos operativos"
-                }
-              />
-            </div>
           </section>
 
           <section className="detail-card">
@@ -810,9 +852,30 @@ export default function App() {
                 selectedDate={selectedDate}
               />
             ) : (
-              <p className="empty-copy">
-                Selecciona un tramo en el mapa o en la lista para ver su evolucion mensual.
-              </p>
+              <div className="history-empty">
+                <p className="empty-copy">
+                  Selecciona un tramo en el mapa o en la lista para ver su evolucion mensual.
+                </p>
+                <div className="detail-grid summary-grid">
+                  <Detail
+                    label="Tramos con caudal"
+                    value={`${selectedSnapshot.stats.routesWithFlow}/${selectedSnapshot.stats.routes}`}
+                  />
+                  <Detail label="Mes activo" value={selectedDateShortLabel} />
+                  <Detail
+                    label="Caudal maximo de tramo"
+                    value={`${formatNumber(peakRouteFlow)} MMm3/d`}
+                  />
+                  <Detail
+                    label="Tramos exigidos"
+                    value={
+                      selectedSnapshotHasData
+                        ? `${highStressCount} sobre 73`
+                        : "Sin datos operativos"
+                    }
+                  />
+                </div>
+              </div>
             )}
           </section>
 
@@ -851,6 +914,15 @@ function Legend() {
       <div><i style={{ background: "#ffe06d" }} /> Medio</div>
       <div><i style={{ background: "#ff9d4d" }} /> Alto</div>
       <div><i style={{ background: "#ff5f87" }} /> Saturado</div>
+    </div>
+  );
+}
+
+function MetricPill({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="metric-pill">
+      <strong>{value}</strong>
+      <span>{label}</span>
     </div>
   );
 }
