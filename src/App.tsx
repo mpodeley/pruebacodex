@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import flowData from "../data/processed/powerbi-flows-latest.json";
 import outlineData from "../data/processed/argentina-outline-3857.json";
 
@@ -77,6 +77,8 @@ const dataset = flowData as FlowDataset;
 const outline = outlineData as OutlineDataset;
 const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 760;
+const MIN_SCALE = 1;
+const MAX_SCALE = 5;
 const INITIAL_TRANSFORM: Transform = { scale: 1, x: 0, y: 0 };
 
 function fixText(value: string | null) {
@@ -242,6 +244,8 @@ export default function App() {
   const [selectedRoute, setSelectedRoute] = useState<NetworkRoute | null>(null);
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragState = useRef<{ x: number; y: number } | null>(null);
 
   const network = useProjectedNetwork(dataset.routes, outline.polygons);
 
@@ -288,47 +292,86 @@ export default function App() {
     selectedRoute &&
     network.routes.find((route) => route.ruta === selectedRoute.ruta);
 
-  function handleWheel(event: React.WheelEvent<SVGSVGElement>) {
-    event.preventDefault();
-    const factor = event.deltaY > 0 ? 0.92 : 1.08;
-    setTransform((current) => ({
-      ...current,
-      scale: Math.min(3.2, Math.max(0.7, current.scale * factor))
-    }));
+  function clampTransform(next: Transform) {
+    if (next.scale <= MIN_SCALE) {
+      return INITIAL_TRANSFORM;
+    }
+
+    const minX = CANVAS_WIDTH - CANVAS_WIDTH * next.scale;
+    const minY = CANVAS_HEIGHT - CANVAS_HEIGHT * next.scale;
+
+    return {
+      scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, next.scale)),
+      x: Math.min(0, Math.max(minX, next.x)),
+      y: Math.min(0, Math.max(minY, next.y))
+    };
   }
 
-  function panBy(x: number, y: number) {
-    setTransform((current) => ({
-      ...current,
-      x: current.x + x,
-      y: current.y + y
-    }));
+  function handleWheel(event: React.WheelEvent<SVGSVGElement>) {
+    event.preventDefault();
+    const factor = event.deltaY > 0 ? 0.9 : 1.12;
+    const pointerX = event.nativeEvent.offsetX;
+    const pointerY = event.nativeEvent.offsetY;
+
+    setTransform((current) => {
+      const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, current.scale * factor));
+      if (nextScale === current.scale) {
+        return current;
+      }
+
+      const next = {
+        scale: nextScale,
+        x: pointerX - (pointerX - current.x) * (nextScale / current.scale),
+        y: pointerY - (pointerY - current.y) * (nextScale / current.scale)
+      };
+
+      return clampTransform(next);
+    });
+  }
+
+  function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
+    dragState.current = { x: event.clientX, y: event.clientY };
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
+    if (!dragState.current || transform.scale <= MIN_SCALE) {
+      return;
+    }
+
+    const deltaX = event.clientX - dragState.current.x;
+    const deltaY = event.clientY - dragState.current.y;
+    dragState.current = { x: event.clientX, y: event.clientY };
+
+    setTransform((current) =>
+      clampTransform({
+        ...current,
+        x: current.x + deltaX,
+        y: current.y + deltaY
+      })
+    );
+  }
+
+  function handlePointerUp(event: React.PointerEvent<SVGSVGElement>) {
+    dragState.current = null;
+    setIsDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   }
 
   return (
     <div className="app-shell">
       <div className="backdrop" />
-      <header className="hero">
-        <div>
+      <section className="control-bar">
+        <div className="control-copy">
           <p className="eyebrow">Argentina Gas Grid</p>
-          <h1>Flujo vs capacidad sobre la red de transporte</h1>
+          <h1>Flujo vs capacidad en la red de transporte</h1>
           <p className="lede">
-            Vista en coordenadas planas proyectadas, con contorno argentino y red
-            trazada desde la misma referencia espacial.
+            Fecha de corte {dataset.latestDate}. Grosor por caudal, color por utilizacion.
           </p>
         </div>
-        <div className="hero-metrics">
-          <Metric label="Fecha de corte" value={dataset.latestDate} />
-          <Metric
-            label="Tramos con caudal"
-            value={`${dataset.stats.routesWithFlow}/${dataset.stats.routes}`}
-          />
-          <Metric label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
-          <Metric label="Tramos exigidos" value={`${highStressCount} sobre 73`} />
-        </div>
-      </header>
-
-      <section className="control-bar">
         <label>
           <span>Gasoducto</span>
           <select
@@ -349,23 +392,9 @@ export default function App() {
           />
           <span>Mostrar solo tramos con uso mayor a 80%</span>
         </label>
-        <div className="zoom-tools">
-          <button type="button" onClick={() => setTransform(INITIAL_TRANSFORM)}>
-            Reset
-          </button>
-          <button type="button" onClick={() => panBy(0, -40)}>
-            Arriba
-          </button>
-          <button type="button" onClick={() => panBy(-40, 0)}>
-            Izq
-          </button>
-          <button type="button" onClick={() => panBy(40, 0)}>
-            Der
-          </button>
-          <button type="button" onClick={() => panBy(0, 40)}>
-            Abajo
-          </button>
-        </div>
+        <button type="button" className="reset-view" onClick={() => setTransform(INITIAL_TRANSFORM)}>
+          Recentrar vista
+        </button>
       </section>
 
       <main className="layout">
@@ -379,8 +408,12 @@ export default function App() {
           </div>
           <svg
             viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
-            className="network-map"
+            className={`network-map ${isDragging ? "is-dragging" : ""}`}
             onWheel={handleWheel}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
           >
             <defs>
               <radialGradient id="nightGlow" cx="50%" cy="45%" r="70%">
@@ -397,7 +430,8 @@ export default function App() {
               ry={CANVAS_HEIGHT * 0.4}
               fill="url(#nightGlow)"
             />
-            <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>
+            <g transform={`translate(${transform.x} ${transform.y})`}>
+              <g transform={`scale(${transform.scale})`}>
               <path d={network.countryPath} className="country-fill" />
               <rect
                 x="30"
@@ -434,11 +468,26 @@ export default function App() {
                   </text>
                 </g>
               ))}
+              </g>
             </g>
           </svg>
+          <p className="map-note">
+            Datos visibles: topologia y geometria de capas publicas de ENARGAS en ArcGIS, mas
+            flujos y capacidades estimadas publicados en su reporte Power BI. La visualizacion
+            muestra el ultimo corte disponible del dataset.
+          </p>
         </section>
 
         <aside className="side-panel">
+          <section className="detail-card detail-summary">
+            <h3>Lectura rapida</h3>
+            <div className="detail-grid summary-grid">
+              <Detail label="Tramos con caudal" value={`${dataset.stats.routesWithFlow}/${dataset.stats.routes}`} />
+              <Detail label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
+              <Detail label="Tramos exigidos" value={`${highStressCount} sobre 73`} />
+            </div>
+          </section>
+
           <section className="detail-card">
             <h3>Detalle del tramo</h3>
             {selectedDetails ? (
@@ -496,15 +545,6 @@ export default function App() {
         </aside>
       </main>
     </div>
-  );
-}
-
-function Metric({ label, value }: { label: string; value: string }) {
-  return (
-    <article className="metric-card">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </article>
   );
 }
 
