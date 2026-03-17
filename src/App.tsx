@@ -344,6 +344,10 @@ export default function App() {
     () => datedRoutes.find((route) => route.ruta === selectedRouteId) ?? null,
     [datedRoutes, selectedRouteId]
   );
+  const selectedVisibleRoute = useMemo(
+    () => visibleRoutes.find((route) => route.ruta === selectedRouteId) ?? null,
+    [visibleRoutes, selectedRouteId]
+  );
 
   const availableDatesDescending = useMemo(
     () => [...dataset.availableDates].reverse(),
@@ -389,7 +393,6 @@ export default function App() {
 
   function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
     dragState.current = { x: event.clientX, y: event.clientY, moved: false };
-    event.currentTarget.setPointerCapture(event.pointerId);
   }
 
   function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
@@ -419,9 +422,6 @@ export default function App() {
   function handlePointerUp(event: React.PointerEvent<SVGSVGElement>) {
     dragState.current = null;
     setIsDragging(false);
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
   }
 
   function handleRouteSelect(routeId: string) {
@@ -543,7 +543,7 @@ export default function App() {
                       strokeWidth={Math.max(route.strokeWidth + 10, 16)}
                       strokeLinecap="round"
                       className="route-hit-area"
-                      onClick={() => handleRouteSelect(route.ruta)}
+                      onPointerUp={() => handleRouteSelect(route.ruta)}
                     />
                     <line
                       x1={route.start.x}
@@ -553,7 +553,7 @@ export default function App() {
                       stroke={utilizationColor(route.utilization)}
                       strokeWidth={route.strokeWidth}
                       strokeLinecap="round"
-                      opacity={selectedDetails && selectedDetails.ruta !== route.ruta ? 0.14 : 0.9}
+                      opacity={selectedVisibleRoute && selectedVisibleRoute.ruta !== route.ruta ? 0.14 : 0.9}
                     />
                   </g>
                 ))}
