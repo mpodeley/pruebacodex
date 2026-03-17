@@ -1,6 +1,7 @@
 {
-  "generatedAt": "2026-03-17T12:33:36.226Z",
+  "generatedAt": "2026-03-17T18:47:03.108Z",
   "source": "ENARGAS Power BI public report",
+  "projection": "EPSG:3857",
   "latestDate": "2025-09-30",
   "stats": {
     "routes": 73,
@@ -24,7 +25,11 @@
       "capacidad": 28.53,
       "fcf": "Desde Campo Durán",
       "sentido": "Desde Campo Durán",
-      "utilization": 0.05178198387662112
+      "utilization": 0.05178198387662112,
+      "xOrigen": -7088825.17371566,
+      "yOrigen": -2534352.3402991896,
+      "xDestino": -7162296.03763922,
+      "yDestino": -2680464.0819783327
     },
     {
       "ruta": "Pichanal-Miraflores",
@@ -40,7 +45,11 @@
       "capacidad": 28.36,
       "fcf": "Desde Campo Durán",
       "sentido": "Desde Campo Durán",
-      "utilization": 0.015417052505153574
+      "utilization": 0.015417052505153574,
+      "xOrigen": -7162296.03763922,
+      "yOrigen": -2680464.0819783327,
+      "xDestino": -7215729.3932199925,
+      "yDestino": -2841391.9234036594
     },
     {
       "ruta": "Miraflores-Lumbreras",
@@ -56,7 +65,11 @@
       "capacidad": 24.69,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.05234636300662224
+      "utilization": 0.05234636300662224,
+      "xOrigen": -7215729.3932199925,
+      "yOrigen": -2841391.9234036594,
+      "xDestino": -7230200.927023117,
+      "yDestino": -2900330.182563664
     },
     {
       "ruta": "Lumbreras-Tucumán",
@@ -72,7 +85,11 @@
       "capacidad": 21,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.11961960488730963
+      "utilization": 0.11961960488730963,
+      "xOrigen": -7230200.927023117,
+      "yOrigen": -2900330.182563664,
+      "xDestino": -7253578.020089705,
+      "yDestino": -3104743.6981482785
     },
     {
       "ruta": "Tucumán-Lavalle",
@@ -88,7 +105,11 @@
       "capacidad": 17.98,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.2894183371876253
+      "utilization": 0.2894183371876253,
+      "xOrigen": -7253578.020089705,
+      "yOrigen": -3104743.6981482785,
+      "xDestino": -7249125.240457975,
+      "yDestino": -3350215.06008894
     },
     {
       "ruta": "Lavalle-Recreo",
@@ -104,7 +125,11 @@
       "capacidad": 15.09,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.36711011945881394
+      "utilization": 0.36711011945881394,
+      "xOrigen": -7249125.240457975,
+      "yOrigen": -3350215.06008894,
+      "xDestino": -7224634.952483456,
+      "yDestino": -3406228.2645908794
     },
     {
       "ruta": "Recreo-Deán Funes",
@@ -120,7 +145,11 @@
       "capacidad": 15.03,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.37309725233755836
+      "utilization": 0.37309725233755836,
+      "xOrigen": -7224634.952483456,
+      "yOrigen": -3406228.2645908794,
+      "xDestino": -7167862.012178886,
+      "yDestino": -3551199.107328475
     },
     {
       "ruta": "Deán Funes-Ferreyra",
@@ -136,7 +165,11 @@
       "capacidad": 14.76,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.4218104134575543
+      "utilization": 0.4218104134575543,
+      "xOrigen": -7167862.012178886,
+      "yOrigen": -3551199.107328475,
+      "xDestino": -7121107.826045711,
+      "yDestino": -3692634.1034163036
     },
     {
       "ruta": "Ferreyra-Tío Pujio",
@@ -152,7 +185,11 @@
       "capacidad": 13.42,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.522600872029322
+      "utilization": 0.522600872029322,
+      "xOrigen": -7121107.826045711,
+      "yOrigen": -3692634.1034163036,
+      "xDestino": -7046523.767214217,
+      "yDestino": -3801438.1221607304
     },
     {
       "ruta": "Tío Pujio-Leones",
@@ -168,7 +205,11 @@
       "capacidad": 9.35,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.8027640323672194
+      "utilization": 0.8027640323672194,
+      "xOrigen": -7046523.767214217,
+      "yOrigen": -3801438.1221607304,
+      "xDestino": -6928525.106973346,
+      "yDestino": -3843651.66527756
     },
     {
       "ruta": "Leones-San Jerónimo",
@@ -184,7 +225,11 @@
       "capacidad": 9.27,
       "fcf": "Desde San Jerónimo",
       "sentido": "Desde San Jerónimo",
-      "utilization": 0.830306764038134
+      "utilization": 0.830306764038134,
+      "xOrigen": -6928525.106973346,
+      "yOrigen": -3843651.66527756,
+      "xDestino": -6799394.497653149,
+      "yDestino": -3876736.014417856
     },
     {
       "ruta": "Bolivia-Campo Durán",
@@ -200,7 +245,11 @@
       "capacidad": 27.7,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0
+      "utilization": 0,
+      "xOrigen": -7088825.17371566,
+      "yOrigen": -2509124.1653393484,
+      "xDestino": -7088825.17371566,
+      "yDestino": -2534352.3402991896
     },
     {
       "ruta": "Chile-Nor Andino",
@@ -216,7 +265,11 @@
       "capacidad": 2.6,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0
+      "utilization": 0,
+      "xOrigen": -7465196.260768227,
+      "yOrigen": -2658750.223433199,
+      "xDestino": -7462858.662781062,
+      "yDestino": -2658645.6866933703
     },
     {
       "ruta": "Nor Andino-Chile",
@@ -232,7 +285,11 @@
       "capacidad": 2.6,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0
+      "utilization": 0,
+      "xOrigen": -7462858.662781062,
+      "yOrigen": -2658645.6866933703,
+      "xDestino": -7465196.260768227,
+      "yDestino": -2658750.223433199
     },
     {
       "ruta": "Pichanal-Nor Andino",
@@ -248,7 +305,11 @@
       "capacidad": 2.6,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0
+      "utilization": 0,
+      "xOrigen": -7162296.03763922,
+      "yOrigen": -2680464.0819783327,
+      "xDestino": -7462858.662781062,
+      "yDestino": -2658645.6866933703
     },
     {
       "ruta": "Loma La Lata-Puelén",
@@ -264,7 +325,11 @@
       "capacidad": 32.67,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9040618304254666
+      "utilization": 0.9040618304254666,
+      "xOrigen": -7616479.560075777,
+      "yOrigen": -4644613.748702693,
+      "xDestino": -7539669.111428418,
+      "yDestino": -4516049.501323953
     },
     {
       "ruta": "Puelén-Cochicó",
@@ -280,7 +345,11 @@
       "capacidad": 32.51,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9053948833342398
+      "utilization": 0.9053948833342398,
+      "xOrigen": -7539669.111428418,
+      "yOrigen": -4516049.501323953,
+      "xDestino": -7458405.883149329,
+      "yDestino": -4351652.965578021
     },
     {
       "ruta": "Cochicó-La Mora",
@@ -296,7 +365,11 @@
       "capacidad": 32.13,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9056120375912173
+      "utilization": 0.9056120375912173,
+      "xOrigen": -7458405.883149329,
+      "yOrigen": -4351652.965578021,
+      "xDestino": -7439481.569714472,
+      "yDestino": -4177479.0621810867
     },
     {
       "ruta": "La Mora-Beazley",
@@ -312,7 +385,11 @@
       "capacidad": 27.05,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.7775357029082696
+      "utilization": 0.7775357029082696,
+      "xOrigen": -7439481.569714472,
+      "yOrigen": -4177479.0621810867,
+      "xDestino": -7420557.256279617,
+      "yDestino": -3999299.5169666726
     },
     {
       "ruta": "Beazley-Chaján",
@@ -328,7 +405,11 @@
       "capacidad": 17.45,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.1574828267744584
+      "utilization": 1.1574828267744584,
+      "xOrigen": -7420557.256279617,
+      "yOrigen": -3999299.5169666726,
+      "xDestino": -7249125.240457975,
+      "yDestino": -3969872.6890722197
     },
     {
       "ruta": "Chaján-La Carlota",
@@ -344,7 +425,11 @@
       "capacidad": 16.35,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.2048079143447556
+      "utilization": 1.2048079143447556,
+      "xOrigen": -7249125.240457975,
+      "yOrigen": -3969872.6890722197,
+      "xDestino": -7076580.029728401,
+      "yDestino": -3937856.0471176477
     },
     {
       "ruta": "La Carlota-Baldissera",
@@ -360,7 +445,11 @@
       "capacidad": 16.19,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.44892389410583616
+      "utilization": 0.44892389410583616,
+      "xOrigen": -7076580.029728401,
+      "yOrigen": -3937856.0471176477,
+      "xDestino": -6937430.666236808,
+      "yDestino": -3912572.0289339144
     },
     {
       "ruta": "Baldissera-San Jerónimo",
@@ -376,7 +465,11 @@
       "capacidad": 16.06,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.425249285513424
+      "utilization": 0.425249285513424,
+      "xOrigen": -6937430.666236808,
+      "yOrigen": -3912572.0289339144,
+      "xDestino": -6799394.497653149,
+      "yDestino": -3876736.014417856
     },
     {
       "ruta": "Beazley-La Dormida",
@@ -392,7 +485,11 @@
       "capacidad": 9,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.5461844444444445
+      "utilization": 0.5461844444444445,
+      "xOrigen": -7420557.256279617,
+      "yOrigen": -3999299.5169666726,
+      "xDestino": -7564159.39940294,
+      "yDestino": -3937856.0471176477
     },
     {
       "ruta": "La Mora-Gas Andes",
@@ -408,7 +505,11 @@
       "capacidad": 10,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.30164500000000005
+      "utilization": 0.30164500000000005,
+      "xOrigen": -7439481.569714472,
+      "yOrigen": -4177479.0621810867,
+      "xDestino": -7770100.4573704945,
+      "yDestino": -4058381.044084304
     },
     {
       "ruta": "Sierra Barrosa-Chelforó",
@@ -424,7 +525,11 @@
       "capacidad": 10.41,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.921754337079731
+      "utilization": 0.921754337079731,
+      "xOrigen": -7662120.551301019,
+      "yOrigen": -4684496.936757037,
+      "xDestino": -7407198.917384424,
+      "yDestino": -4724536.8060051855
     },
     {
       "ruta": "Chelforó-Fortin 1",
@@ -440,7 +545,11 @@
       "capacidad": 9.82,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9699948774949082
+      "utilization": 0.9699948774949082,
+      "xOrigen": -7407198.917384424,
+      "yOrigen": -4724536.8060051855,
+      "xDestino": -7256917.604813504,
+      "yDestino": -4724536.8060051855
     },
     {
       "ruta": "Fortin 1-Gaviotas",
@@ -456,7 +565,11 @@
       "capacidad": 9.62,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9834865191268192
+      "utilization": 0.9834865191268192,
+      "xOrigen": -7256917.604813504,
+      "yOrigen": -4724536.8060051855,
+      "xDestino": -7094391.148255325,
+      "yDestino": -4711649.627439854
     },
     {
       "ruta": "Gaviotas-General Cerri",
@@ -472,7 +585,11 @@
       "capacidad": 9.56,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9834257322175732
+      "utilization": 0.9834257322175732,
+      "xOrigen": -7094391.148255325,
+      "yOrigen": -4711649.627439854,
+      "xDestino": -6946336.225500271,
+      "yDestino": -4675937.423641831
     },
     {
       "ruta": "Loma La Lata-Cervantes",
@@ -488,7 +605,11 @@
       "capacidad": 29.57,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9827082907676699
+      "utilization": 0.9827082907676699,
+      "xOrigen": -7616479.560075777,
+      "yOrigen": -4644613.748702693,
+      "xDestino": -7494028.1202031765,
+      "yDestino": -4718807.1489502825
     },
     {
       "ruta": "Cervantes-Belisle",
@@ -504,7 +625,11 @@
       "capacidad": 28.63,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.0102789961578764
+      "utilization": 1.0102789961578764,
+      "xOrigen": -7494028.1202031765,
+      "yOrigen": -4718807.1489502825,
+      "xDestino": -7333728.0534608625,
+      "yDestino": -4725969.7266431935
     },
     {
       "ruta": "Belisle-La Adela",
@@ -520,7 +645,11 @@
       "capacidad": 28.45,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.0117364989455186
+      "utilization": 1.0117364989455186,
+      "xOrigen": -7333728.0534608625,
+      "yOrigen": -4725969.7266431935,
+      "xDestino": -7132239.775125036,
+      "yDestino": -4715943.534309267
     },
     {
       "ruta": "La Adela-General Cerri",
@@ -536,7 +665,11 @@
       "capacidad": 28.45,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.0068031634446397
+      "utilization": 1.0068031634446397,
+      "xOrigen": -7132239.775125036,
+      "yOrigen": -4715943.534309267,
+      "xDestino": -6946336.225500271,
+      "yDestino": -4675937.423641831
     },
     {
       "ruta": "Pacífico",
@@ -552,7 +685,11 @@
       "capacidad": 1.35,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.4915925925925925
+      "utilization": 0.4915925925925925,
+      "xOrigen": -7616479.560075777,
+      "yOrigen": -4644613.748702693,
+      "xDestino": -7928174.134296943,
+      "yDestino": -4468418.64189159
     },
     {
       "ruta": "Cordillerano",
@@ -568,7 +705,11 @@
       "capacidad": 1.71,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.0003859649122808
+      "utilization": 1.0003859649122808,
+      "xOrigen": -7662120.551301019,
+      "yOrigen": -4684496.936757037,
+      "xDestino": -7935966.498652473,
+      "yDestino": -5296763.19259226
     },
     {
       "ruta": "Patagónico",
@@ -584,7 +725,11 @@
       "capacidad": 1.2,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6146333333333334
+      "utilization": 0.6146333333333334,
+      "xOrigen": -7578630.933206065,
+      "yOrigen": -5745163.884511022,
+      "xDestino": -7935966.498652473,
+      "yDestino": -5296763.19259226
     },
     {
       "ruta": "San Sebastián-Magallanes",
@@ -600,7 +745,11 @@
       "capacidad": 28.97,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.5534104245771487
+      "utilization": 0.5534104245771487,
+      "xOrigen": -7591989.272101258,
+      "yOrigen": -7049867.789500121,
+      "xDestino": -7617592.754983711,
+      "yDestino": -6858193.660621794
     },
     {
       "ruta": "Magallanes-Moy Aike",
@@ -616,7 +765,11 @@
       "capacidad": 28.54,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6277229320252277
+      "utilization": 0.6277229320252277,
+      "xOrigen": -7617592.754983711,
+      "yOrigen": -6858193.660621794,
+      "xDestino": -7745610.169395975,
+      "yDestino": -6663857.248470895
     },
     {
       "ruta": "Moy Aike-Piedrabuena",
@@ -632,7 +785,11 @@
       "capacidad": 29.13,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6325058323498798
+      "utilization": 0.6325058323498798,
+      "xOrigen": -7745610.169395975,
+      "yOrigen": -6663857.248470895,
+      "xDestino": -7705535.152710397,
+      "yDestino": -6494908.859840439
     },
     {
       "ruta": "Piedrabuena-San Julián",
@@ -648,7 +805,11 @@
       "capacidad": 28.85,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6316968943102081
+      "utilization": 0.6316968943102081,
+      "xOrigen": -7705535.152710397,
+      "yOrigen": -6494908.859840439,
+      "xDestino": -7589762.882285393,
+      "yDestino": -6377288.917718739
     },
     {
       "ruta": "San Julián-Río Seco",
@@ -664,7 +825,11 @@
       "capacidad": 28.59,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.630477883461558
+      "utilization": 0.630477883461558,
+      "xOrigen": -7589762.882285393,
+      "yOrigen": -6377288.917718739,
+      "xDestino": -7544121.891060149,
+      "yDestino": -6198847.904540944
     },
     {
       "ruta": "Río Seco-Bosque Petrificado",
@@ -680,7 +845,11 @@
       "capacidad": 28.31,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6307353730481785
+      "utilization": 0.6307353730481785,
+      "xOrigen": -7544121.891060149,
+      "yOrigen": -6198847.904540944,
+      "xDestino": -7499594.094742841,
+      "yDestino": -6052129.136259906
     },
     {
       "ruta": "Bosque Petrificado-Pico Truncado",
@@ -696,7 +865,11 @@
       "capacidad": 28.05,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.630081180100772
+      "utilization": 0.630081180100772,
+      "xOrigen": -7499594.094742841,
+      "yOrigen": -6052129.136259906,
+      "xDestino": -7564159.39940294,
+      "yDestino": -5886752.92820952
     },
     {
       "ruta": "Pico Truncado-Manantiales Behr",
@@ -712,7 +885,11 @@
       "capacidad": 37.1,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.49889173273325294
+      "utilization": 0.49889173273325294,
+      "xOrigen": -7564159.39940294,
+      "yOrigen": -5886752.92820952,
+      "xDestino": -7531876.747072889,
+      "yDestino": -5708527.338604558
     },
     {
       "ruta": "Manantiales Behr -Garayalde",
@@ -728,7 +905,11 @@
       "capacidad": 35.12,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.5051204813376946
+      "utilization": 0.5051204813376946,
+      "xOrigen": -7531876.747072889,
+      "yOrigen": -5708527.338604558,
+      "xDestino": -7416104.4766478855,
+      "yDestino": -5571283.934101895
     },
     {
       "ruta": "Garayalde-Dolavon",
@@ -744,7 +925,11 @@
       "capacidad": 34.87,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.5070122133107045
+      "utilization": 0.5070122133107045,
+      "xOrigen": -7416104.4766478855,
+      "yOrigen": -5571283.934101895,
+      "xDestino": -7338180.833092594,
+      "yDestino": -5402211.422121317
     },
     {
       "ruta": "Dolavon-Bajo del Gualicho",
@@ -760,7 +945,11 @@
       "capacidad": 30.22,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.48768438628448
+      "utilization": 0.48768438628448,
+      "xOrigen": -7338180.833092594,
+      "yOrigen": -5402211.422121317,
+      "xDestino": -7307011.375670477,
+      "yDestino": -5210540.740698198
     },
     {
       "ruta": "Bajo del Gualicho-San Antonio Oeste",
@@ -776,7 +965,11 @@
       "capacidad": 29.99,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.4887263970362878
+      "utilization": 0.4887263970362878,
+      "xOrigen": -7307011.375670477,
+      "yOrigen": -5210540.740698198,
+      "xDestino": -7271389.138616629,
+      "yDestino": -5031535.585431851
     },
     {
       "ruta": "San Antonio Oeste-General Conesa",
@@ -792,7 +985,11 @@
       "capacidad": 29.59,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.48166068909728427
+      "utilization": 0.48166068909728427,
+      "xOrigen": -7271389.138616629,
+      "yOrigen": -5031535.585431851,
+      "xDestino": -7176767.571442347,
+      "yDestino": -4873210.805685581
     },
     {
       "ruta": "General Conesa-Rio Colorado",
@@ -808,7 +1005,11 @@
       "capacidad": 28.98,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.4784251033578651
+      "utilization": 0.4784251033578651,
+      "xOrigen": -7176767.571442347,
+      "yOrigen": -4873210.805685581,
+      "xDestino": -7054316.131569746,
+      "yDestino": -4763297.125604978
     },
     {
       "ruta": "Rio Colorado-General Cerri",
@@ -824,7 +1025,11 @@
       "capacidad": 28.91,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.47487034249853005
+      "utilization": 0.47487034249853005,
+      "xOrigen": -7054316.131569746,
+      "yOrigen": -4763297.125604978,
+      "xDestino": -6946336.225500271,
+      "yDestino": -4675937.423641831
     },
     {
       "ruta": "Methanex",
@@ -840,7 +1045,11 @@
       "capacidad": 2.9,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.15762758620689657
+      "utilization": 0.15762758620689657,
+      "xOrigen": -7617592.754983711,
+      "yOrigen": -6858193.660621794,
+      "xDestino": -7882533.143071701,
+      "yDestino": -6971907.246749399
     },
     {
       "ruta": "Fueguino",
@@ -856,7 +1065,11 @@
       "capacidad": 3.2,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.759375
+      "utilization": 0.759375,
+      "xOrigen": -7591989.272101258,
+      "yOrigen": -7049867.789500121,
+      "xDestino": -7604234.416088518,
+      "yDestino": -7321215.602827211
     },
     {
       "ruta": "San Jerónimo-Gto. Santa Fe",
@@ -872,7 +1085,11 @@
       "capacidad": 7.91,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.161960809102402
+      "utilization": 1.161960809102402,
+      "xOrigen": -6799394.497653149,
+      "yOrigen": -3876736.014417856,
+      "xDestino": -6765998.650415167,
+      "yDestino": -3710918.1820304533
     },
     {
       "ruta": "San Jerónimo-Litoral",
@@ -888,7 +1105,11 @@
       "capacidad": 18.53,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 1.0869686994063679
+      "utilization": 1.0869686994063679,
+      "xOrigen": -6799394.497653149,
+      "yOrigen": -3876736.014417856,
+      "xDestino": -6755979.896243773,
+      "yDestino": -3912572.0289339144
     },
     {
       "ruta": "Litoral-BAN",
@@ -904,7 +1125,11 @@
       "capacidad": 18.53,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9353712898003237
+      "utilization": 0.9353712898003237,
+      "xOrigen": -6755979.896243773,
+      "yOrigen": -3912572.0289339144,
+      "xDestino": -6567849.95680314,
+      "yDestino": -4075895.8560763993
     },
     {
       "ruta": "BAN-GBA",
@@ -920,7 +1145,11 @@
       "capacidad": null,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": null
+      "utilization": null,
+      "xOrigen": -6567849.95680314,
+      "yOrigen": -4075895.8560763993,
+      "xDestino": -6531114.524841361,
+      "yDestino": -4092087.4957008725
     },
     {
       "ruta": "TGS a TGN",
@@ -936,7 +1165,11 @@
       "capacidad": null,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": null
+      "utilization": null,
+      "xOrigen": -6556718.007723813,
+      "yOrigen": -4109654.7335526645,
+      "xDestino": -6531114.524841361,
+      "yDestino": -4092087.4957008725
     },
     {
       "ruta": "GBA-BAN",
@@ -952,7 +1185,11 @@
       "capacidad": null,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": null
+      "utilization": null,
+      "xOrigen": -6531114.524841361,
+      "yOrigen": -4092087.4957008725,
+      "xDestino": -6567849.95680314,
+      "yDestino": -4075895.8560763993
     },
     {
       "ruta": "BAN-Litoral",
@@ -968,7 +1205,11 @@
       "capacidad": null,
       "fcf": null,
       "sentido": null,
-      "utilization": null
+      "utilization": null,
+      "xOrigen": -6567849.95680314,
+      "yOrigen": -4075895.8560763993,
+      "xDestino": -6755979.896243773,
+      "yDestino": -3912572.0289339144
     },
     {
       "ruta": "GNL Escobar-BAN",
@@ -984,7 +1225,11 @@
       "capacidad": 22.3,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0
+      "utilization": 0,
+      "xOrigen": -6541133.279012755,
+      "yOrigen": -4061073.8683712794,
+      "xDestino": -6567849.95680314,
+      "yDestino": -4075895.8560763993
     },
     {
       "ruta": "General Cerri-Saturno",
@@ -1000,7 +1245,11 @@
       "capacidad": 31.76,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.8846703400503778
+      "utilization": 0.8846703400503778,
+      "xOrigen": -6946336.225500271,
+      "yOrigen": -4675937.423641831,
+      "xDestino": -6977505.682922387,
+      "yDestino": -4419610.516859499
     },
     {
       "ruta": "General Cerri-Indio Rico",
@@ -1016,7 +1265,11 @@
       "capacidad": 24.95,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.7383286573146294
+      "utilization": 0.7383286573146294,
+      "xOrigen": -6946336.225500271,
+      "yOrigen": -4675937.423641831,
+      "xDestino": -6793828.523113485,
+      "yDestino": -4611968.244315262
     },
     {
       "ruta": "Saturno-Ordoqui",
@@ -1032,7 +1285,11 @@
       "capacidad": 30.15,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.9034865671641792
+      "utilization": 0.9034865671641792,
+      "xOrigen": -6977505.682922387,
+      "yOrigen": -4419610.516859499,
+      "xDestino": -6808300.056916611,
+      "yDestino": -4281374.647898357
     },
     {
       "ruta": "Ordoqui-GBA",
@@ -1048,7 +1305,11 @@
       "capacidad": 29.24,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.6591108071135432
+      "utilization": 0.6591108071135432,
+      "xOrigen": -6808300.056916611,
+      "yOrigen": -4281374.647898357,
+      "xDestino": -6556718.007723813,
+      "yDestino": -4109654.7335526645
     },
     {
       "ruta": "Mercedes-Cardales",
@@ -1064,7 +1325,11 @@
       "capacidad": 15,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.48399733333333333
+      "utilization": 0.48399733333333333,
+      "xOrigen": -6589599.55891433,
+      "yOrigen": -4084701.7664567977,
+      "xDestino": -6598006.451386835,
+      "yDestino": -4049039.7852540673
     },
     {
       "ruta": "Indio Rico-Olavarría",
@@ -1080,7 +1345,11 @@
       "capacidad": 9.8,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.760573469387755
+      "utilization": 0.760573469387755,
+      "xOrigen": -6793828.523113485,
+      "yOrigen": -4611968.244315262,
+      "xDestino": -6706999.320294733,
+      "yDestino": -4423785.276712943
     },
     {
       "ruta": "Olavarría-GBA",
@@ -1096,7 +1365,11 @@
       "capacidad": 8.83,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.7714201585503965
+      "utilization": 0.7714201585503965,
+      "xOrigen": -6706999.320294733,
+      "yOrigen": -4423785.276712943,
+      "xDestino": -6556718.007723813,
+      "yDestino": -4109654.7335526645
     },
     {
       "ruta": "Indio Rico-Barker",
@@ -1112,7 +1385,11 @@
       "capacidad": 13.33,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.8188582145536387
+      "utilization": 0.8188582145536387,
+      "xOrigen": -6793828.523113485,
+      "yOrigen": -4611968.244315262,
+      "xDestino": -6623509.702199778,
+      "yDestino": -4517453.687744586
     },
     {
       "ruta": "Barker-GBA",
@@ -1128,7 +1405,11 @@
       "capacidad": 8.1,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.8169580246913586
+      "utilization": 0.8169580246913586,
+      "xOrigen": -6623509.702199778,
+      "yOrigen": -4517453.687744586,
+      "xDestino": -6556718.007723813,
+      "yDestino": -4109654.7335526645
     },
     {
       "ruta": "Cruz del Sur",
@@ -1144,7 +1425,11 @@
       "capacidad": 2.2,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.10761363636363636
+      "utilization": 0.10761363636363636,
+      "xOrigen": -6453190.881286068,
+      "yOrigen": -4138090.7864838243,
+      "xDestino": -6444285.322022607,
+      "yDestino": -4119125.402329641
     },
     {
       "ruta": "San Jerónimo-GBA",
@@ -1160,7 +1445,11 @@
       "capacidad": null,
       "fcf": null,
       "sentido": null,
-      "utilization": null
+      "utilization": null,
+      "xOrigen": -6799394.497653149,
+      "yOrigen": -3876736.014417856,
+      "xDestino": -6531114.524841361,
+      "yDestino": -4092087.4957008725
     },
     {
       "ruta": "BAN-San Jerónimo",
@@ -1176,7 +1465,11 @@
       "capacidad": 13,
       "fcf": "Desde Campo Durán",
       "sentido": "Flujo de Gas",
-      "utilization": 0.8228084615384615
+      "utilization": 0.8228084615384615,
+      "xOrigen": -6567849.95680314,
+      "yOrigen": -4075895.8560763993,
+      "xDestino": -6799394.497653149,
+      "yDestino": -3876736.014417856
     }
   ]
 }

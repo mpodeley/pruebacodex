@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import flowData from "../data/processed/powerbi-flows-latest.json";
+import outlineData from "../data/processed/argentina-outline-3857.json";
 
 type RouteRecord = {
   ruta: string;
@@ -16,10 +17,15 @@ type RouteRecord = {
   fcf: string | null;
   sentido: string | null;
   utilization: number | null;
+  xOrigen: number;
+  yOrigen: number;
+  xDestino: number;
+  yDestino: number;
 };
 
 type FlowDataset = {
   latestDate: string;
+  projection: string;
   stats: {
     routes: number;
     routesWithFlow: number;
@@ -28,6 +34,24 @@ type FlowDataset = {
     totalCapacity: number;
   };
   routes: RouteRecord[];
+};
+
+type OutlinePoint = {
+  lon: number;
+  lat: number;
+  x: number;
+  y: number;
+};
+
+type OutlineDataset = {
+  projection: string;
+  polygons: OutlinePoint[][];
+  bounds: {
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
+  };
 };
 
 type Node = {
@@ -50,127 +74,10 @@ type Transform = {
 };
 
 const dataset = flowData as FlowDataset;
+const outline = outlineData as OutlineDataset;
 const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 760;
 const INITIAL_TRANSFORM: Transform = { scale: 1, x: 0, y: 0 };
-const VIEWPORT_BOUNDS = {
-  minLat: -55.6,
-  maxLat: -21.2,
-  minLon: -73.6,
-  maxLon: -53.4
-};
-const ARGENTINA_POLYGON = [
-  [-64.964892, -22.075862],
-  [-64.377021, -22.798091],
-  [-63.986838, -21.993644],
-  [-62.846468, -22.034985],
-  [-62.685057, -22.249029],
-  [-60.846565, -23.880713],
-  [-60.028966, -24.032796],
-  [-58.807128, -24.771459],
-  [-57.777217, -25.16234],
-  [-57.63366, -25.603657],
-  [-58.618174, -27.123719],
-  [-57.60976, -27.395899],
-  [-56.486702, -27.548499],
-  [-55.695846, -27.387837],
-  [-54.788795, -26.621786],
-  [-54.625291, -25.739255],
-  [-54.13005, -25.547639],
-  [-53.628349, -26.124865],
-  [-53.648735, -26.923473],
-  [-54.490725, -27.474757],
-  [-55.162286, -27.881915],
-  [-56.2909, -28.852761],
-  [-57.625133, -30.216295],
-  [-57.874937, -31.016556],
-  [-58.14244, -32.044504],
-  [-58.132648, -33.040567],
-  [-58.349611, -33.263189],
-  [-58.427074, -33.909454],
-  [-58.495442, -34.43149],
-  [-57.22583, -35.288027],
-  [-57.362359, -35.97739],
-  [-56.737487, -36.413126],
-  [-56.788285, -36.901572],
-  [-57.749157, -38.183871],
-  [-59.231857, -38.72022],
-  [-61.237445, -38.928425],
-  [-62.335957, -38.827707],
-  [-62.125763, -39.424105],
-  [-62.330531, -40.172586],
-  [-62.145994, -40.676897],
-  [-62.745803, -41.028761],
-  [-63.770495, -41.166789],
-  [-64.73209, -40.802677],
-  [-65.118035, -41.064315],
-  [-64.978561, -42.058001],
-  [-64.303408, -42.359016],
-  [-63.755948, -42.043687],
-  [-63.458059, -42.563138],
-  [-64.378804, -42.873558],
-  [-65.181804, -43.495381],
-  [-65.328823, -44.501366],
-  [-65.565269, -45.036786],
-  [-66.509966, -45.039628],
-  [-67.293794, -45.551896],
-  [-67.580546, -46.301773],
-  [-66.597066, -47.033925],
-  [-65.641027, -47.236135],
-  [-65.985088, -48.133289],
-  [-67.166179, -48.697337],
-  [-67.816088, -49.869669],
-  [-68.728745, -50.264218],
-  [-69.138539, -50.73251],
-  [-68.815561, -51.771104],
-  [-68.149995, -52.349983],
-  [-68.571545, -52.299444],
-  [-69.498362, -52.142761],
-  [-71.914804, -52.009022],
-  [-72.329404, -51.425956],
-  [-72.309974, -50.67701],
-  [-72.975747, -50.74145],
-  [-73.328051, -50.378785],
-  [-73.415436, -49.318436],
-  [-72.648247, -48.878618],
-  [-72.331161, -48.244238],
-  [-72.447355, -47.738533],
-  [-71.917258, -46.884838],
-  [-71.552009, -45.560733],
-  [-71.659316, -44.973689],
-  [-71.222779, -44.784243],
-  [-71.329801, -44.407522],
-  [-71.793623, -44.207172],
-  [-71.464056, -43.787611],
-  [-71.915424, -43.408565],
-  [-72.148898, -42.254888],
-  [-71.746804, -42.051386],
-  [-71.915734, -40.832339],
-  [-71.680761, -39.808164],
-  [-71.413517, -38.916022],
-  [-70.814664, -38.552995],
-  [-71.118625, -37.576827],
-  [-71.121881, -36.658124],
-  [-70.364769, -36.005089],
-  [-70.388049, -35.169688],
-  [-69.817309, -34.193571],
-  [-69.814777, -33.273886],
-  [-70.074399, -33.09121],
-  [-70.535069, -31.36501],
-  [-69.919008, -30.336339],
-  [-70.01355, -29.367923],
-  [-69.65613, -28.459141],
-  [-69.001235, -27.521214],
-  [-68.295542, -26.89934],
-  [-68.5948, -26.506909],
-  [-68.386001, -26.185016],
-  [-68.417653, -24.518555],
-  [-67.328443, -24.025303],
-  [-66.985234, -22.986349],
-  [-67.106674, -22.735925],
-  [-66.273339, -21.83231],
-  [-64.964892, -22.075862]
-] as const;
 
 function fixText(value: string | null) {
   if (!value) {
@@ -211,31 +118,7 @@ function utilizationColor(utilization: number | null) {
   return "#53e0a1";
 }
 
-function projectPoint(lat: number, lon: number) {
-  const x =
-    ((lon - VIEWPORT_BOUNDS.minLon) /
-      (VIEWPORT_BOUNDS.maxLon - VIEWPORT_BOUNDS.minLon || 1)) *
-      (CANVAS_WIDTH - 180) +
-    90;
-  const y =
-    CANVAS_HEIGHT -
-    (((lat - VIEWPORT_BOUNDS.minLat) /
-      (VIEWPORT_BOUNDS.maxLat - VIEWPORT_BOUNDS.minLat || 1)) *
-      (CANVAS_HEIGHT - 180) +
-      90);
-  return { x, y };
-}
-
-function buildPolygonPath(points: readonly (readonly [number, number])[]) {
-  return `${points
-    .map(([lon, lat], index) => {
-      const { x, y } = projectPoint(lat, lon);
-      return `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-    })
-    .join(" ")} Z`;
-}
-
-function useDerivedNetwork(routes: RouteRecord[]) {
+function useProjectedNetwork(routes: RouteRecord[], polygons: OutlinePoint[][]) {
   return useMemo(() => {
     const cleanedRoutes = routes.map((route) => ({
       ...route,
@@ -247,41 +130,87 @@ function useDerivedNetwork(routes: RouteRecord[]) {
       sentido: fixText(route.sentido)
     }));
 
+    const allProjectedPoints = [
+      ...cleanedRoutes.flatMap((route) => [
+        { x: route.xOrigen, y: route.yOrigen },
+        { x: route.xDestino, y: route.yDestino }
+      ]),
+      ...polygons.flat()
+    ];
+
+    const bounds = allProjectedPoints.reduce(
+      (acc, point) => ({
+        minX: Math.min(acc.minX, point.x),
+        maxX: Math.max(acc.maxX, point.x),
+        minY: Math.min(acc.minY, point.y),
+        maxY: Math.max(acc.maxY, point.y)
+      }),
+      {
+        minX: Infinity,
+        maxX: -Infinity,
+        minY: Infinity,
+        maxY: -Infinity
+      }
+    );
+
+    const pad = 80;
+    const scaleX = (CANVAS_WIDTH - pad * 2) / (bounds.maxX - bounds.minX || 1);
+    const scaleY = (CANVAS_HEIGHT - pad * 2) / (bounds.maxY - bounds.minY || 1);
+    const scale = Math.min(scaleX, scaleY);
+    const usedWidth = (bounds.maxX - bounds.minX) * scale;
+    const usedHeight = (bounds.maxY - bounds.minY) * scale;
+    const offsetX = (CANVAS_WIDTH - usedWidth) / 2;
+    const offsetY = (CANVAS_HEIGHT - usedHeight) / 2;
+
+    const project = (x: number, y: number) => ({
+      x: offsetX + (x - bounds.minX) * scale,
+      y: CANVAS_HEIGHT - (offsetY + (y - bounds.minY) * scale)
+    });
+
+    const countryPath = polygons
+      .map((polygon) =>
+        polygon
+          .map((point, index) => {
+            const projected = project(point.x, point.y);
+            return `${index === 0 ? "M" : "L"} ${projected.x.toFixed(1)} ${projected.y.toFixed(1)}`;
+          })
+          .join(" ")
+      )
+      .join(" Z ")
+      .concat(" Z");
+
     const nodeAccumulator = new Map<
       string,
-      { label: string; latSum: number; lonSum: number; count: number }
+      { label: string; xSum: number; ySum: number; count: number }
     >();
 
     for (const route of cleanedRoutes) {
       const originNode = nodeAccumulator.get(route.origen) ?? {
         label: route.origen,
-        latSum: 0,
-        lonSum: 0,
+        xSum: 0,
+        ySum: 0,
         count: 0
       };
-      originNode.latSum += route.latitudOrigen;
-      originNode.lonSum += route.longitudOrigen;
+      originNode.xSum += route.xOrigen;
+      originNode.ySum += route.yOrigen;
       originNode.count += 1;
       nodeAccumulator.set(route.origen, originNode);
 
       const destinationNode = nodeAccumulator.get(route.destino) ?? {
         label: route.destino,
-        latSum: 0,
-        lonSum: 0,
+        xSum: 0,
+        ySum: 0,
         count: 0
       };
-      destinationNode.latSum += route.latitudDestino;
-      destinationNode.lonSum += route.longitudDestino;
+      destinationNode.xSum += route.xDestino;
+      destinationNode.ySum += route.yDestino;
       destinationNode.count += 1;
       nodeAccumulator.set(route.destino, destinationNode);
     }
 
     const nodes = new Map<string, Node>();
     for (const [id, entry] of nodeAccumulator.entries()) {
-      const projected = projectPoint(
-        entry.latSum / entry.count,
-        entry.lonSum / entry.count
-      );
+      const projected = project(entry.xSum / entry.count, entry.ySum / entry.count);
       nodes.set(id, {
         id,
         label: entry.label,
@@ -290,28 +219,22 @@ function useDerivedNetwork(routes: RouteRecord[]) {
     }
 
     const maxCaudal = Math.max(...cleanedRoutes.map((route) => route.caudal ?? 0), 1);
-
-    const networkRoutes: NetworkRoute[] = cleanedRoutes.map((route) => {
-      const start = nodes.get(route.origen)!;
-      const end = nodes.get(route.destino)!;
-
-      return {
-        ...route,
-        start,
-        end,
-        strokeWidth: 1.6 + ((route.caudal ?? 0) / maxCaudal) * 10
-      };
-    });
+    const networkRoutes: NetworkRoute[] = cleanedRoutes.map((route) => ({
+      ...route,
+      start: nodes.get(route.origen)!,
+      end: nodes.get(route.destino)!,
+      strokeWidth: 1.6 + ((route.caudal ?? 0) / maxCaudal) * 10
+    }));
 
     return {
+      countryPath,
       nodes: Array.from(nodes.values()),
       routes: networkRoutes,
-      argentinaPath: buildPolygonPath(ARGENTINA_POLYGON),
       gasoductos: Array.from(
         new Set(cleanedRoutes.map((route) => route.gasoducto))
       ).sort()
     };
-  }, [routes]);
+  }, [routes, polygons]);
 }
 
 export default function App() {
@@ -320,16 +243,18 @@ export default function App() {
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
 
-  const network = useDerivedNetwork(dataset.routes);
+  const network = useProjectedNetwork(dataset.routes, outline.polygons);
 
-  const visibleRoutes = useMemo(() => {
-    return network.routes.filter((route) => {
-      const gasoductoMatch =
-        selectedGasoducto === "Todos" || route.gasoducto === selectedGasoducto;
-      const criticalMatch = !showCriticalOnly || (route.utilization ?? 0) >= 0.8;
-      return gasoductoMatch && criticalMatch;
-    });
-  }, [network.routes, selectedGasoducto, showCriticalOnly]);
+  const visibleRoutes = useMemo(
+    () =>
+      network.routes.filter((route) => {
+        const gasoductoMatch =
+          selectedGasoducto === "Todos" || route.gasoducto === selectedGasoducto;
+        const criticalMatch = !showCriticalOnly || (route.utilization ?? 0) >= 0.8;
+        return gasoductoMatch && criticalMatch;
+      }),
+    [network.routes, selectedGasoducto, showCriticalOnly]
+  );
 
   const visibleNodes = useMemo(() => {
     const activeLabels = new Set<string>();
@@ -388,8 +313,8 @@ export default function App() {
           <p className="eyebrow">Argentina Gas Grid</p>
           <h1>Flujo vs capacidad sobre la red de transporte</h1>
           <p className="lede">
-            Vista geo referenciada sobre una silueta de Argentina, con foco en
-            caudal, saturacion y lectura rapida de la red.
+            Vista en coordenadas planas proyectadas, con contorno argentino y red
+            trazada desde la misma referencia espacial.
           </p>
         </div>
         <div className="hero-metrics">
@@ -447,7 +372,7 @@ export default function App() {
         <section className="map-panel">
           <div className="panel-heading">
             <div>
-              <h2>Red geo referenciada</h2>
+              <h2>Red proyectada</h2>
               <p>El grosor representa caudal y el color representa utilizacion.</p>
             </div>
             <Legend />
@@ -473,7 +398,7 @@ export default function App() {
               fill="url(#nightGlow)"
             />
             <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>
-              <path d={network.argentinaPath} className="country-fill" />
+              <path d={network.countryPath} className="country-fill" />
               <rect
                 x="30"
                 y="30"
@@ -482,7 +407,7 @@ export default function App() {
                 rx="30"
                 className="map-frame"
               />
-              <path d={network.argentinaPath} className="country-outline" />
+              <path d={network.countryPath} className="country-outline" />
               {visibleRoutes.map((route) => (
                 <g
                   key={route.ruta}
