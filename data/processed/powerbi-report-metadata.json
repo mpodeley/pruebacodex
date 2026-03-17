@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-17T18:47:03.107Z",
+  "generatedAt": "2026-03-17T20:49:29.686Z",
   "source": "ENARGAS Power BI public report",
   "resourceKey": "948aa3aa-1c05-4cc3-b68c-6dd65a53c694",
   "model": {
@@ -8,6 +8,7 @@
     "displayName": "PRESENTACIÓN WEB - Flujo de gas  + reversion 2025_ArcGIS_v2",
     "lastRefreshTime": "2025-12-01T14:29:45.757"
   },
+  "availableDates": 1369,
   "latestDate": "2025-09-30",
   "visuals": [
     {

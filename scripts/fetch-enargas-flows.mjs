@@ -354,15 +354,18 @@ function rowsToObjects(rows, keys) {
   );
 }
 
-async function getLatestDate() {
+async function getAvailableDates() {
   const payload = await queryData({
     from: [{ Name: "h", Entity: "Fechas", Type: 0 }],
-    select: [buildAggregation("h", "Fecha", 4, "Max(Fechas.Fecha)")],
+    select: [buildColumn("h", "Fecha", "Fechas.Fecha")],
     projections: [0],
-    top: 1
+    top: 2000
   });
 
-  return parseDsrRows(payload)[0][0];
+  return parseDsrRows(payload)
+    .map((row) => row[0])
+    .filter(Boolean)
+    .sort();
 }
 
 async function getRoutes() {
@@ -394,21 +397,22 @@ async function getRoutes() {
   ]);
 }
 
-async function getLatestFlows(latestDate) {
+async function getAllFlows() {
   const payload = await queryData({
     from: [{ Name: "f", Entity: "Flujos", Type: 0 }],
     select: [
+      buildColumn("f", "Fecha", "Flujos.Fecha"),
       buildColumn("f", "Ruta", "Flujos.Ruta"),
       buildColumn("f", "Caudal", "Flujos.Caudal"),
       buildColumn("f", "F-CF", "Flujos.F-CF"),
       buildColumn("f", "Flujo-ContrFlujo", "Flujos.Flujo-ContrFlujo")
     ],
-    where: [buildDateEqualsCondition("f", "Fecha", latestDate)],
-    projections: [0, 1, 2, 3],
-    top: 200
+    projections: [0, 1, 2, 3, 4],
+    top: 120000
   });
 
   return rowsToObjects(parseDsrRows(payload), [
+    "fecha",
     "ruta",
     "caudal",
     "fcf",
@@ -416,22 +420,22 @@ async function getLatestFlows(latestDate) {
   ]);
 }
 
-async function getLatestCapacity(latestDate) {
+async function getAllCapacity() {
   const payload = await queryData({
     from: [{ Name: "c", Entity: "Capacidad", Type: 0 }],
     select: [
+      buildColumn("c", "Fecha", "Capacidad.Fecha"),
       buildColumn("c", "Ruta", "Capacidad.Ruta"),
       buildColumn("c", "Capacidad", "Capacidad.Capacidad")
     ],
-    where: [buildDateEqualsCondition("c", "Fecha", latestDate)],
-    projections: [0, 1],
-    top: 200
+    projections: [0, 1, 2],
+    top: 120000
   });
 
-  return rowsToObjects(parseDsrRows(payload), ["ruta", "capacidad"]);
+  return rowsToObjects(parseDsrRows(payload), ["fecha", "ruta", "capacidad"]);
 }
 
-function buildMetadata(modelsAndExploration, conceptualSchema, latestDate) {
+function buildMetadata(modelsAndExploration, conceptualSchema, latestDate, availableDates) {
   const model = modelsAndExploration.models[0];
   const exploration = modelsAndExploration.exploration;
   const entities =
@@ -450,6 +454,7 @@ function buildMetadata(modelsAndExploration, conceptualSchema, latestDate) {
       displayName: model.displayName,
       lastRefreshTime: model.LastRefreshTime
     },
+    availableDates: availableDates.length,
     latestDate,
     visuals: exploration.sections[0].visualContainers.map((visual) => {
       const config = JSON.parse(visual.config);
@@ -507,19 +512,19 @@ function buildProjectedOutline() {
   };
 }
 
-function buildLatestSnapshot({ latestDate, routes, flows, capacity }) {
-  const flowsByRoute = new Map(flows.map((item) => [item.ruta, item]));
-  const capacityByRoute = new Map(capacity.map((item) => [item.ruta, item]));
+function selectMonthlyDates(dates) {
+  const byMonth = new Map();
 
-  const routesWithMetrics = routes.map((route) => {
-    const flow = flowsByRoute.get(route.ruta) ?? {};
-    const cap = capacityByRoute.get(route.ruta) ?? {};
-    const caudal = flow.caudal ?? null;
-    const capacidad = cap.capacidad ?? null;
-    const utilization =
-      caudal != null && capacidad != null && capacidad !== 0
-        ? caudal / capacidad
-        : null;
+  for (const date of dates) {
+    byMonth.set(date.slice(0, 7), date);
+  }
+
+  return Array.from(byMonth.values()).sort();
+}
+
+function buildTimelineDataset({ dates, latestDate, routes, flows, capacity }) {
+  const selectedDates = new Set(dates);
+  const projectedRoutes = routes.map((route) => {
     const originProjected = projectMercator(route.longitudOrigen, route.latitudOrigen);
     const destinationProjected = projectMercator(
       route.longitudDestino,
@@ -528,12 +533,6 @@ function buildLatestSnapshot({ latestDate, routes, flows, capacity }) {
 
     return {
       ...route,
-      fecha: latestDate,
-      caudal,
-      capacidad,
-      fcf: flow.fcf ?? null,
-      sentido: flow.sentido ?? null,
-      utilization,
       xOrigen: originProjected.x,
       yOrigen: originProjected.y,
       xDestino: destinationProjected.x,
@@ -541,22 +540,62 @@ function buildLatestSnapshot({ latestDate, routes, flows, capacity }) {
     };
   });
 
-  const withFlow = routesWithMetrics.filter((item) => item.caudal != null);
-  const withCapacity = routesWithMetrics.filter((item) => item.capacidad != null);
+  const flowMetrics = flows.filter((item) => selectedDates.has(item.fecha));
+  const capacityMetrics = capacity.filter((item) => selectedDates.has(item.fecha));
+
+  const flowByDateAndRoute = new Map(
+    flowMetrics.map((item) => [`${item.fecha}::${item.ruta}`, item])
+  );
+  const capacityByDateAndRoute = new Map(
+    capacityMetrics.map((item) => [`${item.fecha}::${item.ruta}`, item])
+  );
+
+  const snapshots = dates.map((date) => {
+    const metrics = routes.map((route) => {
+      const flow = flowByDateAndRoute.get(`${date}::${route.ruta}`) ?? {};
+      const cap = capacityByDateAndRoute.get(`${date}::${route.ruta}`) ?? {};
+      const caudal = flow.caudal ?? null;
+      const capacidad = cap.capacidad ?? null;
+      const utilization =
+        caudal != null && capacidad != null && capacidad !== 0
+          ? caudal / capacidad
+          : null;
+
+      return {
+        ruta: route.ruta,
+        fecha: date,
+        caudal,
+        capacidad,
+        fcf: flow.fcf ?? null,
+        sentido: flow.sentido ?? null,
+        utilization
+      };
+    });
+
+    const withFlow = metrics.filter((item) => item.caudal != null);
+    const withCapacity = metrics.filter((item) => item.capacidad != null);
+
+    return {
+      date,
+      stats: {
+        routes: routes.length,
+        routesWithFlow: withFlow.length,
+        routesWithCapacity: withCapacity.length,
+        totalFlow: withFlow.reduce((sum, item) => sum + item.caudal, 0),
+        totalCapacity: withCapacity.reduce((sum, item) => sum + item.capacidad, 0)
+      },
+      metrics
+    };
+  });
 
   return {
     generatedAt: new Date().toISOString(),
     source: "ENARGAS Power BI public report",
     projection: "EPSG:3857",
     latestDate,
-    stats: {
-      routes: routes.length,
-      routesWithFlow: withFlow.length,
-      routesWithCapacity: withCapacity.length,
-      totalFlow: withFlow.reduce((sum, item) => sum + item.caudal, 0),
-      totalCapacity: withCapacity.reduce((sum, item) => sum + item.capacidad, 0)
-    },
-    routes: routesWithMetrics
+    availableDates: dates,
+    routes: projectedRoutes,
+    snapshots
   };
 }
 
@@ -570,18 +609,26 @@ async function main() {
     fetchConceptualSchema()
   ]);
 
-  console.log("Resolving latest date...");
-  const latestDate = await getLatestDate();
+  console.log("Resolving available dates...");
+  const availableDates = await getAvailableDates();
+  const latestDate = availableDates.at(-1);
+  const timelineDates = selectMonthlyDates(availableDates);
 
-  console.log(`Fetching route metadata for ${latestDate}...`);
+  console.log(`Fetching route metadata and time series (${timelineDates.length} monthly cuts)...`);
   const [routes, flows, capacity] = await Promise.all([
     getRoutes(),
-    getLatestFlows(latestDate),
-    getLatestCapacity(latestDate)
+    getAllFlows(),
+    getAllCapacity()
   ]);
 
-  const metadata = buildMetadata(modelsAndExploration, conceptualSchema, latestDate);
-  const latestSnapshot = buildLatestSnapshot({
+  const metadata = buildMetadata(
+    modelsAndExploration,
+    conceptualSchema,
+    latestDate,
+    availableDates
+  );
+  const timelineSnapshot = buildTimelineDataset({
+    dates: timelineDates,
     latestDate,
     routes,
     flows,
@@ -607,7 +654,7 @@ async function main() {
     ),
     writeFile(
       join(PROCESSED_DIR, "powerbi-flows-latest.json"),
-      JSON.stringify(latestSnapshot, null, 2),
+      JSON.stringify(timelineSnapshot, null, 2),
       "utf8"
     ),
     writeFile(
@@ -618,10 +665,9 @@ async function main() {
   ]);
 
   console.log("Done.");
-  console.log(`Latest date: ${latestSnapshot.latestDate}`);
-  console.log(`Routes: ${latestSnapshot.stats.routes}`);
-  console.log(`Routes with flow: ${latestSnapshot.stats.routesWithFlow}`);
-  console.log(`Routes with capacity: ${latestSnapshot.stats.routesWithCapacity}`);
+  console.log(`Latest date: ${timelineSnapshot.latestDate}`);
+  console.log(`Cuts included: ${timelineSnapshot.availableDates.length}`);
+  console.log(`Routes: ${timelineSnapshot.routes.length}`);
 }
 
 main().catch((error) => {

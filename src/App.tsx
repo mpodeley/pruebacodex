@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import flowData from "../data/processed/powerbi-flows-latest.json";
 import outlineData from "../data/processed/argentina-outline-3857.json";
 
-type RouteRecord = {
+type RouteBase = {
   ruta: string;
   origen: string;
   destino: string;
@@ -11,21 +11,24 @@ type RouteRecord = {
   longitudOrigen: number;
   latitudDestino: number;
   longitudDestino: number;
-  fecha: string;
-  caudal: number | null;
-  capacidad: number | null;
-  fcf: string | null;
-  sentido: string | null;
-  utilization: number | null;
   xOrigen: number;
   yOrigen: number;
   xDestino: number;
   yDestino: number;
 };
 
-type FlowDataset = {
-  latestDate: string;
-  projection: string;
+type RouteMetrics = {
+  ruta: string;
+  fecha: string;
+  caudal: number | null;
+  capacidad: number | null;
+  fcf: string | null;
+  sentido: string | null;
+  utilization: number | null;
+};
+
+type Snapshot = {
+  date: string;
   stats: {
     routes: number;
     routesWithFlow: number;
@@ -33,7 +36,15 @@ type FlowDataset = {
     totalFlow: number;
     totalCapacity: number;
   };
-  routes: RouteRecord[];
+  metrics: RouteMetrics[];
+};
+
+type FlowDataset = {
+  latestDate: string;
+  projection: string;
+  availableDates: string[];
+  routes: RouteBase[];
+  snapshots: Snapshot[];
 };
 
 type OutlinePoint = {
@@ -61,9 +72,12 @@ type Node = {
   y: number;
 };
 
-type NetworkRoute = RouteRecord & {
+type ProjectedRoute = RouteBase & {
   start: Node;
   end: Node;
+};
+
+type DisplayRoute = ProjectedRoute & RouteMetrics & {
   strokeWidth: number;
 };
 
@@ -120,16 +134,14 @@ function utilizationColor(utilization: number | null) {
   return "#53e0a1";
 }
 
-function useProjectedNetwork(routes: RouteRecord[], polygons: OutlinePoint[][]) {
+function useProjectedNetwork(routes: RouteBase[], polygons: OutlinePoint[][]) {
   return useMemo(() => {
     const cleanedRoutes = routes.map((route) => ({
       ...route,
       ruta: fixText(route.ruta),
       origen: fixText(route.origen),
       destino: fixText(route.destino),
-      gasoducto: fixText(route.gasoducto),
-      fcf: fixText(route.fcf),
-      sentido: fixText(route.sentido)
+      gasoducto: fixText(route.gasoducto)
     }));
 
     const allProjectedPoints = [
@@ -220,18 +232,16 @@ function useProjectedNetwork(routes: RouteRecord[], polygons: OutlinePoint[][]) 
       });
     }
 
-    const maxCaudal = Math.max(...cleanedRoutes.map((route) => route.caudal ?? 0), 1);
-    const networkRoutes: NetworkRoute[] = cleanedRoutes.map((route) => ({
+    const projectedRoutes: ProjectedRoute[] = cleanedRoutes.map((route) => ({
       ...route,
       start: nodes.get(route.origen)!,
-      end: nodes.get(route.destino)!,
-      strokeWidth: 1.6 + ((route.caudal ?? 0) / maxCaudal) * 10
+      end: nodes.get(route.destino)!
     }));
 
     return {
       countryPath,
       nodes: Array.from(nodes.values()),
-      routes: networkRoutes,
+      routes: projectedRoutes,
       gasoductos: Array.from(
         new Set(cleanedRoutes.map((route) => route.gasoducto))
       ).sort()
@@ -241,23 +251,65 @@ function useProjectedNetwork(routes: RouteRecord[], polygons: OutlinePoint[][]) 
 
 export default function App() {
   const [selectedGasoducto, setSelectedGasoducto] = useState("Todos");
-  const [selectedRoute, setSelectedRoute] = useState<NetworkRoute | null>(null);
+  const [selectedRouteId, setSelectedRouteId] = useState<string | null>(null);
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(dataset.latestDate);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
   const [isDragging, setIsDragging] = useState(false);
   const dragState = useRef<{ x: number; y: number } | null>(null);
 
   const network = useProjectedNetwork(dataset.routes, outline.polygons);
 
+  const selectedSnapshot = useMemo(
+    () =>
+      dataset.snapshots.find((snapshot) => snapshot.date === selectedDate) ??
+      dataset.snapshots[dataset.snapshots.length - 1],
+    [selectedDate]
+  );
+
+  const datedRoutes = useMemo(() => {
+    const metricsByRoute = new Map(
+      selectedSnapshot.metrics.map((metric) => [
+        fixText(metric.ruta),
+        {
+          ...metric,
+          ruta: fixText(metric.ruta),
+          fcf: fixText(metric.fcf),
+          sentido: fixText(metric.sentido)
+        }
+      ])
+    );
+
+    const maxCaudal = Math.max(
+      ...selectedSnapshot.metrics.map((metric) => metric.caudal ?? 0),
+      1
+    );
+
+    return network.routes.map((route) => {
+      const metric = metricsByRoute.get(route.ruta);
+      const caudal = metric?.caudal ?? null;
+      return {
+        ...route,
+        fecha: selectedSnapshot.date,
+        caudal,
+        capacidad: metric?.capacidad ?? null,
+        fcf: metric?.fcf ?? null,
+        sentido: metric?.sentido ?? null,
+        utilization: metric?.utilization ?? null,
+        strokeWidth: 1.6 + ((caudal ?? 0) / maxCaudal) * 10
+      };
+    });
+  }, [network.routes, selectedSnapshot]);
+
   const visibleRoutes = useMemo(
     () =>
-      network.routes.filter((route) => {
+      datedRoutes.filter((route) => {
         const gasoductoMatch =
           selectedGasoducto === "Todos" || route.gasoducto === selectedGasoducto;
         const criticalMatch = !showCriticalOnly || (route.utilization ?? 0) >= 0.8;
         return gasoductoMatch && criticalMatch;
       }),
-    [network.routes, selectedGasoducto, showCriticalOnly]
+    [datedRoutes, selectedGasoducto, showCriticalOnly]
   );
 
   const visibleNodes = useMemo(() => {
@@ -271,26 +323,32 @@ export default function App() {
 
   const busiestRoutes = useMemo(
     () =>
-      [...network.routes]
+      [...visibleRoutes]
         .filter((route) => route.utilization != null)
         .sort((a, b) => (b.utilization ?? 0) - (a.utilization ?? 0))
         .slice(0, 6),
-    [network.routes]
+    [visibleRoutes]
   );
 
   const highStressCount = useMemo(
-    () => network.routes.filter((route) => (route.utilization ?? 0) >= 0.8).length,
-    [network.routes]
+    () => datedRoutes.filter((route) => (route.utilization ?? 0) >= 0.8).length,
+    [datedRoutes]
   );
 
   const peakRouteFlow = useMemo(
-    () => Math.max(...network.routes.map((route) => route.caudal ?? 0), 0),
-    [network.routes]
+    () => Math.max(...datedRoutes.map((route) => route.caudal ?? 0), 0),
+    [datedRoutes]
   );
 
-  const selectedDetails =
-    selectedRoute &&
-    network.routes.find((route) => route.ruta === selectedRoute.ruta);
+  const selectedDetails = useMemo(
+    () => datedRoutes.find((route) => route.ruta === selectedRouteId) ?? null,
+    [datedRoutes, selectedRouteId]
+  );
+
+  const availableDatesDescending = useMemo(
+    () => [...dataset.availableDates].reverse(),
+    []
+  );
 
   function clampTransform(next: Transform) {
     if (next.scale <= MIN_SCALE) {
@@ -369,9 +427,25 @@ export default function App() {
           <p className="eyebrow">Argentina Gas Grid</p>
           <h1>Flujo vs capacidad en la red de transporte</h1>
           <p className="lede">
-            Fecha de corte {dataset.latestDate}. Grosor por caudal, color por utilizacion.
+            Cortes mensuales del dataset ENARGAS. Grosor por caudal, color por utilizacion.
           </p>
         </div>
+        <label>
+          <span>Fecha</span>
+          <select
+            value={selectedDate}
+            onChange={(event) => {
+              setSelectedDate(event.target.value);
+              setSelectedRouteId(null);
+            }}
+          >
+            {availableDatesDescending.map((date) => (
+              <option key={date} value={date}>
+                {date}
+              </option>
+            ))}
+          </select>
+        </label>
         <label>
           <span>Gasoducto</span>
           <select
@@ -402,7 +476,10 @@ export default function App() {
           <div className="panel-heading">
             <div>
               <h2>Red proyectada</h2>
-              <p>El grosor representa caudal y el color representa utilizacion.</p>
+              <p>
+                Corte {selectedSnapshot.date}. {selectedSnapshot.stats.routesWithFlow} tramos
+                con caudal y {highStressCount} con uso mayor a 80%.
+              </p>
             </div>
             <Legend />
           </div>
@@ -432,49 +509,49 @@ export default function App() {
             />
             <g transform={`translate(${transform.x} ${transform.y})`}>
               <g transform={`scale(${transform.scale})`}>
-              <path d={network.countryPath} className="country-fill" />
-              <rect
-                x="30"
-                y="30"
-                width={CANVAS_WIDTH - 60}
-                height={CANVAS_HEIGHT - 60}
-                rx="30"
-                className="map-frame"
-              />
-              <path d={network.countryPath} className="country-outline" />
-              {visibleRoutes.map((route) => (
-                <g
-                  key={route.ruta}
-                  onClick={() => setSelectedRoute(route)}
-                  className="route-hit"
-                >
-                  <line
-                    x1={route.start.x}
-                    y1={route.start.y}
-                    x2={route.end.x}
-                    y2={route.end.y}
-                    stroke={utilizationColor(route.utilization)}
-                    strokeWidth={route.strokeWidth}
-                    strokeLinecap="round"
-                    opacity={selectedDetails && selectedDetails.ruta !== route.ruta ? 0.14 : 0.9}
-                  />
-                </g>
-              ))}
-              {visibleNodes.map((node) => (
-                <g key={node.id}>
-                  <circle cx={node.x} cy={node.y} r="5.5" className="node-dot" />
-                  <text x={node.x + 8} y={node.y - 8} className="node-label">
-                    {node.label}
-                  </text>
-                </g>
-              ))}
+                <path d={network.countryPath} className="country-fill" />
+                <rect
+                  x="30"
+                  y="30"
+                  width={CANVAS_WIDTH - 60}
+                  height={CANVAS_HEIGHT - 60}
+                  rx="30"
+                  className="map-frame"
+                />
+                <path d={network.countryPath} className="country-outline" />
+                {visibleRoutes.map((route) => (
+                  <g
+                    key={route.ruta}
+                    onClick={() => setSelectedRouteId(route.ruta)}
+                    className="route-hit"
+                  >
+                    <line
+                      x1={route.start.x}
+                      y1={route.start.y}
+                      x2={route.end.x}
+                      y2={route.end.y}
+                      stroke={utilizationColor(route.utilization)}
+                      strokeWidth={route.strokeWidth}
+                      strokeLinecap="round"
+                      opacity={selectedDetails && selectedDetails.ruta !== route.ruta ? 0.14 : 0.9}
+                    />
+                  </g>
+                ))}
+                {visibleNodes.map((node) => (
+                  <g key={node.id}>
+                    <circle cx={node.x} cy={node.y} r="5.5" className="node-dot" />
+                    <text x={node.x + 8} y={node.y - 8} className="node-label">
+                      {node.label}
+                    </text>
+                  </g>
+                ))}
               </g>
             </g>
           </svg>
           <p className="map-note">
             Datos visibles: topologia y geometria de capas publicas de ENARGAS en ArcGIS, mas
-            flujos y capacidades estimadas publicados en su reporte Power BI. La visualizacion
-            muestra el ultimo corte disponible del dataset.
+            flujos y capacidades estimadas publicados en su reporte Power BI. Este MVP usa
+            cortes mensuales para mantener la visualizacion liviana y comparable.
           </p>
         </section>
 
@@ -482,7 +559,10 @@ export default function App() {
           <section className="detail-card detail-summary">
             <h3>Lectura rapida</h3>
             <div className="detail-grid summary-grid">
-              <Detail label="Tramos con caudal" value={`${dataset.stats.routesWithFlow}/${dataset.stats.routes}`} />
+              <Detail
+                label="Tramos con caudal"
+                value={`${selectedSnapshot.stats.routesWithFlow}/${selectedSnapshot.stats.routes}`}
+              />
               <Detail label="Caudal maximo de tramo" value={`${formatNumber(peakRouteFlow)} MMm3/d`} />
               <Detail label="Tramos exigidos" value={`${highStressCount} sobre 73`} />
             </div>
@@ -494,6 +574,7 @@ export default function App() {
               <div className="detail-grid">
                 <Detail label="Ruta" value={selectedDetails.ruta} />
                 <Detail label="Gasoducto" value={selectedDetails.gasoducto} />
+                <Detail label="Fecha" value={selectedDetails.fecha} />
                 <Detail label="Origen" value={selectedDetails.origen} />
                 <Detail label="Destino" value={selectedDetails.destino} />
                 <Detail
@@ -524,7 +605,7 @@ export default function App() {
               </div>
             ) : (
               <p className="empty-copy">
-                Elegi un tramo para ver sus metricas y el balance flujo/capacidad.
+                Elegi un tramo para ver sus metricas en la fecha seleccionada.
               </p>
             )}
           </section>
@@ -534,7 +615,7 @@ export default function App() {
             <ul className="hot-list">
               {busiestRoutes.map((route) => (
                 <li key={route.ruta}>
-                  <button type="button" onClick={() => setSelectedRoute(route)}>
+                  <button type="button" onClick={() => setSelectedRouteId(route.ruta)}>
                     <span>{route.ruta}</span>
                     <strong>{formatNumber((route.utilization ?? 0) * 100)}%</strong>
                   </button>
