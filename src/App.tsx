@@ -37,6 +37,12 @@ type Node = {
   y: number;
 };
 
+type NetworkRoute = RouteRecord & {
+  start: Node;
+  end: Node;
+  strokeWidth: number;
+};
+
 type Transform = {
   scale: number;
   x: number;
@@ -47,6 +53,50 @@ const dataset = flowData as FlowDataset;
 const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 760;
 const INITIAL_TRANSFORM: Transform = { scale: 1, x: 0, y: 0 };
+const VIEWPORT_BOUNDS = {
+  minLat: -56,
+  maxLat: -20,
+  minLon: -74,
+  maxLon: -52
+};
+const ARGENTINA_POLYGON = [
+  [-68.4, -21.8],
+  [-66.3, -22.2],
+  [-65.1, -24.2],
+  [-66.2, -26.3],
+  [-67.3, -28.6],
+  [-68.2, -31.1],
+  [-69.1, -33.6],
+  [-70.1, -36.2],
+  [-71.2, -38.8],
+  [-71.5, -41.4],
+  [-71.1, -43.8],
+  [-70.2, -46.1],
+  [-69.7, -48.2],
+  [-68.5, -50.4],
+  [-67.2, -52.1],
+  [-66.1, -54.4],
+  [-64.7, -54.9],
+  [-64, -53.5],
+  [-63.4, -51.7],
+  [-62.8, -49.3],
+  [-62.1, -46.7],
+  [-61.5, -43.9],
+  [-60.8, -40.7],
+  [-60, -37.8],
+  [-59.1, -35.5],
+  [-58.3, -34.2],
+  [-57.5, -32.6],
+  [-56.6, -30.1],
+  [-55.5, -27.4],
+  [-54.8, -25.9],
+  [-54.6, -24.3],
+  [-55.7, -22.6],
+  [-57.8, -21.7],
+  [-60.7, -21.9],
+  [-63.8, -22.4],
+  [-66.3, -22.2]
+] as const;
 
 function fixText(value: string | null) {
   if (!value) {
@@ -73,18 +123,42 @@ function formatNumber(value: number | null, digits = 2) {
 
 function utilizationColor(utilization: number | null) {
   if (utilization == null) {
-    return "#9aa7b6";
+    return "#4b648b";
   }
   if (utilization >= 1) {
-    return "#d6472f";
+    return "#ff5f87";
   }
   if (utilization >= 0.8) {
-    return "#f08c2e";
+    return "#ff9d4d";
   }
   if (utilization >= 0.5) {
-    return "#e2ba33";
+    return "#ffe06d";
   }
-  return "#2f9d62";
+  return "#53e0a1";
+}
+
+function projectPoint(lat: number, lon: number) {
+  const x =
+    ((lon - VIEWPORT_BOUNDS.minLon) /
+      (VIEWPORT_BOUNDS.maxLon - VIEWPORT_BOUNDS.minLon || 1)) *
+      (CANVAS_WIDTH - 180) +
+    90;
+  const y =
+    CANVAS_HEIGHT -
+    (((lat - VIEWPORT_BOUNDS.minLat) /
+      (VIEWPORT_BOUNDS.maxLat - VIEWPORT_BOUNDS.minLat || 1)) *
+      (CANVAS_HEIGHT - 180) +
+      90);
+  return { x, y };
+}
+
+function buildPolygonPath(points: readonly (readonly [number, number])[]) {
+  return `${points
+    .map(([lon, lat], index) => {
+      const { x, y } = projectPoint(lat, lon);
+      return `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    })
+    .join(" ")} Z`;
 }
 
 function useDerivedNetwork(routes: RouteRecord[]) {
@@ -99,46 +173,20 @@ function useDerivedNetwork(routes: RouteRecord[]) {
       sentido: fixText(route.sentido)
     }));
 
-    const bounds = cleanedRoutes.reduce(
-      (acc, route) => ({
-        minLat: Math.min(acc.minLat, route.latitudOrigen, route.latitudDestino),
-        maxLat: Math.max(acc.maxLat, route.latitudOrigen, route.latitudDestino),
-        minLon: Math.min(acc.minLon, route.longitudOrigen, route.longitudDestino),
-        maxLon: Math.max(acc.maxLon, route.longitudOrigen, route.longitudDestino)
-      }),
-      {
-        minLat: Infinity,
-        maxLat: -Infinity,
-        minLon: Infinity,
-        maxLon: -Infinity
-      }
-    );
-
-    const project = (lat: number, lon: number) => {
-      const x =
-        ((lon - bounds.minLon) / (bounds.maxLon - bounds.minLon || 1)) *
-          (CANVAS_WIDTH - 180) +
-        90;
-      const y =
-        CANVAS_HEIGHT -
-        (((lat - bounds.minLat) / (bounds.maxLat - bounds.minLat || 1)) *
-          (CANVAS_HEIGHT - 180) +
-          90);
-      return { x, y };
-    };
-
     const nodes = new Map<string, Node>();
+
     for (const route of cleanedRoutes) {
       if (!nodes.has(route.origen)) {
-        const projected = project(route.latitudOrigen, route.longitudOrigen);
+        const projected = projectPoint(route.latitudOrigen, route.longitudOrigen);
         nodes.set(route.origen, {
           id: route.origen,
           label: route.origen,
           ...projected
         });
       }
+
       if (!nodes.has(route.destino)) {
-        const projected = project(route.latitudDestino, route.longitudDestino);
+        const projected = projectPoint(route.latitudDestino, route.longitudDestino);
         nodes.set(route.destino, {
           id: route.destino,
           label: route.destino,
@@ -147,32 +195,34 @@ function useDerivedNetwork(routes: RouteRecord[]) {
       }
     }
 
-    const maxCaudal = Math.max(
-      ...cleanedRoutes.map((route) => route.caudal ?? 0),
-      1
-    );
+    const maxCaudal = Math.max(...cleanedRoutes.map((route) => route.caudal ?? 0), 1);
+
+    const networkRoutes: NetworkRoute[] = cleanedRoutes.map((route) => {
+      const start = nodes.get(route.origen)!;
+      const end = nodes.get(route.destino)!;
+
+      return {
+        ...route,
+        start,
+        end,
+        strokeWidth: 1.6 + ((route.caudal ?? 0) / maxCaudal) * 10
+      };
+    });
 
     return {
       nodes: Array.from(nodes.values()),
-      routes: cleanedRoutes.map((route) => {
-        const start = nodes.get(route.origen)!;
-        const end = nodes.get(route.destino)!;
-        return {
-          ...route,
-          start,
-          end,
-          strokeWidth:
-            1.5 + (((route.caudal ?? 0) / maxCaudal) * 10)
-        };
-      }),
-      gasoductos: Array.from(new Set(cleanedRoutes.map((route) => route.gasoducto))).sort()
+      routes: networkRoutes,
+      argentinaPath: buildPolygonPath(ARGENTINA_POLYGON),
+      gasoductos: Array.from(
+        new Set(cleanedRoutes.map((route) => route.gasoducto))
+      ).sort()
     };
   }, [routes]);
 }
 
 export default function App() {
   const [selectedGasoducto, setSelectedGasoducto] = useState("Todos");
-  const [selectedRoute, setSelectedRoute] = useState<RouteRecord | null>(null);
+  const [selectedRoute, setSelectedRoute] = useState<NetworkRoute | null>(null);
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
 
@@ -234,8 +284,8 @@ export default function App() {
           <p className="eyebrow">Argentina Gas Grid</p>
           <h1>Flujo vs capacidad sobre la red de transporte</h1>
           <p className="lede">
-            Vista esquemática interactiva con datos públicos de ENARGAS y Power BI,
-            lista para evolucionar a GitHub Pages.
+            Vista geo referenciada sobre una silueta de Argentina, con foco en
+            caudal, saturacion y lectura rapida de la red.
           </p>
         </div>
         <div className="hero-metrics">
@@ -292,10 +342,8 @@ export default function App() {
         <section className="map-panel">
           <div className="panel-heading">
             <div>
-              <h2>Red esquemática</h2>
-              <p>
-                El grosor representa caudal y el color representa utilización.
-              </p>
+              <h2>Red geo referenciada</h2>
+              <p>El grosor representa caudal y el color representa utilizacion.</p>
             </div>
             <Legend />
           </div>
@@ -304,9 +352,23 @@ export default function App() {
             className="network-map"
             onWheel={handleWheel}
           >
-            <g
-              transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}
-            >
+            <defs>
+              <radialGradient id="nightGlow" cx="50%" cy="45%" r="70%">
+                <stop offset="0%" stopColor="rgba(85,126,255,0.22)" />
+                <stop offset="65%" stopColor="rgba(17,24,46,0.08)" />
+                <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+              </radialGradient>
+            </defs>
+            <rect x="0" y="0" width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="map-ocean" />
+            <ellipse
+              cx={CANVAS_WIDTH / 2}
+              cy={CANVAS_HEIGHT / 2}
+              rx={CANVAS_WIDTH * 0.38}
+              ry={CANVAS_HEIGHT * 0.4}
+              fill="url(#nightGlow)"
+            />
+            <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>
+              <path d={network.argentinaPath} className="country-fill" />
               <rect
                 x="30"
                 y="30"
@@ -315,6 +377,7 @@ export default function App() {
                 rx="30"
                 className="map-frame"
               />
+              <path d={network.argentinaPath} className="country-outline" />
               {visibleRoutes.map((route) => (
                 <g
                   key={route.ruta}
@@ -329,7 +392,7 @@ export default function App() {
                     stroke={utilizationColor(route.utilization)}
                     strokeWidth={route.strokeWidth}
                     strokeLinecap="round"
-                    opacity={selectedDetails && selectedDetails.ruta !== route.ruta ? 0.18 : 0.94}
+                    opacity={selectedDetails && selectedDetails.ruta !== route.ruta ? 0.14 : 0.9}
                   />
                 </g>
               ))}
@@ -371,7 +434,7 @@ export default function App() {
                   }
                 />
                 <Detail
-                  label="Utilización"
+                  label="Utilizacion"
                   value={
                     selectedDetails.utilization == null
                       ? "Sin dato"
@@ -382,13 +445,13 @@ export default function App() {
               </div>
             ) : (
               <p className="empty-copy">
-                Elegí un tramo para ver sus métricas y el balance flujo/capacidad.
+                Elegi un tramo para ver sus metricas y el balance flujo/capacidad.
               </p>
             )}
           </section>
 
           <section className="detail-card">
-            <h3>Tramos más exigidos</h3>
+            <h3>Tramos mas exigidos</h3>
             <ul className="hot-list">
               {busiestRoutes.map((route) => (
                 <li key={route.ruta}>
@@ -427,10 +490,10 @@ function Detail({ label, value }: { label: string; value: string }) {
 function Legend() {
   return (
     <div className="legend">
-      <div><i style={{ background: "#2f9d62" }} /> Bajo</div>
-      <div><i style={{ background: "#e2ba33" }} /> Medio</div>
-      <div><i style={{ background: "#f08c2e" }} /> Alto</div>
-      <div><i style={{ background: "#d6472f" }} /> Saturado</div>
+      <div><i style={{ background: "#53e0a1" }} /> Bajo</div>
+      <div><i style={{ background: "#ffe06d" }} /> Medio</div>
+      <div><i style={{ background: "#ff9d4d" }} /> Alto</div>
+      <div><i style={{ background: "#ff5f87" }} /> Saturado</div>
     </div>
   );
 }

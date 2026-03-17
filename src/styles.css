@@ -1,14 +1,15 @@
 :root {
-  color-scheme: light;
-  --bg: #f1efe7;
-  --panel: rgba(248, 244, 236, 0.82);
-  --panel-strong: rgba(255, 251, 243, 0.92);
-  --line: rgba(73, 56, 32, 0.18);
-  --ink: #1f2a30;
-  --muted: #5d6a72;
-  --accent: #124559;
-  --accent-soft: #dfe9dc;
-  --shadow: 0 24px 80px rgba(47, 39, 24, 0.15);
+  color-scheme: dark;
+  --bg: #07111f;
+  --bg-soft: #0d1830;
+  --panel: rgba(11, 22, 40, 0.8);
+  --panel-strong: rgba(15, 28, 49, 0.94);
+  --line: rgba(132, 167, 255, 0.16);
+  --ink: #edf3ff;
+  --muted: #91a2c4;
+  --accent: #7dd3fc;
+  --accent-soft: #162846;
+  --shadow: 0 28px 100px rgba(1, 7, 18, 0.55);
 }
 
 * {
@@ -20,9 +21,9 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 30%),
-    radial-gradient(circle at top right, rgba(193, 214, 205, 0.8), transparent 26%),
-    linear-gradient(135deg, #efe8db 0%, #e5ecdf 48%, #dce8ea 100%);
+    radial-gradient(circle at top left, rgba(90, 118, 255, 0.18), transparent 24%),
+    radial-gradient(circle at top right, rgba(0, 214, 201, 0.12), transparent 22%),
+    linear-gradient(180deg, #081121 0%, #09162a 35%, #07111f 100%);
   min-height: 100vh;
 }
 
@@ -45,9 +46,9 @@ input {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(18, 69, 89, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 69, 89, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(115, 153, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(115, 153, 255, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
   pointer-events: none;
 }
 
@@ -55,9 +56,9 @@ input {
 .control-bar,
 .map-panel,
 .detail-card {
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
   background: var(--panel);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(126, 165, 255, 0.12);
   box-shadow: var(--shadow);
 }
 
@@ -109,7 +110,7 @@ h1 {
   padding: 16px;
   border-radius: 18px;
   background: var(--panel-strong);
-  border: 1px solid rgba(18, 69, 89, 0.08);
+  border: 1px solid rgba(102, 140, 230, 0.12);
 }
 
 .metric-card span,
@@ -124,7 +125,7 @@ h1 {
 
 .metric-card strong,
 .detail-item strong {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
 }
 
 .control-bar {
@@ -146,8 +147,9 @@ h1 {
 
 .control-bar select {
   min-width: 220px;
-  border: 1px solid rgba(18, 69, 89, 0.12);
-  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  border: 1px solid rgba(125, 159, 245, 0.16);
+  background: rgba(9, 20, 39, 0.9);
   padding: 10px 12px;
   border-radius: 12px;
 }
@@ -168,8 +170,8 @@ h1 {
 .hot-list button {
   border: 0;
   border-radius: 999px;
-  background: #123e50;
-  color: #f8f4ec;
+  background: linear-gradient(135deg, #173254, #224875);
+  color: #eef6ff;
   padding: 10px 14px;
   cursor: pointer;
 }
@@ -224,14 +226,28 @@ h1 {
   aspect-ratio: 1.2 / 1;
   border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(22, 55, 67, 0.05), transparent),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(240, 233, 221, 0.25));
+    radial-gradient(circle at 50% 40%, rgba(70, 103, 199, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(9, 20, 39, 0.86), rgba(4, 10, 22, 0.98));
+}
+
+.map-ocean {
+  fill: #050c19;
 }
 
 .map-frame {
-  fill: rgba(255, 253, 247, 0.45);
-  stroke: rgba(18, 69, 89, 0.1);
+  fill: rgba(7, 15, 30, 0.18);
+  stroke: rgba(110, 146, 235, 0.08);
   stroke-width: 1.5;
+}
+
+.country-fill {
+  fill: rgba(26, 45, 74, 0.9);
+}
+
+.country-outline {
+  fill: none;
+  stroke: rgba(160, 194, 255, 0.42);
+  stroke-width: 2;
 }
 
 .route-hit {
@@ -240,15 +256,19 @@ h1 {
 }
 
 .node-dot {
-  fill: #163743;
-  stroke: rgba(255, 255, 255, 0.92);
+  fill: #dff7ff;
+  stroke: rgba(87, 147, 255, 0.95);
   stroke-width: 2;
 }
 
 .node-label {
-  fill: #20343d;
+  fill: #f0f5ff;
   font-size: 11px;
   letter-spacing: 0.02em;
+  paint-order: stroke;
+  stroke: rgba(5, 12, 25, 0.92);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
 
 .side-panel {
@@ -292,12 +312,12 @@ h1 {
   text-align: left;
   background: var(--panel-strong);
   color: var(--ink);
-  border: 1px solid rgba(18, 69, 89, 0.08);
+  border: 1px solid rgba(102, 140, 230, 0.12);
   border-radius: 18px;
 }
 
 .hot-list strong {
-  color: #c5522a;
+  color: #ff9ab0;
 }
 
 @media (max-width: 1080px) {
