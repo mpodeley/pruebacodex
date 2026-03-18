@@ -346,7 +346,10 @@ export default function App() {
   const [isPlayingTimeline, setIsPlayingTimeline] = useState(false);
   const [transform, setTransform] = useState(INITIAL_TRANSFORM);
   const [isDragging, setIsDragging] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
   const dragState = useRef<{ x: number; y: number; moved: boolean } | null>(null);
+  const pointerCache = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const lastPinchDistance = useRef<number | null>(null);
 
   const network = useProjectedNetwork(dataset.routes, outline.polygons);
 
@@ -526,6 +529,29 @@ export default function App() {
     setDateByIndex(selectedDateIndex + direction);
   }
 
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const handler = (event: WheelEvent) => {
+      event.preventDefault();
+      const factor = event.deltaY > 0 ? 0.9 : 1.12;
+      const rect = svg.getBoundingClientRect();
+      const pointerX = ((event.clientX - rect.left) / rect.width) * CANVAS_WIDTH;
+      const pointerY = ((event.clientY - rect.top) / rect.height) * CANVAS_HEIGHT;
+      setTransform((current) => {
+        const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, current.scale * factor));
+        if (nextScale === current.scale) return current;
+        return clampTransform({
+          scale: nextScale,
+          x: pointerX - (pointerX - current.x) * (nextScale / current.scale),
+          y: pointerY - (pointerY - current.y) * (nextScale / current.scale)
+        });
+      });
+    };
+    svg.addEventListener("wheel", handler, { passive: false });
+    return () => svg.removeEventListener("wheel", handler);
+  }, []);
+
   function clampTransform(next: Transform) {
     if (next.scale <= MIN_SCALE) {
       return INITIAL_TRANSFORM;
@@ -541,33 +567,46 @@ export default function App() {
     };
   }
 
-  function handleWheel(event: React.WheelEvent<SVGSVGElement>) {
-    event.preventDefault();
-    const factor = event.deltaY > 0 ? 0.9 : 1.12;
-    const pointerX = event.nativeEvent.offsetX;
-    const pointerY = event.nativeEvent.offsetY;
-
-    setTransform((current) => {
-      const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, current.scale * factor));
-      if (nextScale === current.scale) {
-        return current;
-      }
-
-      const next = {
-        scale: nextScale,
-        x: pointerX - (pointerX - current.x) * (nextScale / current.scale),
-        y: pointerY - (pointerY - current.y) * (nextScale / current.scale)
-      };
-
-      return clampTransform(next);
-    });
-  }
-
   function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
-    dragState.current = { x: event.clientX, y: event.clientY, moved: false };
+    pointerCache.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointerCache.current.size === 1) {
+      dragState.current = { x: event.clientX, y: event.clientY, moved: false };
+    } else {
+      dragState.current = null;
+      setIsDragging(false);
+    }
   }
 
   function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
+    pointerCache.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+    if (pointerCache.current.size === 2) {
+      const [p1, p2] = Array.from(pointerCache.current.values());
+      const distance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+      if (lastPinchDistance.current != null) {
+        const factor = distance / lastPinchDistance.current;
+        const svg = svgRef.current;
+        if (svg) {
+          const rect = svg.getBoundingClientRect();
+          const midClientX = (p1.x + p2.x) / 2;
+          const midClientY = (p1.y + p2.y) / 2;
+          const pointerX = ((midClientX - rect.left) / rect.width) * CANVAS_WIDTH;
+          const pointerY = ((midClientY - rect.top) / rect.height) * CANVAS_HEIGHT;
+          setTransform((current) => {
+            const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, current.scale * factor));
+            return clampTransform({
+              scale: nextScale,
+              x: pointerX - (pointerX - current.x) * (nextScale / current.scale),
+              y: pointerY - (pointerY - current.y) * (nextScale / current.scale)
+            });
+          });
+        }
+      }
+      lastPinchDistance.current = distance;
+      return;
+    }
+
+    lastPinchDistance.current = null;
     if (!dragState.current || transform.scale <= MIN_SCALE) {
       return;
     }
@@ -592,6 +631,16 @@ export default function App() {
   }
 
   function handlePointerUp(event: React.PointerEvent<SVGSVGElement>) {
+    const hadMultiplePointers = pointerCache.current.size > 1;
+    pointerCache.current.delete(event.pointerId);
+    lastPinchDistance.current = null;
+
+    if (hadMultiplePointers) {
+      dragState.current = null;
+      setIsDragging(false);
+      return;
+    }
+
     if (!dragState.current?.moved) {
       const rect = event.currentTarget.getBoundingClientRect();
       const svgX = ((event.clientX - rect.left) / rect.width) * CANVAS_WIDTH;
@@ -615,11 +664,29 @@ export default function App() {
       const hitThreshold = Math.max(6, 12 / transform.scale);
       if (nearestRoute && nearestDistance <= hitThreshold) {
         setSelectedRouteId(nearestRoute.ruta);
+      } else {
+        setSelectedRouteId(null);
       }
     }
 
     dragState.current = null;
     setIsDragging(false);
+  }
+
+  function handlePointerLeave() {
+    pointerCache.current.clear();
+    lastPinchDistance.current = null;
+    dragState.current = null;
+    setIsDragging(false);
+  }
+
+  function handlePointerCancel(event: React.PointerEvent<SVGSVGElement>) {
+    pointerCache.current.delete(event.pointerId);
+    lastPinchDistance.current = null;
+    if (pointerCache.current.size === 0) {
+      dragState.current = null;
+      setIsDragging(false);
+    }
   }
 
   return (
@@ -732,29 +799,16 @@ export default function App() {
               </button>
             </div>
             <svg
+              ref={svgRef}
               viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
               className={`network-map ${isDragging ? "is-dragging" : ""}`}
-              onWheel={handleWheel}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
-              onPointerLeave={handlePointerUp}
+              onPointerLeave={handlePointerLeave}
+              onPointerCancel={handlePointerCancel}
             >
-              <defs>
-                <radialGradient id="nightGlow" cx="50%" cy="45%" r="70%">
-                  <stop offset="0%" stopColor="rgba(85,126,255,0.22)" />
-                  <stop offset="65%" stopColor="rgba(17,24,46,0.08)" />
-                  <stop offset="100%" stopColor="rgba(0,0,0,0)" />
-                </radialGradient>
-              </defs>
               <rect x="0" y="0" width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="map-ocean" />
-              <ellipse
-                cx={CANVAS_WIDTH / 2}
-                cy={CANVAS_HEIGHT / 2}
-                rx={CANVAS_WIDTH * 0.38}
-                ry={CANVAS_HEIGHT * 0.4}
-                fill="url(#nightGlow)"
-              />
               <g transform={`translate(${transform.x} ${transform.y})`}>
                 <g transform={`scale(${transform.scale})`}>
                   <path d={network.countryPath} className="country-fill" />
@@ -781,10 +835,36 @@ export default function App() {
                       />
                     </g>
                   ))}
+                {visibleRoutes.map((route) => {
+                  const dx = route.end.x - route.start.x;
+                  const dy = route.end.y - route.start.y;
+                  const len = Math.hypot(dx, dy);
+                  if (len < 8) return null;
+                  const mx = (route.start.x + route.end.x) / 2;
+                  const my = (route.start.y + route.end.y) / 2;
+                  const angleDeg = Math.atan2(dy, dx) * (180 / Math.PI);
+                  const isReverse = route.sentido?.toLowerCase().includes("inv") ?? false;
+                  const finalAngle = angleDeg + (isReverse ? 180 : 0);
+                  return (
+                    <polygon
+                      key={`flow-${route.ruta}`}
+                      points="0,0 -7,-3.5 -7,3.5"
+                      transform={`translate(${mx},${my}) rotate(${finalAngle}) scale(${1 / transform.scale})`}
+                      fill={utilizationColor(route.utilization)}
+                      opacity={selectedVisibleRoute && selectedVisibleRoute.ruta !== route.ruta ? 0.14 : 0.82}
+                      style={{ pointerEvents: "none" }}
+                    />
+                  );
+                })}
                 {visibleNodes.map((node) => (
                   <g key={node.id} className="node-group">
                     <circle cx={node.x} cy={node.y} r="3.4" className="node-dot" />
-                    <text x={node.x + 6} y={node.y - 6} className="node-label">
+                    <text
+                      x={node.x + 6}
+                      y={node.y - 6}
+                      className="node-label"
+                      style={{ fontSize: `${9 / transform.scale}px` }}
+                    >
                       {node.label}
                     </text>
                   </g>
