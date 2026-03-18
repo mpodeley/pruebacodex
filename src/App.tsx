@@ -173,6 +173,32 @@ function buildSeriesPath(
     .join(" ");
 }
 
+function distanceToSegment(
+  point: { x: number; y: number },
+  start: { x: number; y: number },
+  end: { x: number; y: number }
+) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+
+  if (dx === 0 && dy === 0) {
+    return Math.hypot(point.x - start.x, point.y - start.y);
+  }
+
+  const t = Math.max(
+    0,
+    Math.min(
+      1,
+      ((point.x - start.x) * dx + (point.y - start.y) * dy) / (dx * dx + dy * dy)
+    )
+  );
+
+  const projectionX = start.x + t * dx;
+  const projectionY = start.y + t * dy;
+
+  return Math.hypot(point.x - projectionX, point.y - projectionY);
+}
+
 function utilizationColor(utilization: number | null) {
   if (utilization == null) {
     return "#4b648b";
@@ -566,16 +592,34 @@ export default function App() {
   }
 
   function handlePointerUp(event: React.PointerEvent<SVGSVGElement>) {
-    dragState.current = null;
-    setIsDragging(false);
-  }
+    if (!dragState.current?.moved) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const svgX = ((event.clientX - rect.left) / rect.width) * CANVAS_WIDTH;
+      const svgY = ((event.clientY - rect.top) / rect.height) * CANVAS_HEIGHT;
+      const mapPoint = {
+        x: (svgX - transform.x) / transform.scale,
+        y: (svgY - transform.y) / transform.scale
+      };
 
-  function handleRouteSelect(routeId: string) {
-    if (dragState.current?.moved) {
-      return;
+      let nearestRoute: DisplayRoute | null = null;
+      let nearestDistance = Infinity;
+
+      for (const route of visibleRoutes) {
+        const distance = distanceToSegment(mapPoint, route.start, route.end);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestRoute = route;
+        }
+      }
+
+      const hitThreshold = Math.max(6, 12 / transform.scale);
+      if (nearestRoute && nearestDistance <= hitThreshold) {
+        setSelectedRouteId(nearestRoute.ruta);
+      }
     }
 
-    setSelectedRouteId(routeId);
+    dragState.current = null;
+    setIsDragging(false);
   }
 
   return (
@@ -730,17 +774,6 @@ export default function App() {
                         y1={route.start.y}
                         x2={route.end.x}
                         y2={route.end.y}
-                        stroke="transparent"
-                        strokeWidth={Math.max(route.strokeWidth + 10, 16)}
-                        strokeLinecap="round"
-                        className="route-hit-area"
-                        onPointerUp={() => handleRouteSelect(route.ruta)}
-                      />
-                      <line
-                        x1={route.start.x}
-                        y1={route.start.y}
-                        x2={route.end.x}
-                        y2={route.end.y}
                         stroke={utilizationColor(route.utilization)}
                         strokeWidth={route.strokeWidth}
                         strokeLinecap="round"
@@ -751,7 +784,9 @@ export default function App() {
                 {visibleNodes.map((node) => (
                   <g key={node.id} className="node-group">
                     <circle cx={node.x} cy={node.y} r="3.4" className="node-dot" />
-                    <title>{node.label}</title>
+                    <text x={node.x + 6} y={node.y - 6} className="node-label">
+                      {node.label}
+                    </text>
                   </g>
                 ))}
                 </g>
