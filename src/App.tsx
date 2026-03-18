@@ -748,14 +748,12 @@ export default function App() {
                       />
                     </g>
                   ))}
-                  {visibleNodes.map((node) => (
-                    <g key={node.id}>
-                      <circle cx={node.x} cy={node.y} r="5.5" className="node-dot" />
-                      <text x={node.x + 8} y={node.y - 8} className="node-label">
-                        {node.label}
-                      </text>
-                    </g>
-                  ))}
+                {visibleNodes.map((node) => (
+                  <g key={node.id} className="node-group">
+                    <circle cx={node.x} cy={node.y} r="3.4" className="node-dot" />
+                    <title>{node.label}</title>
+                  </g>
+                ))}
                 </g>
               </g>
             </svg>

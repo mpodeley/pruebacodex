@@ -473,19 +473,13 @@ h1 {
 }
 
 .node-dot {
-  fill: #dff7ff;
-  stroke: rgba(87, 147, 255, 0.95);
-  stroke-width: 2;
+  fill: rgba(223, 247, 255, 0.92);
+  stroke: rgba(87, 147, 255, 0.78);
+  stroke-width: 1.2;
 }
 
-.node-label {
-  fill: #f0f5ff;
-  font-size: 11px;
-  letter-spacing: 0.02em;
-  paint-order: stroke;
-  stroke: rgba(5, 12, 25, 0.92);
-  stroke-width: 3px;
-  stroke-linejoin: round;
+.node-group {
+  cursor: default;
 }
 
 .side-panel {
