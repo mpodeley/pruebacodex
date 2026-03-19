@@ -696,7 +696,7 @@ export default function App() {
         <section className="hero-bar">
           <div className="control-copy">
             <p className="eyebrow">Argentina Gas Grid</p>
-            <h1>Mapa temporal de flujos y capacidad de la red de gas en Argentina</h1>
+            <h1>Flujo vs capacidad en la red de transporte</h1>
             <p className="lede">
               Navegacion temporal de la red ENARGAS. Grosor por caudal, color por utilizacion.
             </p>
