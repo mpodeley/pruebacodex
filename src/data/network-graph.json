@@ -1,0 +1,3369 @@
+{
+  "nodes": [
+    {
+      "id": "Catriel",
+      "type": "city_gate",
+      "label": "Catriel"
+    },
+    {
+      "id": "El Llano",
+      "type": "city_gate",
+      "label": "El Llano"
+    },
+    {
+      "id": "Los Cardales",
+      "type": "city_gate",
+      "label": "Los Cardales"
+    },
+    {
+      "id": "General Pacheco",
+      "type": "city_gate",
+      "label": "General Pacheco"
+    },
+    {
+      "id": "KM 742",
+      "type": "city_gate",
+      "label": "KM 742"
+    },
+    {
+      "id": "KM 799",
+      "type": "city_gate",
+      "label": "KM 799"
+    },
+    {
+      "id": "General Rodríguez",
+      "type": "city_gate",
+      "label": "General Rodríguez"
+    },
+    {
+      "id": "Rodríguez",
+      "type": "city_gate",
+      "label": "Rodríguez"
+    },
+    {
+      "id": "Rosetti",
+      "type": "city_gate",
+      "label": "Rosetti"
+    },
+    {
+      "id": "Las Heras",
+      "type": "city_gate",
+      "label": "Las Heras"
+    },
+    {
+      "id": "Cañuelas",
+      "type": "city_gate",
+      "label": "Cañuelas"
+    },
+    {
+      "id": "La Sortija",
+      "type": "city_gate",
+      "label": "La Sortija"
+    },
+    {
+      "id": "Olavarría",
+      "type": "compressor",
+      "label": "Olavarría"
+    },
+    {
+      "id": "Río Neuquén",
+      "type": "city_gate",
+      "label": "Río Neuquén"
+    },
+    {
+      "id": "Nudo Troncal",
+      "type": "city_gate",
+      "label": "Nudo Troncal"
+    },
+    {
+      "id": "Lavalle",
+      "type": "compressor",
+      "label": "Lavalle"
+    },
+    {
+      "id": "Recreo",
+      "type": "compressor",
+      "label": "Recreo"
+    },
+    {
+      "id": "Loma La Lata",
+      "type": "city_gate",
+      "label": "Loma La Lata"
+    },
+    {
+      "id": "Válvula 6",
+      "type": "city_gate",
+      "label": "Válvula 6"
+    },
+    {
+      "id": "Villa Mercedes",
+      "type": "city_gate",
+      "label": "Villa Mercedes"
+    },
+    {
+      "id": "Bulnes",
+      "type": "city_gate",
+      "label": "Bulnes"
+    },
+    {
+      "id": "Tucumán",
+      "type": "compressor",
+      "label": "Tucumán"
+    },
+    {
+      "id": "Los Romanos",
+      "type": "city_gate",
+      "label": "Los Romanos"
+    },
+    {
+      "id": "Río Coyle",
+      "type": "city_gate",
+      "label": "Río Coyle"
+    },
+    {
+      "id": "Piedrabuena",
+      "type": "compressor",
+      "label": "Piedrabuena"
+    },
+    {
+      "id": "KM 544",
+      "type": "city_gate",
+      "label": "KM 544"
+    },
+    {
+      "id": "KM 554",
+      "type": "city_gate",
+      "label": "KM 554"
+    },
+    {
+      "id": "Planta La Mora (VB Nº1)",
+      "type": "city_gate",
+      "label": "Planta La Mora (VB Nº1)"
+    },
+    {
+      "id": "Válvula de Bloqueo Nº5",
+      "type": "city_gate",
+      "label": "Válvula de Bloqueo Nº5"
+    },
+    {
+      "id": "Saladillo",
+      "type": "city_gate",
+      "label": "Saladillo"
+    },
+    {
+      "id": "Trampa Las Heras",
+      "type": "city_gate",
+      "label": "Trampa Las Heras"
+    },
+    {
+      "id": "Pla",
+      "type": "city_gate",
+      "label": "Pla"
+    },
+    {
+      "id": "Lumbreras",
+      "type": "compressor",
+      "label": "Lumbreras"
+    },
+    {
+      "id": "Válvula 9",
+      "type": "city_gate",
+      "label": "Válvula 9"
+    },
+    {
+      "id": "Límite Internacional",
+      "type": "city_gate",
+      "label": "Límite Internacional"
+    },
+    {
+      "id": "KM 409",
+      "type": "city_gate",
+      "label": "KM 409"
+    },
+    {
+      "id": "Gaviotas",
+      "type": "compressor",
+      "label": "Gaviotas"
+    },
+    {
+      "id": "General Cerri",
+      "type": "city_gate",
+      "label": "General Cerri"
+    },
+    {
+      "id": "Espíritu Santo",
+      "type": "city_gate",
+      "label": "Espíritu Santo"
+    },
+    {
+      "id": "Cabo Vírgenes II",
+      "type": "city_gate",
+      "label": "Cabo Vírgenes II"
+    },
+    {
+      "id": "San Lorenzo",
+      "type": "city_gate",
+      "label": "San Lorenzo"
+    },
+    {
+      "id": "La Carlota",
+      "type": "compressor",
+      "label": "La Carlota"
+    },
+    {
+      "id": "KM 712",
+      "type": "city_gate",
+      "label": "KM 712"
+    },
+    {
+      "id": "KM 794",
+      "type": "city_gate",
+      "label": "KM 794"
+    },
+    {
+      "id": "San Jerónimo",
+      "type": "compressor",
+      "label": "San Jerónimo"
+    },
+    {
+      "id": "Barrancas",
+      "type": "city_gate",
+      "label": "Barrancas"
+    },
+    {
+      "id": "Loop Km 10",
+      "type": "city_gate",
+      "label": "Loop Km 10"
+    },
+    {
+      "id": "Km 32",
+      "type": "city_gate",
+      "label": "Km 32"
+    },
+    {
+      "id": "Santo Tomé",
+      "type": "city_gate",
+      "label": "Santo Tomé"
+    },
+    {
+      "id": "Santa Fe",
+      "type": "city_gate",
+      "label": "Santa Fe"
+    },
+    {
+      "id": "KM 232",
+      "type": "city_gate",
+      "label": "KM 232"
+    },
+    {
+      "id": "KM 242",
+      "type": "city_gate",
+      "label": "KM 242"
+    },
+    {
+      "id": "San Nicolás",
+      "type": "city_gate",
+      "label": "San Nicolás"
+    },
+    {
+      "id": "Deán Funes",
+      "type": "compressor",
+      "label": "Deán Funes"
+    },
+    {
+      "id": "Aldao",
+      "type": "city_gate",
+      "label": "Aldao"
+    },
+    {
+      "id": "Planta Papagayos (VB Nº9)",
+      "type": "city_gate",
+      "label": "Planta Papagayos (VB Nº9)"
+    },
+    {
+      "id": "Frontera",
+      "type": "city_gate",
+      "label": "Frontera"
+    },
+    {
+      "id": "Bermejo",
+      "type": "city_gate",
+      "label": "Bermejo"
+    },
+    {
+      "id": "Río Seco",
+      "type": "compressor",
+      "label": "Río Seco"
+    },
+    {
+      "id": "Bosque Petrificado",
+      "type": "compressor",
+      "label": "Bosque Petrificado"
+    },
+    {
+      "id": "Belisle",
+      "type": "city_gate",
+      "label": "Belisle"
+    },
+    {
+      "id": "La Adela",
+      "type": "compressor",
+      "label": "La Adela"
+    },
+    {
+      "id": "Chelforó",
+      "type": "compressor",
+      "label": "Chelforó"
+    },
+    {
+      "id": "T. Intermedia",
+      "type": "city_gate",
+      "label": "T. Intermedia"
+    },
+    {
+      "id": "Sauce de Luna",
+      "type": "city_gate",
+      "label": "Sauce de Luna"
+    },
+    {
+      "id": "San Jaime",
+      "type": "city_gate",
+      "label": "San Jaime"
+    },
+    {
+      "id": "KM 624",
+      "type": "city_gate",
+      "label": "KM 624"
+    },
+    {
+      "id": "Pichanal",
+      "type": "compressor",
+      "label": "Pichanal"
+    },
+    {
+      "id": "Loop Río Neuquén",
+      "type": "city_gate",
+      "label": "Loop Río Neuquén"
+    },
+    {
+      "id": "KM 318",
+      "type": "city_gate",
+      "label": "KM 318"
+    },
+    {
+      "id": "KM 328",
+      "type": "city_gate",
+      "label": "KM 328"
+    },
+    {
+      "id": "KM 664",
+      "type": "city_gate",
+      "label": "KM 664"
+    },
+    {
+      "id": "KM 682\r\nKM 664",
+      "type": "city_gate",
+      "label": "KM 682\r\nKM 664"
+    },
+    {
+      "id": "KM 654",
+      "type": "city_gate",
+      "label": "KM 654"
+    },
+    {
+      "id": "KM 662",
+      "type": "city_gate",
+      "label": "KM 662"
+    },
+    {
+      "id": "Ferreyra",
+      "type": "compressor",
+      "label": "Ferreyra"
+    },
+    {
+      "id": "Medanito",
+      "type": "city_gate",
+      "label": "Medanito"
+    },
+    {
+      "id": "Mainqué",
+      "type": "city_gate",
+      "label": "Mainqué"
+    },
+    {
+      "id": "Ordoqui",
+      "type": "compressor",
+      "label": "Ordoqui"
+    },
+    {
+      "id": "Tcb",
+      "type": "city_gate",
+      "label": "Tcb"
+    },
+    {
+      "id": "Tcc",
+      "type": "city_gate",
+      "label": "Tcc"
+    },
+    {
+      "id": "KM 485",
+      "type": "city_gate",
+      "label": "KM 485"
+    },
+    {
+      "id": "KM 495",
+      "type": "city_gate",
+      "label": "KM 495"
+    },
+    {
+      "id": "KM 592",
+      "type": "city_gate",
+      "label": "KM 592"
+    },
+    {
+      "id": "KM 425",
+      "type": "city_gate",
+      "label": "KM 425"
+    },
+    {
+      "id": "Escalante",
+      "type": "city_gate",
+      "label": "Escalante"
+    },
+    {
+      "id": "Planta Punta Lara",
+      "type": "city_gate",
+      "label": "Planta Punta Lara"
+    },
+    {
+      "id": "Conexión Subfluvial",
+      "type": "city_gate",
+      "label": "Conexión Subfluvial"
+    },
+    {
+      "id": "KM 17",
+      "type": "city_gate",
+      "label": "KM 17"
+    },
+    {
+      "id": "KM 32",
+      "type": "city_gate",
+      "label": "KM 32"
+    },
+    {
+      "id": "Cerro Redondo",
+      "type": "city_gate",
+      "label": "Cerro Redondo"
+    },
+    {
+      "id": "Loma de la Lata",
+      "type": "city_gate",
+      "label": "Loma de la Lata"
+    },
+    {
+      "id": "KM 695",
+      "type": "city_gate",
+      "label": "KM 695"
+    },
+    {
+      "id": "KM 798",
+      "type": "city_gate",
+      "label": "KM 798"
+    },
+    {
+      "id": "KM 674",
+      "type": "city_gate",
+      "label": "KM 674"
+    },
+    {
+      "id": "Salamanca",
+      "type": "city_gate",
+      "label": "Salamanca"
+    },
+    {
+      "id": "Garayalde",
+      "type": "compressor",
+      "label": "Garayalde"
+    },
+    {
+      "id": "Pairique",
+      "type": "city_gate",
+      "label": "Pairique"
+    },
+    {
+      "id": "Paso de Jama",
+      "type": "city_gate",
+      "label": "Paso de Jama"
+    },
+    {
+      "id": "Campo Durán",
+      "type": "city_gate",
+      "label": "Campo Durán"
+    },
+    {
+      "id": "KM 264",
+      "type": "city_gate",
+      "label": "KM 264"
+    },
+    {
+      "id": "KM 274",
+      "type": "city_gate",
+      "label": "KM 274"
+    },
+    {
+      "id": "Fortin Uno",
+      "type": "city_gate",
+      "label": "Fortin Uno"
+    },
+    {
+      "id": "Ezeiza",
+      "type": "city_gate",
+      "label": "Ezeiza"
+    },
+    {
+      "id": "Tío Pujio",
+      "type": "compressor",
+      "label": "Tío Pujio"
+    },
+    {
+      "id": "Leones",
+      "type": "compressor",
+      "label": "Leones"
+    },
+    {
+      "id": "Camilo Aldao",
+      "type": "city_gate",
+      "label": "Camilo Aldao"
+    },
+    {
+      "id": "Tandil",
+      "type": "city_gate",
+      "label": "Tandil"
+    },
+    {
+      "id": "Infiernillo",
+      "type": "city_gate",
+      "label": "Infiernillo"
+    },
+    {
+      "id": "Miraflores",
+      "type": "compressor",
+      "label": "Miraflores"
+    },
+    {
+      "id": "KM 997",
+      "type": "city_gate",
+      "label": "KM 997"
+    },
+    {
+      "id": "KM 1229",
+      "type": "city_gate",
+      "label": "KM 1229"
+    },
+    {
+      "id": "KM 0",
+      "type": "city_gate",
+      "label": "KM 0"
+    },
+    {
+      "id": "KM 120",
+      "type": "city_gate",
+      "label": "KM 120"
+    },
+    {
+      "id": "Loop Km 354",
+      "type": "city_gate",
+      "label": "Loop Km 354"
+    },
+    {
+      "id": "Km 374",
+      "type": "city_gate",
+      "label": "Km 374"
+    },
+    {
+      "id": "Pico Truncado",
+      "type": "compressor",
+      "label": "Pico Truncado"
+    },
+    {
+      "id": "Holdich",
+      "type": "city_gate",
+      "label": "Holdich"
+    },
+    {
+      "id": "Huincul",
+      "type": "city_gate",
+      "label": "Huincul"
+    },
+    {
+      "id": "Senillosa 10",
+      "type": "city_gate",
+      "label": "Senillosa 10"
+    },
+    {
+      "id": "Altavista",
+      "type": "city_gate",
+      "label": "Altavista"
+    },
+    {
+      "id": "Saturno",
+      "type": "compressor",
+      "label": "Saturno"
+    },
+    {
+      "id": "Dolavon",
+      "type": "compressor",
+      "label": "Dolavon"
+    },
+    {
+      "id": "Gualicho",
+      "type": "city_gate",
+      "label": "Gualicho"
+    },
+    {
+      "id": "KM 631",
+      "type": "city_gate",
+      "label": "KM 631"
+    },
+    {
+      "id": "KM 291",
+      "type": "city_gate",
+      "label": "KM 291"
+    },
+    {
+      "id": "KM 311",
+      "type": "city_gate",
+      "label": "KM 311"
+    },
+    {
+      "id": "KM 210",
+      "type": "city_gate",
+      "label": "KM 210"
+    },
+    {
+      "id": "KM 200",
+      "type": "city_gate",
+      "label": "KM 200"
+    },
+    {
+      "id": "Tca",
+      "type": "city_gate",
+      "label": "Tca"
+    },
+    {
+      "id": "Buchanan II",
+      "type": "city_gate",
+      "label": "Buchanan II"
+    },
+    {
+      "id": "Gutierrez",
+      "type": "city_gate",
+      "label": "Gutierrez"
+    },
+    {
+      "id": "KM 944",
+      "type": "city_gate",
+      "label": "KM 944"
+    },
+    {
+      "id": "KM 961",
+      "type": "city_gate",
+      "label": "KM 961"
+    },
+    {
+      "id": "Km 526",
+      "type": "city_gate",
+      "label": "Km 526"
+    },
+    {
+      "id": "Km 544",
+      "type": "city_gate",
+      "label": "Km 544"
+    },
+    {
+      "id": "KM 659",
+      "type": "city_gate",
+      "label": "KM 659"
+    },
+    {
+      "id": "Loop Línea IV Barrosa",
+      "type": "city_gate",
+      "label": "Loop Línea IV Barrosa"
+    },
+    {
+      "id": "Las Mesitas",
+      "type": "city_gate",
+      "label": "Las Mesitas"
+    },
+    {
+      "id": "KM 170",
+      "type": "city_gate",
+      "label": "KM 170"
+    },
+    {
+      "id": "KM 648",
+      "type": "city_gate",
+      "label": "KM 648"
+    },
+    {
+      "id": "KM 682",
+      "type": "city_gate",
+      "label": "KM 682"
+    },
+    {
+      "id": "Loop",
+      "type": "city_gate",
+      "label": "Loop"
+    },
+    {
+      "id": "KM 805",
+      "type": "city_gate",
+      "label": "KM 805"
+    },
+    {
+      "id": "San Julián",
+      "type": "compressor",
+      "label": "San Julián"
+    },
+    {
+      "id": "KM 250",
+      "type": "city_gate",
+      "label": "KM 250"
+    },
+    {
+      "id": "264\r\nKM 250",
+      "type": "city_gate",
+      "label": "264\r\nKM 250"
+    },
+    {
+      "id": "KM 154",
+      "type": "city_gate",
+      "label": "KM 154"
+    },
+    {
+      "id": "KM 322",
+      "type": "city_gate",
+      "label": "KM 322"
+    },
+    {
+      "id": "KM 331",
+      "type": "city_gate",
+      "label": "KM 331"
+    },
+    {
+      "id": "KM 155",
+      "type": "city_gate",
+      "label": "KM 155"
+    },
+    {
+      "id": "KM 177",
+      "type": "city_gate",
+      "label": "KM 177"
+    },
+    {
+      "id": "KM 694",
+      "type": "city_gate",
+      "label": "KM 694"
+    },
+    {
+      "id": "KM 714",
+      "type": "city_gate",
+      "label": "KM 714"
+    },
+    {
+      "id": "Beazley",
+      "type": "compressor",
+      "label": "Beazley"
+    },
+    {
+      "id": "Monteleña",
+      "type": "city_gate",
+      "label": "Monteleña"
+    },
+    {
+      "id": "Loop Km 374",
+      "type": "city_gate",
+      "label": "Loop Km 374"
+    },
+    {
+      "id": "Km 399",
+      "type": "city_gate",
+      "label": "Km 399"
+    },
+    {
+      "id": "KM 144",
+      "type": "city_gate",
+      "label": "KM 144"
+    },
+    {
+      "id": "KM 10",
+      "type": "city_gate",
+      "label": "KM 10"
+    },
+    {
+      "id": "KM 33",
+      "type": "city_gate",
+      "label": "KM 33"
+    },
+    {
+      "id": "KM 43",
+      "type": "city_gate",
+      "label": "KM 43"
+    },
+    {
+      "id": "Ramal",
+      "type": "city_gate",
+      "label": "Ramal"
+    },
+    {
+      "id": "Pres R Saenz Peña",
+      "type": "city_gate",
+      "label": "Pres R Saenz Peña"
+    },
+    {
+      "id": "Loop Km 89",
+      "type": "city_gate",
+      "label": "Loop Km 89"
+    },
+    {
+      "id": "Km 223",
+      "type": "city_gate",
+      "label": "Km 223"
+    },
+    {
+      "id": "Conesa",
+      "type": "city_gate",
+      "label": "Conesa"
+    },
+    {
+      "id": "Pacheco",
+      "type": "city_gate",
+      "label": "Pacheco"
+    },
+    {
+      "id": "Fortín Uno",
+      "type": "compressor",
+      "label": "Fortín Uno"
+    },
+    {
+      "id": "Lavayén",
+      "type": "city_gate",
+      "label": "Lavayén"
+    },
+    {
+      "id": "Río Piedras",
+      "type": "city_gate",
+      "label": "Río Piedras"
+    },
+    {
+      "id": "KM 986",
+      "type": "city_gate",
+      "label": "KM 986"
+    },
+    {
+      "id": "KM 64",
+      "type": "city_gate",
+      "label": "KM 64"
+    },
+    {
+      "id": "KM 94",
+      "type": "city_gate",
+      "label": "KM 94"
+    },
+    {
+      "id": "KM 45",
+      "type": "city_gate",
+      "label": "KM 45"
+    },
+    {
+      "id": "Loop Km 356",
+      "type": "city_gate",
+      "label": "Loop Km 356"
+    },
+    {
+      "id": "Km 397",
+      "type": "city_gate",
+      "label": "Km 397"
+    },
+    {
+      "id": "KM 699",
+      "type": "city_gate",
+      "label": "KM 699"
+    },
+    {
+      "id": "KM 716",
+      "type": "city_gate",
+      "label": "KM 716"
+    },
+    {
+      "id": "KM 440",
+      "type": "city_gate",
+      "label": "KM 440"
+    },
+    {
+      "id": "Paso de los Libres",
+      "type": "city_gate",
+      "label": "Paso de los Libres"
+    },
+    {
+      "id": "Río Uruguay",
+      "type": "city_gate",
+      "label": "Río Uruguay"
+    },
+    {
+      "id": "La Paz",
+      "type": "compressor",
+      "label": "La Paz"
+    },
+    {
+      "id": "Cervantes",
+      "type": "compressor",
+      "label": "Cervantes"
+    },
+    {
+      "id": "Cochicó",
+      "type": "compressor",
+      "label": "Cochicó"
+    },
+    {
+      "id": "Las Varitas",
+      "type": "city_gate",
+      "label": "Las Varitas"
+    },
+    {
+      "id": "Senillosa 8",
+      "type": "city_gate",
+      "label": "Senillosa 8"
+    },
+    {
+      "id": "Barker",
+      "type": "compressor",
+      "label": "Barker"
+    },
+    {
+      "id": "KM 193",
+      "type": "city_gate",
+      "label": "KM 193"
+    },
+    {
+      "id": "KM 208",
+      "type": "city_gate",
+      "label": "KM 208"
+    },
+    {
+      "id": "Coraceros",
+      "type": "city_gate",
+      "label": "Coraceros"
+    },
+    {
+      "id": "KM 684",
+      "type": "city_gate",
+      "label": "KM 684"
+    },
+    {
+      "id": "La Dormida",
+      "type": "city_gate",
+      "label": "La Dormida"
+    },
+    {
+      "id": "Palca de Aparzo",
+      "type": "city_gate",
+      "label": "Palca de Aparzo"
+    },
+    {
+      "id": "Tres Cruces",
+      "type": "compressor",
+      "label": "Tres Cruces"
+    },
+    {
+      "id": "Línea IV Barrosa",
+      "type": "city_gate",
+      "label": "Línea IV Barrosa"
+    },
+    {
+      "id": "KM 839",
+      "type": "city_gate",
+      "label": "KM 839"
+    },
+    {
+      "id": "KM 840",
+      "type": "city_gate",
+      "label": "KM 840"
+    },
+    {
+      "id": "Loop Km 32",
+      "type": "city_gate",
+      "label": "Loop Km 32"
+    },
+    {
+      "id": "Km 52",
+      "type": "city_gate",
+      "label": "Km 52"
+    },
+    {
+      "id": "Media Luna",
+      "type": "city_gate",
+      "label": "Media Luna"
+    },
+    {
+      "id": "Int. Neuba II",
+      "type": "city_gate",
+      "label": "Int. Neuba II"
+    },
+    {
+      "id": "Río Colorado",
+      "type": "compressor",
+      "label": "Río Colorado"
+    },
+    {
+      "id": "Trancas",
+      "type": "city_gate",
+      "label": "Trancas"
+    },
+    {
+      "id": "KM 223",
+      "type": "city_gate",
+      "label": "KM 223"
+    },
+    {
+      "id": "Loop Km 397",
+      "type": "city_gate",
+      "label": "Loop Km 397"
+    },
+    {
+      "id": "Ramallo",
+      "type": "city_gate",
+      "label": "Ramallo"
+    },
+    {
+      "id": "Chaján",
+      "type": "compressor",
+      "label": "Chaján"
+    },
+    {
+      "id": "Aldea Brasilera",
+      "type": "city_gate",
+      "label": "Aldea Brasilera"
+    },
+    {
+      "id": "Loop Km 134",
+      "type": "city_gate",
+      "label": "Loop Km 134"
+    },
+    {
+      "id": "Km 154",
+      "type": "city_gate",
+      "label": "Km 154"
+    },
+    {
+      "id": "Int. Neuba I",
+      "type": "city_gate",
+      "label": "Int. Neuba I"
+    },
+    {
+      "id": "Chelforó Conesa",
+      "type": "city_gate",
+      "label": "Chelforó Conesa"
+    },
+    {
+      "id": "KM 967",
+      "type": "city_gate",
+      "label": "KM 967"
+    },
+    {
+      "id": "Loop Km 223.460",
+      "type": "city_gate",
+      "label": "Loop Km 223.460"
+    },
+    {
+      "id": "Km 243.940",
+      "type": "city_gate",
+      "label": "Km 243.940"
+    },
+    {
+      "id": "KM 1056",
+      "type": "city_gate",
+      "label": "KM 1056"
+    },
+    {
+      "id": "KM 1077",
+      "type": "city_gate",
+      "label": "KM 1077"
+    },
+    {
+      "id": "Barrosa",
+      "type": "city_gate",
+      "label": "Barrosa"
+    },
+    {
+      "id": "Roca",
+      "type": "city_gate",
+      "label": "Roca"
+    },
+    {
+      "id": "Km 569",
+      "type": "city_gate",
+      "label": "Km 569"
+    },
+    {
+      "id": "Km 587",
+      "type": "city_gate",
+      "label": "Km 587"
+    },
+    {
+      "id": "KM 343",
+      "type": "city_gate",
+      "label": "KM 343"
+    },
+    {
+      "id": "KM 44",
+      "type": "city_gate",
+      "label": "KM 44"
+    },
+    {
+      "id": "Cabo Vírgenes",
+      "type": "city_gate",
+      "label": "Cabo Vírgenes"
+    },
+    {
+      "id": "KM 806",
+      "type": "city_gate",
+      "label": "KM 806"
+    },
+    {
+      "id": "KM 897",
+      "type": "city_gate",
+      "label": "KM 897"
+    },
+    {
+      "id": "Loop KM 0",
+      "type": "city_gate",
+      "label": "Loop KM 0"
+    },
+    {
+      "id": "KM 28",
+      "type": "city_gate",
+      "label": "KM 28"
+    },
+    {
+      "id": "KM 21",
+      "type": "city_gate",
+      "label": "KM 21"
+    },
+    {
+      "id": "Loop Km 108",
+      "type": "city_gate",
+      "label": "Loop Km 108"
+    },
+    {
+      "id": "Km 134",
+      "type": "city_gate",
+      "label": "Km 134"
+    },
+    {
+      "id": "Loop Km 0",
+      "type": "city_gate",
+      "label": "Loop Km 0"
+    },
+    {
+      "id": "Km 45",
+      "type": "city_gate",
+      "label": "Km 45"
+    },
+    {
+      "id": "KM 957",
+      "type": "city_gate",
+      "label": "KM 957"
+    },
+    {
+      "id": "KM 970",
+      "type": "city_gate",
+      "label": "KM 970"
+    },
+    {
+      "id": "KM 70",
+      "type": "city_gate",
+      "label": "KM 70"
+    },
+    {
+      "id": "Km 648",
+      "type": "city_gate",
+      "label": "Km 648"
+    },
+    {
+      "id": "KM 444",
+      "type": "city_gate",
+      "label": "KM 444"
+    },
+    {
+      "id": "Centenario",
+      "type": "city_gate",
+      "label": "Centenario"
+    },
+    {
+      "id": "Int. Huincul",
+      "type": "city_gate",
+      "label": "Int. Huincul"
+    },
+    {
+      "id": "Senillosa Transferencia 16",
+      "type": "city_gate",
+      "label": "Senillosa Transferencia 16"
+    },
+    {
+      "id": "KM 569",
+      "type": "city_gate",
+      "label": "KM 569"
+    },
+    {
+      "id": "San Antonio Oeste",
+      "type": "city_gate",
+      "label": "San Antonio Oeste"
+    },
+    {
+      "id": "KM 310",
+      "type": "city_gate",
+      "label": "KM 310"
+    },
+    {
+      "id": "KM 336",
+      "type": "city_gate",
+      "label": "KM 336"
+    },
+    {
+      "id": "Caimancito",
+      "type": "city_gate",
+      "label": "Caimancito"
+    },
+    {
+      "id": "KM 341",
+      "type": "city_gate",
+      "label": "KM 341"
+    },
+    {
+      "id": "Alto Pelado",
+      "type": "city_gate",
+      "label": "Alto Pelado"
+    },
+    {
+      "id": "KM 368",
+      "type": "city_gate",
+      "label": "KM 368"
+    },
+    {
+      "id": "KM 378",
+      "type": "city_gate",
+      "label": "KM 378"
+    },
+    {
+      "id": "VN37",
+      "type": "city_gate",
+      "label": "VN37"
+    },
+    {
+      "id": "La Mora",
+      "type": "compressor",
+      "label": "La Mora"
+    },
+    {
+      "id": "KM 505",
+      "type": "city_gate",
+      "label": "KM 505"
+    },
+    {
+      "id": "KM 534",
+      "type": "city_gate",
+      "label": "KM 534"
+    },
+    {
+      "id": "KM 459",
+      "type": "city_gate",
+      "label": "KM 459"
+    },
+    {
+      "id": "KM 126",
+      "type": "city_gate",
+      "label": "KM 126"
+    },
+    {
+      "id": "KM 281",
+      "type": "city_gate",
+      "label": "KM 281"
+    },
+    {
+      "id": "Loop Km 154",
+      "type": "city_gate",
+      "label": "Loop Km 154"
+    },
+    {
+      "id": "Km 160",
+      "type": "city_gate",
+      "label": "Km 160"
+    },
+    {
+      "id": "Loop Km 567",
+      "type": "city_gate",
+      "label": "Loop Km 567"
+    },
+    {
+      "id": "Km 592",
+      "type": "city_gate",
+      "label": "Km 592"
+    },
+    {
+      "id": "KM 271",
+      "type": "city_gate",
+      "label": "KM 271"
+    },
+    {
+      "id": "KM 369",
+      "type": "city_gate",
+      "label": "KM 369"
+    },
+    {
+      "id": "Newton",
+      "type": "city_gate",
+      "label": "Newton"
+    },
+    {
+      "id": "San Sebastián",
+      "type": "city_gate",
+      "label": "San Sebastián"
+    },
+    {
+      "id": "KM 189",
+      "type": "city_gate",
+      "label": "KM 189"
+    },
+    {
+      "id": "KM 1005",
+      "type": "city_gate",
+      "label": "KM 1005"
+    },
+    {
+      "id": "Válvula 5",
+      "type": "city_gate",
+      "label": "Válvula 5"
+    },
+    {
+      "id": "Loop Km 242",
+      "type": "city_gate",
+      "label": "Loop Km 242"
+    },
+    {
+      "id": "Km 269",
+      "type": "city_gate",
+      "label": "Km 269"
+    },
+    {
+      "id": "KM 187",
+      "type": "city_gate",
+      "label": "KM 187"
+    },
+    {
+      "id": "Tramo I Tratayen",
+      "type": "city_gate",
+      "label": "Tramo I Tratayen"
+    },
+    {
+      "id": "Saliquelo",
+      "type": "city_gate",
+      "label": "Saliquelo"
+    },
+    {
+      "id": "Tramo Mercedes",
+      "type": "city_gate",
+      "label": "Tramo Mercedes"
+    },
+    {
+      "id": "Cardales",
+      "type": "city_gate",
+      "label": "Cardales"
+    },
+    {
+      "id": "Ampliación NEUBA II",
+      "type": "city_gate",
+      "label": "Ampliación NEUBA II"
+    },
+    {
+      "id": "Terminación Ordoqui",
+      "type": "city_gate",
+      "label": "Terminación Ordoqui"
+    },
+    {
+      "id": "Volcán",
+      "type": "compressor",
+      "label": "Volcán"
+    },
+    {
+      "id": "Cornejo",
+      "type": "compressor",
+      "label": "Cornejo"
+    },
+    {
+      "id": "Rosario",
+      "type": "compressor",
+      "label": "Rosario"
+    },
+    {
+      "id": "Baldissera",
+      "type": "compressor",
+      "label": "Baldissera"
+    },
+    {
+      "id": "La Candelaria",
+      "type": "compressor",
+      "label": "La Candelaria"
+    },
+    {
+      "id": "Puelén",
+      "type": "compressor",
+      "label": "Puelén"
+    },
+    {
+      "id": "Bajo Gualicho",
+      "type": "compressor",
+      "label": "Bajo Gualicho"
+    },
+    {
+      "id": "Belislé",
+      "type": "compressor",
+      "label": "Belislé"
+    },
+    {
+      "id": "General Cerri - Clarck",
+      "type": "compressor",
+      "label": "General Cerri - Clarck"
+    },
+    {
+      "id": "General Cerri - Fiat",
+      "type": "compressor",
+      "label": "General Cerri - Fiat"
+    },
+    {
+      "id": "General Cerri - Solar",
+      "type": "compressor",
+      "label": "General Cerri - Solar"
+    },
+    {
+      "id": "General Conesa",
+      "type": "compressor",
+      "label": "General Conesa"
+    },
+    {
+      "id": "Indio Rico",
+      "type": "compressor",
+      "label": "Indio Rico"
+    },
+    {
+      "id": "Magallanes",
+      "type": "compressor",
+      "label": "Magallanes"
+    },
+    {
+      "id": "Manantiales Behr",
+      "type": "compressor",
+      "label": "Manantiales Behr"
+    },
+    {
+      "id": "Moy Aike",
+      "type": "compressor",
+      "label": "Moy Aike"
+    },
+    {
+      "id": "Picún Leufú",
+      "type": "compressor",
+      "label": "Picún Leufú"
+    },
+    {
+      "id": "Piedra del Águila",
+      "type": "compressor",
+      "label": "Piedra del Águila"
+    },
+    {
+      "id": "Plaza Huincul",
+      "type": "compressor",
+      "label": "Plaza Huincul"
+    },
+    {
+      "id": "San Antonio",
+      "type": "compressor",
+      "label": "San Antonio"
+    },
+    {
+      "id": "Buchanan",
+      "type": "compressor",
+      "label": "Buchanan"
+    },
+    {
+      "id": "Papagayos",
+      "type": "compressor",
+      "label": "Papagayos"
+    },
+    {
+      "id": "Confluencia",
+      "type": "compressor",
+      "label": "Confluencia"
+    },
+    {
+      "id": "Pico Truncado II",
+      "type": "compressor",
+      "label": "Pico Truncado II"
+    },
+    {
+      "id": "San José de Añelo",
+      "type": "compressor",
+      "label": "San José de Añelo"
+    }
+  ],
+  "links": [
+    {
+      "source": "Catriel",
+      "target": "El Llano",
+      "label": "Catriel - El Llano",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Los Cardales",
+      "target": "General Pacheco",
+      "label": "Los Cardales - General Pacheco",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 742",
+      "target": "KM 799",
+      "label": "KM 742 - KM 799",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Los Cardales",
+      "target": "General Rodríguez",
+      "label": "Los Cardales - General Rodríguez",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Rodríguez",
+      "target": "Rosetti",
+      "label": "Rodríguez - Rosetti",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Las Heras",
+      "target": "Cañuelas",
+      "label": "Las Heras - Cañuelas",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "La Sortija",
+      "target": "Olavarría",
+      "label": "La Sortija - Olavarría",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Río Neuquén",
+      "target": "Nudo Troncal",
+      "label": "Río Neuquén - Nudo Troncal",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lavalle",
+      "target": "Recreo",
+      "label": "Lavalle - Recreo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma La Lata",
+      "target": "Válvula 6",
+      "label": "Loma La Lata - Válvula 6",
+      "operator": "Gas del Pacífico",
+      "type": "Transporte"
+    },
+    {
+      "source": "Villa Mercedes",
+      "target": "Bulnes",
+      "label": "Villa Mercedes - Bulnes",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tucumán",
+      "target": "Los Romanos",
+      "label": "Tucumán - Los Romanos",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Río Coyle",
+      "target": "Piedrabuena",
+      "label": "Río Coyle - Piedrabuena",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 544",
+      "target": "KM 554",
+      "label": "KM 544 - KM 554",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Planta La Mora (VB Nº1)",
+      "target": "Válvula de Bloqueo Nº5",
+      "label": "Planta La Mora (VB Nº1) - Válvula de Bloqueo Nº5",
+      "operator": "Gasoducto Gasandes Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Saladillo",
+      "target": "Trampa Las Heras",
+      "label": "Saladillo - Trampa Las Heras",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Pla",
+      "target": "Las Heras",
+      "label": "Pla - Las Heras",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lumbreras",
+      "target": "Tucumán",
+      "label": "Lumbreras - Tucumán",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Válvula 9",
+      "target": "Límite Internacional",
+      "label": "Válvula 9 - Límite Internacional",
+      "operator": "Gas del Pacífico",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 409",
+      "target": "KM 554",
+      "label": "KM 409 - KM 554",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Gaviotas",
+      "target": "General Cerri",
+      "label": "Gaviotas - General Cerri",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Espíritu Santo",
+      "target": "Cabo Vírgenes II",
+      "label": "Espíritu Santo - Cabo Vírgenes II",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Lorenzo",
+      "target": "Lumbreras",
+      "label": "San Lorenzo - Lumbreras",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Bulnes",
+      "target": "La Carlota",
+      "label": "Bulnes - La Carlota",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 712",
+      "target": "KM 794",
+      "label": "KM 712 - KM 794",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jerónimo",
+      "target": "Barrancas",
+      "label": "San Jerónimo - Barrancas",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 10",
+      "target": "Km 32",
+      "label": "Loop Km 10 - Km 32",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Santo Tomé",
+      "target": "Santa Fe",
+      "label": "Santo Tomé - Santa Fe",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 232",
+      "target": "KM 242",
+      "label": "KM 232 - KM 242",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jerónimo",
+      "target": "San Nicolás",
+      "label": "San Jerónimo - San Nicolás",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Recreo",
+      "target": "Deán Funes",
+      "label": "Recreo - Deán Funes",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tucumán",
+      "target": "Lavalle",
+      "label": "Tucumán - Lavalle",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jerónimo",
+      "target": "Aldao",
+      "label": "San Jerónimo - Aldao",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Planta Papagayos (VB Nº9)",
+      "target": "Frontera",
+      "label": "Planta Papagayos (VB Nº9) - Frontera",
+      "operator": "Gasoducto Gasandes Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Bermejo",
+      "target": "San Lorenzo",
+      "label": "Bermejo - San Lorenzo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Río Seco",
+      "target": "Bosque Petrificado",
+      "label": "Río Seco - Bosque Petrificado",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Belisle",
+      "target": "La Adela",
+      "label": "Belisle - La Adela",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Chelforó",
+      "target": "T. Intermedia",
+      "label": "Chelforó - T. Intermedia",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Sauce de Luna",
+      "target": "San Jaime",
+      "label": "Sauce de Luna - San Jaime",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 554",
+      "target": "KM 624",
+      "label": "KM 554 - KM 624",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Bermejo",
+      "target": "Pichanal",
+      "label": "Bermejo - Pichanal",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Río Neuquén",
+      "target": "Nudo Troncal",
+      "label": "Loop Río Neuquén - Nudo Troncal",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 318",
+      "target": "KM 328",
+      "label": "KM 318 - KM 328",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 664",
+      "target": "KM 682\r\nKM 664",
+      "label": "KM 664 - KM 682\r\nKM 664 - KM 682\r\nKM 664 - KM 682\r\nKM 664 - KM 682\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 654",
+      "target": "KM 662",
+      "label": "KM 654 - KM 662\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Deán Funes",
+      "target": "Ferreyra",
+      "label": "Deán Funes - Ferreyra",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Deán Funes",
+      "target": "Ferreyra",
+      "label": "Deán Funes - Ferreyra",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Medanito",
+      "target": "Mainqué",
+      "label": "Medanito - Mainqué",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ordoqui",
+      "target": "Pla",
+      "label": "Ordoqui - Pla",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tcb",
+      "target": "Tcc",
+      "label": "Tcb - Tcc",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 485",
+      "target": "KM 495",
+      "label": "KM 485 - KM 495\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 592",
+      "target": "KM 712",
+      "label": "KM 592 - KM 712",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 409",
+      "target": "KM 425",
+      "label": "KM 409 - KM 425",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "La Carlota",
+      "target": "Escalante",
+      "label": "La Carlota - Escalante",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Planta Punta Lara",
+      "target": "Conexión Subfluvial",
+      "label": "Planta Punta Lara - Conexión Subfluvial",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 17",
+      "target": "KM 32",
+      "label": "KM 17 - KM 32",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cerro Redondo",
+      "target": "Río Coyle",
+      "label": "Cerro Redondo - Río Coyle",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma de la Lata",
+      "target": "Catriel",
+      "label": "Loma de la Lata - Catriel",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 695",
+      "target": "KM 798",
+      "label": "KM 695 - KM 798",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 674",
+      "target": "KM 695",
+      "label": "KM 674 - KM 695",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Salamanca",
+      "target": "Garayalde",
+      "label": "Salamanca - Garayalde",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Pairique",
+      "target": "Paso de Jama",
+      "label": "Pairique - Paso de Jama",
+      "operator": "Gasoducto Nor Andino Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Campo Durán",
+      "target": "Bermejo",
+      "label": "Campo Durán - Bermejo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 264",
+      "target": "KM 274",
+      "label": "KM 264 - KM 274",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Chelforó",
+      "target": "Fortin Uno",
+      "label": "Chelforó - Fortin Uno",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cañuelas",
+      "target": "Ezeiza",
+      "label": "Cañuelas - Ezeiza",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tío Pujio",
+      "target": "Leones",
+      "label": "Tío Pujio - Leones",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Escalante",
+      "target": "Camilo Aldao",
+      "label": "Escalante - Camilo Aldao",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "La Sortija",
+      "target": "Tandil",
+      "label": "La Sortija - Tandil",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Camilo Aldao",
+      "target": "San Jerónimo",
+      "label": "Camilo Aldao - San Jerónimo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lumbreras",
+      "target": "Infiernillo",
+      "label": "Lumbreras - Infiernillo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Bermejo",
+      "target": "Miraflores",
+      "label": "Bermejo - Miraflores",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 997",
+      "target": "KM 1229",
+      "label": "KM 997 - KM 1229",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 0",
+      "target": "KM 120",
+      "label": "KM 0 - KM 120",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 354",
+      "target": "Km 374",
+      "label": "Loop Km 354 - Km 374",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Pico Truncado",
+      "target": "Holdich",
+      "label": "Pico Truncado - Holdich",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Huincul",
+      "target": "Senillosa 10",
+      "label": "Huincul - Senillosa 10",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Altavista",
+      "target": "Saturno",
+      "label": "Altavista - Saturno",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Dolavon",
+      "target": "Gualicho",
+      "label": "Dolavon - Gualicho",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 624",
+      "target": "KM 631",
+      "label": "KM 624 - KM 631",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 291",
+      "target": "KM 311",
+      "label": "KM 291 - KM 311",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Infiernillo",
+      "target": "Tucumán",
+      "label": "Infiernillo - Tucumán",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 210",
+      "target": "KM 232",
+      "label": "KM 210 - KM 232",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 200",
+      "target": "KM 210",
+      "label": "KM 200 - KM 210",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tca",
+      "target": "Tcb",
+      "label": "Tca - Tcb",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Buchanan II",
+      "target": "Gutierrez",
+      "label": "Buchanan II - Gutierrez",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 944",
+      "target": "KM 961",
+      "label": "KM 944 - KM 961",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "General Cerri",
+      "target": "Altavista",
+      "label": "General Cerri - Altavista",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "General Cerri",
+      "target": "La Sortija",
+      "label": "General Cerri - La Sortija",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tcb",
+      "target": "Tcc",
+      "label": "Tcb - Tcc",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Km 526",
+      "target": "Km 544",
+      "label": "Km 526 - Km 544",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 631",
+      "target": "KM 659",
+      "label": "KM 631 - KM 659",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Holdich",
+      "target": "Salamanca",
+      "label": "Holdich - Salamanca",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Línea IV Barrosa",
+      "target": "Huincul",
+      "label": "Loop Línea IV Barrosa - Huincul",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Miraflores",
+      "target": "Las Mesitas",
+      "label": "Miraflores - Las Mesitas",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 274",
+      "target": "KM 291",
+      "label": "KM 274 - KM 291",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 170",
+      "target": "KM 200",
+      "label": "KM 170 - KM 200\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 648",
+      "target": "KM 682",
+      "label": "KM 648 - KM 682",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 232",
+      "target": "KM 264",
+      "label": "KM 232 - KM 264",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop",
+      "target": "Chelforó",
+      "label": "Loop - Chelforó - Conesa",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 799",
+      "target": "KM 805",
+      "label": "KM 799 - KM 805",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Piedrabuena",
+      "target": "San Julián",
+      "label": "Piedrabuena - San Julián",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 250",
+      "target": "264\r\nKM 250",
+      "label": "KM 250 - 264\r\nKM 250 - 264\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 154",
+      "target": "KM 170",
+      "label": "KM 154 - KM 170\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Julián",
+      "target": "Río Seco",
+      "label": "San Julián - Río Seco",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "General Cerri",
+      "target": "La Sortija",
+      "label": "General Cerri - La Sortija",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Las Heras",
+      "target": "Rodríguez",
+      "label": "Las Heras - Rodríguez",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 322",
+      "target": "KM 331",
+      "label": "KM 322 - KM 331",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 155",
+      "target": "KM 177",
+      "label": "KM 155 - KM 177",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 694",
+      "target": "KM 714",
+      "label": "KM 694 - KM 714",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Campo Durán",
+      "target": "Pichanal",
+      "label": "Campo Durán - Pichanal",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Beazley",
+      "target": "Villa Mercedes",
+      "label": "Beazley - Villa Mercedes",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Monteleña",
+      "target": "San Jerónimo",
+      "label": "Monteleña - San Jerónimo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Válvula 6",
+      "target": "Válvula 9",
+      "label": "Válvula 6 - Válvula 9",
+      "operator": "Gas del Pacífico",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 374",
+      "target": "Km 399",
+      "label": "Loop Km 374 - Km 399",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 144",
+      "target": "KM 200",
+      "label": "KM 144 - KM 200",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 0",
+      "target": "KM 10",
+      "label": "KM 0 - KM 10",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 33",
+      "target": "KM 43",
+      "label": "KM 33 - KM 43",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ramal",
+      "target": "Pres R Saenz Peña",
+      "label": "Ramal a Pres R Saenz Peña",
+      "operator": "Sin datos",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 89",
+      "target": "Km 223",
+      "label": "Loop Km 89 - Km 223",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "T. Intermedia",
+      "target": "Conesa",
+      "label": "T. Intermedia - Conesa",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Garayalde",
+      "target": "Dolavon",
+      "label": "Garayalde - Dolavon",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Rodríguez",
+      "target": "Pacheco",
+      "label": "Rodríguez - Pacheco",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Fortín Uno",
+      "target": "Gaviotas",
+      "label": "Fortín Uno - Gaviotas",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Nicolás",
+      "target": "Los Cardales",
+      "label": "San Nicolás - Los Cardales",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lavayén",
+      "target": "Río Piedras",
+      "label": "Lavayén - Río Piedras",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 986",
+      "target": "KM 997",
+      "label": "KM 986 - KM 997",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 64",
+      "target": "KM 94",
+      "label": "KM 64 - KM 94",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 94",
+      "target": "KM 120",
+      "label": "KM 94 - KM 120\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 10",
+      "target": "KM 45",
+      "label": "KM 10 - KM 45",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 356",
+      "target": "Km 397",
+      "label": "Loop Km 356 - Km 397",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 699",
+      "target": "KM 716",
+      "label": "KM 699 - KM 716",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 440",
+      "target": "KM 485",
+      "label": "KM 440 - KM 485\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Paso de los Libres",
+      "target": "Río Uruguay",
+      "label": "Paso de los Libres - Río Uruguay",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Beazley",
+      "target": "La Paz",
+      "label": "Beazley - La Paz",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cervantes",
+      "target": "Belisle",
+      "label": "Cervantes - Belisle",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cochicó",
+      "target": "Las Varitas",
+      "label": "Cochicó - Las Varitas - Media Luna",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Huincul",
+      "target": "Senillosa 8",
+      "label": "Huincul - Senillosa 8",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Olavarría",
+      "target": "Barker",
+      "label": "Olavarría - Barker",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 193",
+      "target": "KM 208",
+      "label": "KM 193 - KM 208",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Coraceros",
+      "target": "Ordoqui",
+      "label": "Coraceros - Ordoqui",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma La Lata",
+      "target": "Cervantes",
+      "label": "Loma La Lata - Cervantes",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 684",
+      "target": "KM 699",
+      "label": "KM 684 - KM 699",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Beazley",
+      "target": "La Dormida",
+      "label": "Beazley - La Dormida",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Palca de Aparzo",
+      "target": "Tres Cruces",
+      "label": "Palca de Aparzo - Tres Cruces",
+      "operator": "Gasoducto Nor Andino Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Línea IV Barrosa",
+      "target": "Huincul",
+      "label": "Línea IV Barrosa - Huincul",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 839",
+      "target": "KM 840",
+      "label": "KM 839 - KM 840",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Miraflores",
+      "target": "Lumbreras",
+      "label": "Miraflores - Lumbreras",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 32",
+      "target": "Km 52",
+      "label": "Loop Km 32 - Km 52",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Las Varitas",
+      "target": "Media Luna",
+      "label": "Las Varitas - Media Luna",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "El Llano",
+      "target": "Cochicó",
+      "label": "El Llano - Cochicó",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Int. Neuba II",
+      "target": "Loma La Lata",
+      "label": "Int. Neuba II - Loma La Lata - Río Neuquén",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 144",
+      "target": "KM 154",
+      "label": "KM 144 - KM 154",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Río Colorado",
+      "target": "General Cerri",
+      "label": "Río Colorado - General Cerri",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Infiernillo",
+      "target": "Trancas",
+      "label": "Infiernillo - Trancas",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 223",
+      "target": "KM 232",
+      "label": "KM 223 - KM 232",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 397",
+      "target": "Km 526",
+      "label": "Loop Km 397 - Km 526",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 840",
+      "target": "KM 944",
+      "label": "KM 840 - KM 944",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jerónimo",
+      "target": "Ramallo",
+      "label": "San Jerónimo - Ramallo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Chaján",
+      "target": "Bulnes",
+      "label": "Chaján - Bulnes",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Aldea Brasilera",
+      "target": "Sauce de Luna",
+      "label": "Aldea Brasilera - Sauce de Luna",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ramallo",
+      "target": "Los Cardales",
+      "label": "Ramallo - Los Cardales",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Buchanan II",
+      "target": "Planta Punta Lara",
+      "label": "Buchanan II - Planta Punta Lara",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Media Luna",
+      "target": "Beazley",
+      "label": "Media Luna - Beazley",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cochicó",
+      "target": "Las Varitas",
+      "label": "Cochicó - Las Varitas",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 134",
+      "target": "Km 154",
+      "label": "Loop Km 134 - Km 154",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Campo Durán",
+      "target": "Bermejo",
+      "label": "Campo Durán - Bermejo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Int. Neuba I",
+      "target": "Chelforó Conesa",
+      "label": "Int. Neuba I - Chelforó Conesa",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 961",
+      "target": "KM 967",
+      "label": "KM 961 - KM 967",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tucumán",
+      "target": "Lavalle",
+      "label": "Tucumán - Lavalle",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 223.460",
+      "target": "Km 243.940",
+      "label": "Loop Km 223.460 - Km 243.940",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Pichanal",
+      "target": "Miraflores",
+      "label": "Pichanal - Miraflores",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Catriel",
+      "target": "El Llano",
+      "label": "Catriel - El Llano",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 1056",
+      "target": "KM 1077",
+      "label": "KM 1056 - KM 1077",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Barrosa",
+      "target": "Roca",
+      "label": "Barrosa - Roca",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Km 569",
+      "target": "Km 587",
+      "label": "Km 569 - Km 587",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 331",
+      "target": "KM 343",
+      "label": "KM 331 - KM 343",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 242",
+      "target": "KM 264",
+      "label": "KM 242 - KM 264",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 44",
+      "target": "KM 64",
+      "label": "KM 44 - KM 64\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cabo Vírgenes",
+      "target": "Cerro Redondo",
+      "label": "Cabo Vírgenes - Cerro Redondo",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 806",
+      "target": "KM 897",
+      "label": "KM 806 - KM 897",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop KM 0",
+      "target": "KM 28",
+      "label": "Loop KM 0 - KM 28",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 10",
+      "target": "KM 21",
+      "label": "KM 10 - KM 21",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 108",
+      "target": "Km 134",
+      "label": "Loop Km 108 - Km 134",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 0",
+      "target": "Km 45",
+      "label": "Loop Km 0 - Km 45",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 957",
+      "target": "KM 970",
+      "label": "KM 957 - KM 970",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 45",
+      "target": "KM 70",
+      "label": "KM 45 - KM 70",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Km 587",
+      "target": "Km 648",
+      "label": "Km 587 - Km 648",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 425",
+      "target": "KM 444",
+      "label": "KM 425 - KM 444",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Centenario",
+      "target": "Nudo Troncal",
+      "label": "Centenario - Nudo Troncal",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Int. Huincul",
+      "target": "Senillosa Transferencia 16",
+      "label": "Int. Huincul - Senillosa Transferencia 16",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cañuelas",
+      "target": "Buchanan II",
+      "label": "Cañuelas - Buchanan II",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 554",
+      "target": "KM 569",
+      "label": "KM 554 - KM 569",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Aldao",
+      "target": "Aldea Brasilera",
+      "label": "Aldao - Aldea Brasilera",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Leones",
+      "target": "San Jerónimo",
+      "label": "Leones - San Jerónimo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Nicolás",
+      "target": "Los Cardales",
+      "label": "San Nicolás - Los Cardales",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma de la Lata",
+      "target": "Catriel",
+      "label": "Loma de la Lata - Catriel",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Antonio Oeste",
+      "target": "Conesa",
+      "label": "San Antonio Oeste - Conesa",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 310",
+      "target": "KM 336",
+      "label": "KM 310 - KM 336\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 21",
+      "target": "KM 44",
+      "label": "KM 21 - KM 44\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Caimancito",
+      "target": "Lavayén",
+      "label": "Caimancito - Lavayén",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 336",
+      "target": "KM 341",
+      "label": "KM 336 - KM 341\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Beazley",
+      "target": "Alto Pelado",
+      "label": "Beazley - Alto Pelado",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "El Llano",
+      "target": "Cochicó",
+      "label": "El Llano - Cochicó",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 368",
+      "target": "KM 378",
+      "label": "KM 368 - KM 378",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lumbreras",
+      "target": "Infiernillo",
+      "label": "Lumbreras - Infiernillo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Conesa",
+      "target": "Río Colorado",
+      "label": "Conesa - Río Colorado",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Bosque Petrificado",
+      "target": "Pico Truncado",
+      "label": "Bosque Petrificado - Pico Truncado",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jerónimo",
+      "target": "VN37",
+      "label": "San Jerónimo - VN37",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Jaime",
+      "target": "Paso de los Libres",
+      "label": "San Jaime - Paso de los Libres",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Cochicó",
+      "target": "La Mora",
+      "label": "Cochicó - La Mora",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma La Lata",
+      "target": "Río Neuquén",
+      "label": "Loma La Lata - Río Neuquén",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 505",
+      "target": "KM 534",
+      "label": "KM 505 - KM 534\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Catriel",
+      "target": "El Llano",
+      "label": "Catriel - El Llano",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 897",
+      "target": "KM 957",
+      "label": "KM 897 - KM 957",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ferreyra",
+      "target": "Monteleña",
+      "label": "Ferreyra - Monteleña",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 440",
+      "target": "KM 459",
+      "label": "KM 440 - KM 459",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Lavalle",
+      "target": "Recreo",
+      "label": "Lavalle - Recreo",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 120",
+      "target": "KM 126",
+      "label": "KM 120 - KM 126",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 534",
+      "target": "KM 554",
+      "label": "KM 534 - KM 554\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Válvula de Bloqueo Nº5",
+      "target": "Planta Papagayos (VB Nº9)",
+      "label": "Válvula de Bloqueo Nº5 - Planta Papagayos (VB Nº9)",
+      "operator": "Gasoducto Gasandes Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ferreyra",
+      "target": "Tío Pujio",
+      "label": "Ferreyra - Tío Pujio",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 682",
+      "target": "KM 684",
+      "label": "KM 682 - KM 684",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 281",
+      "target": "KM 318",
+      "label": "KM 281 - KM 318",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Roca",
+      "target": "Chelforó",
+      "label": "Roca - Chelforó",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 378",
+      "target": "KM 409",
+      "label": "KM 378 - KM 409",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma de la Lata",
+      "target": "Catriel",
+      "label": "Loma de la Lata - Catriel",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 154",
+      "target": "Km 160",
+      "label": "Loop Km 154 - Km 160",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 567",
+      "target": "Km 592",
+      "label": "Loop Km 567 - Km 592",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "La Adela",
+      "target": "General Cerri",
+      "label": "La Adela - General Cerri",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Pichanal",
+      "target": "Palca de Aparzo",
+      "label": "Pichanal - Palca de Aparzo",
+      "operator": "Gasoducto Nor Andino Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "El Llano",
+      "target": "Cochicó",
+      "label": "El Llano - Cochicó",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Gualicho",
+      "target": "San Antonio Oeste",
+      "label": "Gualicho - San Antonio Oeste",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 264",
+      "target": "KM 271",
+      "label": "KM 264 - KM 271",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 274",
+      "target": "KM 368",
+      "label": "KM 274 - KM 368",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 659",
+      "target": "KM 674",
+      "label": "KM 659 - KM 674",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 341",
+      "target": "KM 369",
+      "label": "KM 341 - KM 369\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Newton",
+      "target": "Buchanan II",
+      "label": "Newton - Buchanan II",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tres Cruces",
+      "target": "Pairique",
+      "label": "Tres Cruces - Pairique",
+      "operator": "Gasoducto Nor Andino Argentina S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 495",
+      "target": "KM 505",
+      "label": "KM 495 - KM 505\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Recreo",
+      "target": "Deán Funes",
+      "label": "Recreo - Deán Funes",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 154",
+      "target": "KM 170",
+      "label": "KM 154 - KM 170\r\n",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Espíritu Santo",
+      "target": "Cabo Vírgenes",
+      "label": "Espíritu Santo - Cabo Vírgenes",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 798",
+      "target": "KM 839",
+      "label": "KM 798 - KM 839",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Saturno",
+      "target": "Coraceros",
+      "label": "Saturno - Coraceros",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tandil",
+      "target": "Newton",
+      "label": "Tandil - Newton",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 126",
+      "target": "KM 144",
+      "label": "KM 126 - KM 144",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "San Sebastián",
+      "target": "Espíritu Santo",
+      "label": "San Sebastián - Espíritu Santo",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 154",
+      "target": "KM 189",
+      "label": "KM 154 - KM 189",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 271",
+      "target": "KM 322",
+      "label": "KM 271 - KM 322",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 967",
+      "target": "KM 1005",
+      "label": "KM 967 - KM 1005",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Olavarría",
+      "target": "Saladillo",
+      "label": "Olavarría - Saladillo",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Río Piedras",
+      "target": "Tucumán",
+      "label": "Río Piedras - Tucumán",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Media Luna",
+      "target": "Beazley",
+      "label": "Media Luna - Beazley",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 1005",
+      "target": "KM 1056",
+      "label": "KM 1005 - KM 1056",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 144",
+      "target": "KM 154",
+      "label": "KM 144 - KM 154",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loma La Lata",
+      "target": "Válvula 5",
+      "label": "Loma La Lata - Válvula 5",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 208",
+      "target": "KM 223",
+      "label": "KM 208 - KM 223",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Loop Km 242",
+      "target": "Km 269",
+      "label": "Loop Km 242 - Km 269",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Aldao",
+      "target": "Santo Tomé",
+      "label": "Aldao - Santo Tomé",
+      "operator": "Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "KM 177",
+      "target": "KM 187",
+      "label": "KM 177 - KM 187",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tramo I Tratayen",
+      "target": "Saliquelo",
+      "label": "Tramo I Tratayen - Saliquelo",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Tramo Mercedes",
+      "target": "Cardales",
+      "label": "Tramo Mercedes - Cardales",
+      "operator": "Transportadora de Gas del Sur S.A. / Transportadora de Gas del Norte S.A.",
+      "type": "Transporte"
+    },
+    {
+      "source": "Ampliación NEUBA II",
+      "target": "Terminación Ordoqui",
+      "label": "Ampliación NEUBA II - Terminación Ordoqui",
+      "operator": "Transportadora de Gas del Sur S.A.",
+      "type": "Transporte"
+    }
+  ]
+}

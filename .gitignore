@@ -2,3 +2,9 @@ data/raw/
 data/processed/network-snapshot.json
 node_modules/
 dist/
+
+# Binario de DuckDB (descargado, no versionar)
+duckdb
+
+# Base de datos local
+db/
